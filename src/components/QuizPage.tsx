@@ -37,7 +37,7 @@ const QuizPage: React.FC = () => {
     if (pageData && pageData.isSplashPage) {
       const handleKeyPress = (event: KeyboardEvent) => {
         if (event.key === 'Enter') {
-          const basePath = getCurrentPath();
+          const basePath = stepId ? '/goal' : '';
           navigate(`${basePath}/2`);
         }
       };

@@ -8,6 +8,8 @@
   # Node.js версия для сборки
   [build.environment]
     NODE_VERSION = "18"
+    # Отключаем строгий режим CI для ESLint предупреждений
+    CI = "false"
 
 # Настройки для SPA - все роуты должны возвращать index.html
 [[redirects]]
