@@ -1,0 +1,466 @@
+
+.profiling-container {
+  width: 100%;
+  max-width: var(--desktop-max-width);
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-gradient);
+  overflow: hidden;
+  padding-bottom: 92px;
+}
+
+.profiling-container .content-wrapper {
+  overflow: hidden;
+  justify-content: flex-start;
+}
+
+
+.profiling-container.profiling-step-1 .question-title,
+.profiling-container.profiling-step-2 .question-title,
+.profiling-container.profiling-step-3 .question-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.profiling-container.profiling-step-1 .title-wrapper,
+.profiling-container.profiling-step-2 .title-wrapper,
+.profiling-container.profiling-step-3 .title-wrapper {
+  text-align: center;
+  gap: 12px;
+}
+
+.profiling-container.profiling-step-1 .question-subtitle,
+.profiling-container.profiling-step-2 .question-subtitle,
+.profiling-container.profiling-step-3 .question-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #504369;
+}
+
+
+.options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 20px;
+  min-height: 220px;
+  align-content: flex-start;
+}
+
+@media (max-width: 440px) {
+  .options-grid {
+    padding: 0;
+    min-height: 276px;
+  }
+}
+
+
+.pill {
+  height: 52px;
+  padding: 0 16px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #28194B;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill:hover {
+  opacity: 0.8;
+}
+
+.pill-primary {
+  background: #4D368A;
+  color: #FFFFFF;
+}
+
+
+.pill-w98 { width: 98px; }
+.pill-w76 { width: 76px; }
+.pill-w122 { width: 122px; }
+.pill-w103 { width: 103px; }
+.pill-w158 { width: 158px; }
+.pill-w120 { width: 120px; }
+.pill-w135 { width: 135px; }
+.pill-w151 { width: 151px; }
+.pill-w116 { width: 116px; }
+
+
+.pill-w119 { width: 119px; }
+.pill-w69 { width: 69px; }
+.pill-w70 { width: 70px; }
+.pill-w90 { width: 90px; }
+.pill-w108 { width: 108px; }
+.pill-w109 { width: 109px; }
+.pill-w166 { width: 166px; }
+.pill-w162 { width: 162px; }
+
+
+.pill-w140 { width: 140px; }
+.pill-w163 { width: 163px; }
+.pill-w139 { width: 139px; }
+.pill-w67 { width: 67px; }
+.pill-w80 { width: 80px; }
+.pill-w83 { width: 83px; }
+.pill-w99 { width: 99px; }
+.pill-w129 { width: 129px; }
+.pill-w144 { width: 144px; }
+.pill-w105 { width: 105px; }
+.pill-w130 { width: 130px; }
+
+
+@media (min-width: 441px) {
+  .profiling-step-1 .options-grid {
+    position: relative;
+    height: 220px;
+  }
+  
+  .profiling-step-1 .pill:nth-child(1) { position: absolute; top: 0; left: 48px; }
+  .profiling-step-1 .pill:nth-child(2) { position: absolute; top: 0; left: 150px; }
+  .profiling-step-1 .pill:nth-child(3) { position: absolute; top: 0; left: 230px; }
+  
+  .profiling-step-1 .pill:nth-child(4) { position: absolute; top: 56px; left: 5.5px; }
+  .profiling-step-1 .pill:nth-child(5) { position: absolute; top: 56px; left: 112.5px; }
+  .profiling-step-1 .pill:nth-child(6) { position: absolute; top: 56px; left: 274.5px; }
+  
+  .profiling-step-1 .pill:nth-child(7) { position: absolute; top: 112px; left: 55px; }
+  .profiling-step-1 .pill:nth-child(8) { position: absolute; top: 112px; left: 194px; }
+  .profiling-step-1 .pill:nth-child(9) { position: absolute; top: 168px; left: 29px; }
+  .profiling-step-1 .pill:nth-child(10) { position: absolute; top: 168px; left: 149px; }
+  .profiling-step-1 .pill:nth-child(11) { position: absolute; top: 168px; left: 251px; }
+
+
+  .profiling-step-2 .options-grid {
+    position: relative;
+    height: 220px;
+  }
+  
+  .profiling-step-2 .pill:nth-child(1) { position: absolute; top: 0; left: 20px; }
+  .profiling-step-2 .pill:nth-child(2) { position: absolute; top: 0; left: 143px; }
+  .profiling-step-2 .pill:nth-child(3) { position: absolute; top: 0; left: 216px; }
+  .profiling-step-2 .pill:nth-child(4) { position: absolute; top: 0; left: 290px; }
+  
+  .profiling-step-2 .pill:nth-child(5) { position: absolute; top: 56px; left: 53px; }
+  .profiling-step-2 .pill:nth-child(6) { position: absolute; top: 56px; left: 165px; }
+  .profiling-step-2 .pill:nth-child(7) { position: absolute; top: 56px; left: 238px; }
+  
+  .profiling-step-2 .pill:nth-child(8) { position: absolute; top: 112px; left: 34px; }
+  .profiling-step-2 .pill:nth-child(9) { position: absolute; top: 112px; left: 204px; }
+  
+  .profiling-step-2 .pill:nth-child(10) { position: absolute; top: 168px; left: 92.5px; }
+  .profiling-step-2 .pill:nth-child(11) { position: absolute; top: 168px; left: 172.5px; }
+  
+
+  .profiling-step-3 .options-grid {
+    position: relative;
+    height: 220px;
+  }
+  
+  .profiling-step-3 .pill:nth-child(1) { position: absolute; top: 0; left: 46.5px; }
+  .profiling-step-3 .pill:nth-child(2) { position: absolute; top: 0; left: 190.5px; }
+  
+  .profiling-step-3 .pill:nth-child(3) { position: absolute; top: 56px; left: 9.5px; }
+  .profiling-step-3 .pill:nth-child(4) { position: absolute; top: 56px; left: 152.5px; }
+  .profiling-step-3 .pill:nth-child(5) { position: absolute; top: 56px; left: 223.5px; }
+  .profiling-step-3 .pill:nth-child(6) { position: absolute; top: 56px; left: 307.5px; }
+  
+  .profiling-step-3 .pill:nth-child(7) { position: absolute; top: 112px; left: 10px; }
+  .profiling-step-3 .pill:nth-child(8) { position: absolute; top: 112px; left: 113px; }
+  .profiling-step-3 .pill:nth-child(9) { position: absolute; top: 112px; left: 246px; }
+  
+  .profiling-step-3 .pill:nth-child(10) { position: absolute; top: 168px; left: 80.5px; }
+  .profiling-step-3 .pill:nth-child(11) { position: absolute; top: 168px; left: 189.5px; }
+}
+
+
+@media (max-width: 768px) {
+  .profiling-container {
+    max-width: var(--mobile-max-width);
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+}
+
+
+@media (max-width: 440px) {
+  .profiling-step-1 .options-grid {
+    position: relative;
+    height: 276px;
+  }
+  
+  .profiling-step-1 .pill:nth-child(1) { position: absolute; top: 0; left: 23px; }
+  .profiling-step-1 .pill:nth-child(2) { position: absolute; top: 0; left: 125px; }
+  .profiling-step-1 .pill:nth-child(3) { position: absolute; top: 0; left: 205px; }
+  
+  .profiling-step-1 .pill:nth-child(4) { position: absolute; top: 56px; left: 42.5px; }
+  .profiling-step-1 .pill:nth-child(5) { position: absolute; top: 56px; left: 149.5px; }
+  
+  .profiling-step-1 .pill:nth-child(6) { position: absolute; top: 112px; left: 45.5px; }
+  .profiling-step-1 .pill:nth-child(7) { position: absolute; top: 112px; left: 169.5px; }
+  
+  .profiling-step-1 .pill:nth-child(8) { position: absolute; top: 168px; left: 39.5px; }
+  .profiling-step-1 .pill:nth-child(9) { position: absolute; top: 168px; left: 194.5px; }
+  
+  .profiling-step-1 .pill:nth-child(10) { position: absolute; top: 224px; left: 64px; }
+  .profiling-step-1 .pill:nth-child(11) { position: absolute; top: 224px; left: 166px; }
+
+
+  .profiling-step-2 .options-grid {
+    position: relative;
+    height: 276px;
+  }
+  
+  .profiling-step-2 .pill:nth-child(1) { position: absolute; top: 0; left: 42px; }
+  .profiling-step-2 .pill:nth-child(2) { position: absolute; top: 0; left: 165px; }
+  .profiling-step-2 .pill:nth-child(3) { position: absolute; top: 0; left: 238px; }
+  
+  .profiling-step-2 .pill:nth-child(4) { position: absolute; top: 56px; left: 37.5px; }
+  .profiling-step-2 .pill:nth-child(5) { position: absolute; top: 56px; left: 131.5px; }
+  .profiling-step-2 .pill:nth-child(6) { position: absolute; top: 56px; left: 243.5px; }
+  
+  .profiling-step-2 .pill:nth-child(7) { position: absolute; top: 112px; left: 35.5px; }
+  .profiling-step-2 .pill:nth-child(8) { position: absolute; top: 112px; left: 148.5px; }
+  
+  .profiling-step-2 .pill:nth-child(9) { position: absolute; top: 168px; left: 54px; }
+  .profiling-step-2 .pill:nth-child(10) { position: absolute; top: 168px; left: 220px; }
+  
+  .profiling-step-2 .pill:nth-child(11) { position: absolute; top: 224px; left: 107.5px; }
+  
+
+  .profiling-step-3 .options-grid {
+    position: relative;
+    height: 276px;
+  }
+  
+  .profiling-step-3 .pill:nth-child(1) { position: absolute; top: 0; left: 21.5px; }
+  .profiling-step-3 .pill:nth-child(2) { position: absolute; top: 0; left: 165.5px; }
+  
+  .profiling-step-3 .pill:nth-child(3) { position: absolute; top: 56px; left: 28px; }
+  .profiling-step-3 .pill:nth-child(4) { position: absolute; top: 56px; left: 171px; }
+  .profiling-step-3 .pill:nth-child(5) { position: absolute; top: 56px; left: 242px; }
+  
+  .profiling-step-3 .pill:nth-child(6) { position: absolute; top: 112px; left: 15.5px; }
+  .profiling-step-3 .pill:nth-child(7) { position: absolute; top: 112px; left: 102.5px; }
+  .profiling-step-3 .pill:nth-child(8) { position: absolute; top: 112px; left: 205.5px; }
+  
+  .profiling-step-3 .pill:nth-child(9) { position: absolute; top: 168px; left: 48.5px; }
+  .profiling-step-3 .pill:nth-child(10) { position: absolute; top: 168px; left: 196.5px; }
+  
+  .profiling-step-3 .pill:nth-child(11) { position: absolute; top: 224px; left: 110px; }
+}
+
+
+.profiling-step-7-testimonial {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 20px;
+}
+
+@media (max-width: 440px) {
+  .profiling-step-7-testimonial {
+    padding: 0;
+  }
+}
+
+.testimonial-card-advanced {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.testimonial-image {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonial-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+.testimonial-image-mirrored img {
+  transform: scaleX(-1);
+}
+
+.testimonial-content-advanced {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.testimonial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.user-avatar {
+  width: 20px;
+  height: 20px;
+  background: #7554CC;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-avatar span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.user-details span {
+  font-size: 12px;
+  font-weight: 400;
+  color: #28194B;
+  line-height: 16px;
+}
+
+.rating img {
+  height: 16px;
+  width: auto;
+}
+
+.testimonial-text p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #28194B;
+  margin: 0;
+  text-align: left;
+}
+
+
+@media (min-width: 441px) {
+  .profiling-step-7-testimonial {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .testimonial-image {
+    height: 236px;
+  }
+  
+  .testimonial-text p {
+    max-width: 368px;
+  }
+}
+
+
+@media (max-width: 440px) {
+  .profiling-step-7-testimonial {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  .testimonial-image {
+    height: 204px;
+  }
+  
+  .testimonial-text p {
+    max-width: 318px;
+  }
+}
+
+
+.continue-button-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 440px;
+  height: 92px;
+  padding: 20px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 440px) {
+  .continue-button-wrapper {
+    max-width: 390px;
+  }
+}
+
+.continue-button {
+  width: 100%;
+  max-width: 400px;
+  height: 52px;
+  background: #4D368A;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 440px) {
+  .continue-button {
+    max-width: 350px;
+  }
+}
+
+.continue-button:hover {
+  opacity: 0.9;
+}
+
+
+.profiling-options {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.profiling-options .options-grid {
+  width: 400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 440px) {
+  .profiling-options .options-grid {
+    width: 350px;
+  }
+}

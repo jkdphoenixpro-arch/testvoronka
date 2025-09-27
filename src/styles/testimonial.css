@@ -1,0 +1,375 @@
+
+.user-step-4 .question-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #28194B;
+}
+
+.user-step-4 .question-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #504369;
+}
+
+
+.user-step-7 .question-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #28194B;
+}
+
+.user-step-7 .question-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #504369;
+}
+
+
+.user-step-7 .content-wrapper {
+  gap: 0;
+}
+
+
+@media (min-width: 441px) {
+  .user-step-4 .question-title {
+    height: 48px;
+  }
+  
+  .user-step-4 .question-subtitle {
+    height: 44px;
+  }
+  
+  .user-step-4 .title-wrapper {
+    height: 102px;
+  }
+  
+  .user-step-7 .question-title {
+    height: 48px;
+  }
+  
+  .user-step-7 .question-subtitle {
+    height: 44px;
+  }
+  
+  .user-step-7 .title-wrapper {
+    height: 102px;
+  }
+}
+
+
+@media (max-width: 440px) {
+  .user-step-4 .question-title {
+    line-height: 24px;
+  }
+  
+  .user-step-4 .question-subtitle {
+    line-height: 22px;
+    height: 66px;
+  }
+  
+  .user-step-4 .title-wrapper {
+    height: 124px;
+  }
+  
+  .user-step-7 .question-title {
+    line-height: 24px;
+  }
+  
+  .user-step-7 .question-subtitle {
+    line-height: 22px;
+    height: 66px;
+  }
+  
+  .user-step-7 .title-wrapper {
+    height: 124px;
+  }
+}
+
+
+.testimonials-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  width: 400px;
+  height: 248px;
+}
+
+@media (max-width: 440px) {
+  .testimonials-wrapper {
+    padding: 0;
+  }
+  
+  .testimonials-grid {
+    width: 350px;
+    height: 268px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 140px 120px;
+  }
+}
+
+
+.testimonial-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 120px;
+}
+
+@media (max-width: 440px) {
+  .testimonial-card {
+    height: 140px;
+  }
+  
+
+  .testimonial-card:nth-child(1),
+  .testimonial-card:nth-child(2) {
+    height: 140px;
+  }
+  
+
+  .testimonial-card:nth-child(3),
+  .testimonial-card:nth-child(4) {
+    height: 120px;
+  }
+}
+
+.testimonial-percentage {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #4D368A;
+  margin-bottom: 8px;
+}
+
+.testimonial-description {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #28194B;
+}
+
+
+@media (min-width: 441px) {
+  .testimonial-card {
+    width: 196px;
+    height: 120px;
+  }
+}
+
+
+@media (max-width: 440px) {
+  .testimonial-card {
+    width: 171px;
+  }
+  
+  .testimonial-card:nth-child(1),
+  .testimonial-card:nth-child(2) {
+    height: 140px;
+  }
+}
+
+
+.user-step-7-testimonial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.testimonial-card-advanced {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 0px 1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+}
+
+.testimonial-image {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.testimonial-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.testimonial-image-mirrored img {
+  transform: scaleX(-1);
+}
+
+.testimonial-content-advanced {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  flex: 1;
+}
+
+.testimonial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #7554CC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.user-details span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #28194B;
+}
+
+.rating img {
+  width: auto;
+  height: 16px;
+}
+
+.testimonial-text p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #28194B;
+  margin: 0;
+}
+
+
+@media (min-width: 441px) {
+  .testimonial-card-advanced {
+    width: 400px;
+    height: 392px;
+    flex-direction: column;
+  }
+  
+  .testimonial-image {
+    width: 368px;
+    height: 236px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 16px 0 16px;
+  }
+  
+  .testimonial-content-advanced {
+    padding: 16px;
+    height: 140px;
+    justify-content: flex-start;
+  }
+  
+  .testimonial-header {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .user-avatar {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  
+  .user-details span {
+    font-size: 12px;
+  }
+  
+  .rating img {
+    height: 16px;
+  }
+  
+  .testimonial-text p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+
+@media (max-width: 440px) {
+  .user-step-7-testimonial {
+    padding: 0;
+  }
+  
+  .testimonial-card-advanced {
+    width: 350px;
+    height: 380px;
+    flex-direction: column;
+  }
+  
+  .testimonial-image {
+    width: 318px;
+    height: 204px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 16px 0 16px;
+  }
+  
+  .testimonial-content-advanced {
+    padding: 16px;
+    height: 160px;
+    justify-content: flex-start;
+  }
+  
+  .testimonial-header {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .user-avatar {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  
+  .user-details span {
+    font-size: 12px;
+  }
+  
+  .rating img {
+    height: 16px;
+  }
+  
+  .testimonial-text p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

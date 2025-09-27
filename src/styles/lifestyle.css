@@ -1,0 +1,58 @@
+.lifestyle-container {
+  width: 100%;
+  max-width: var(--desktop-max-width);
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-gradient);
+  overflow: hidden;
+}
+
+.lifestyle-container .content-wrapper {
+  overflow: hidden;
+  justify-content: flex-start;
+}
+
+.lifestyle-container.lifestyle-step-4 .info-description {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #504370;
+  margin: 10px 0 24px 0;
+}
+
+.lifestyle-container.lifestyle-step-4 .info-image-wrapper {
+  width: 100%;
+  margin-bottom: 80px;
+}
+
+.lifestyle-container.lifestyle-step-4 .info-image {
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  display: block;
+  object-fit: contain;
+}
+
+
+@media (max-width: 768px) {
+  .lifestyle-container {
+    max-width: var(--mobile-max-width);
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  .lifestyle-container.lifestyle-step-4 .info-image {
+    max-height: 300px;
+  }
+}
+
+
+@media (min-width: 769px) {
+  .lifestyle-container.lifestyle-step-4 .info-image {
+    max-height: 343px;
+  }
+}
