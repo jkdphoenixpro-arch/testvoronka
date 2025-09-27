@@ -1,0 +1,41 @@
+[build]
+  # Команда для сборки проекта
+  command = "npm run build"
+  
+  # Папка с собранными файлами для деплоя
+  publish = "build"
+  
+  # Node.js версия для сборки
+  [build.environment]
+    NODE_VERSION = "18"
+
+# Настройки для SPA - все роуты должны возвращать index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Заголовки для оптимизации кеширования статических ресурсов
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Заголовки безопасности
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
