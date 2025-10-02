@@ -1,14 +1,16 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useOnboardingProgress } from '../hooks/useOnboardingProgress';
 
 interface HeaderProps {
-  progress: number;
+  progress?: number;
   onBackClick?: () => void;
   showBackButton?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ progress, onBackClick, showBackButton = true }) => {
+const Header: React.FC<HeaderProps> = ({ progress: localProgress, onBackClick, showBackButton = true }) => {
   const location = useLocation();
+  const { progress: onboardingProgress, isInOnboarding } = useOnboardingProgress();
   
   const isGoalRoute = location.pathname.startsWith('/goal/');
   const isUserRoute = location.pathname.startsWith('/user/');
@@ -48,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ progress, onBackClick, showBackButton =
       
       <div className="progress-bar">
         <div className="progress-track">
-          <div className="progress-fill" style={{ width: `${progress}%` }}></div>
+          <div className="progress-fill" style={{ width: `${isInOnboarding ? onboardingProgress : (localProgress || 0)}%` }}></div>
         </div>
       </div>
     </header>

@@ -68,8 +68,8 @@ const StatementsPage: React.FC = () => {
     if (nextStatement) {
       navigate(`/statements/${nextStepId}`);
     } else {
-      // Переход к следующему разделу или завершение
-      console.log('Statements завершен', selectedValue);
+      // После завершения statements переходим к buildingplan/1
+      navigate('/buildingplan/1');
     }
   };
 
@@ -86,7 +86,6 @@ const StatementsPage: React.FC = () => {
   return (
     <div className="statements-container">
       <Header
-        progress={statementData.progress}
         onBackClick={handleBackClick}
         showBackButton={true}
       />

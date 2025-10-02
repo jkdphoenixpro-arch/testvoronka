@@ -1,0 +1,274 @@
+/* Results Page Styles - точно по макету Figma */
+
+/* Переопределение глобальных стилей для страницы results */
+/* Включаем скролл на body для страницы results */
+body.results-page {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Переопределяем стили App для results */
+body.results-page .App {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Переопределяем стили #root для results */
+body.results-page #root {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Основной контейнер - без скролла, позволяем естественному растягиванию */
+.quiz-container.results-container {
+  height: auto !important; /* Автоматическая высота по контенту */
+  min-height: 100vh !important; /* Минимум на весь экран */
+  overflow: visible !important; /* Никакого скролла на контейнере */
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Контент wrapper */
+.results-container .content-wrapper {
+  flex: 1 !important;
+  padding: 24px 20px 0 !important;
+  gap: 24px !important;
+  overflow: visible !important;
+  justify-content: flex-start !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Results content */
+.results-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.results-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.results-header .heading-container {
+  padding: 0;
+}
+
+.results-title {
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: #281A4B;
+  margin: 0;
+  text-align: center;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.results-description {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.results-description p {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #50436D;
+  margin: 0;
+}
+
+/* Results sections */
+.results-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Result card base */
+.result-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Card header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Icon wrapper */
+.icon-wrapper {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-background {
+  width: 36px;
+  height: 36px;
+  background: rgba(77, 54, 138, 0.1);
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-background svg {
+  width: 16px;
+  height: 16px;
+}
+
+.card-title {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #281A4B;
+}
+
+.time-label {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #50436D;
+}
+
+/* Goal section */
+.goal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.goal-tag {
+  background: rgba(77, 54, 138, 0.1);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #281A4B;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Issue areas section */
+.issue-areas-card {
+  min-height: 200px;
+}
+
+.issue-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.issue-tag {
+  background: rgba(77, 54, 138, 0.1);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #281A4B;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Improvements section */
+.improvements-card {
+  min-height: 228px;
+}
+
+.improvements-chart {
+  width: 100%;
+  height: 144px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(77, 54, 138, 0.05);
+  border-radius: 12px;
+  border: 1px dashed rgba(77, 54, 138, 0.2);
+}
+
+.chart-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Кнопка в конце страницы - стандартный подход */
+.results-container .bottom-bar {
+  position: static !important;
+  transform: none !important;
+  left: auto !important;
+  bottom: auto !important;
+  padding: 24px 20px 32px !important;
+  width: 100% !important;
+  max-width: var(--desktop-max-width) !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Mobile version */
+@media (max-width: 768px) {
+  .results-container .content-wrapper {
+    padding: 16px 16px 0 !important;
+  }
+
+  .results-content {
+    max-width: 350px;
+  }
+  
+  .results-title {
+    max-width: 310px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  
+  .results-description {
+    max-width: 310px;
+  }
+  
+  .result-card {
+    max-width: 350px;
+  }
+
+  .results-container .bottom-bar {
+    padding: 16px 16px 24px !important;
+    max-width: var(--mobile-max-width) !important;
+  }
+}

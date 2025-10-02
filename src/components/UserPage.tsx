@@ -132,6 +132,25 @@ export default function UserPage() {
   
   const [selectedOptions, setSelectedOptions] = useState<number[]>(currentStep.initialSelected);
 
+  // Состояние для управления анимацией
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  // Перезапуск анимации при смене шага на user/4
+  useEffect(() => {
+    if (currentStepId === 4) {
+      setShouldAnimate(false);
+      // Небольшая задержка для сброса анимации
+      setTimeout(() => setShouldAnimate(true), 10);
+    }
+  }, [currentStepId]);
+
+  // Инициализация анимации при первой загрузке
+  useEffect(() => {
+    if (currentStepId === 4) {
+      setShouldAnimate(true);
+    }
+  }, []);
+
   // Обновляем выбранные опции при смене шага
   useEffect(() => {
     setSelectedOptions(currentStep.initialSelected);
@@ -183,8 +202,8 @@ export default function UserPage() {
     } else if (currentStepId === 6) {
       navigate('/user/7');
     } else if (currentStepId === 7) {
-      // На 7-м этапе ничего не происходит при нажатии Continue
-      return;
+      // После завершения user секции переходим к lifestyle/1
+      navigate('/lifestyle/1');
     } else {
       navigate('/user/1');
     }
@@ -207,12 +226,11 @@ export default function UserPage() {
   return (
     <div className={getContainerClassName()}>
       <Header 
-        progress={currentStep.progress}
         onBackClick={handleBackClick}
         showBackButton={true}
       />
       
-      <main className="content-wrapper">
+      <main className={`content-wrapper ${shouldAnimate ? 'animate-in' : ''}`}>
         <div className="title-wrapper">
           <div className="heading-container">
             <h2 className="question-title">{currentStep.title}</h2>
@@ -224,7 +242,7 @@ export default function UserPage() {
           currentStepId === 7 ? (
             <div className="user-step-7-testimonial">
               <div className="testimonial-card-advanced">
-                <div className="testimonial-image testimonial-image-mirrored">
+                <div className="testimonial-image">
                   <img src="/image/before&after.webp" alt="Before and after results" />
                 </div>
                 <div className="testimonial-content-advanced">

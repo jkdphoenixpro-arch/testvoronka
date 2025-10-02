@@ -26,11 +26,32 @@ const QuizPage: React.FC = () => {
       return selected ? [selected.value] : [];
     }
   });
+
+  // Состояние для управления анимацией
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   
   // Получаем текущий путь для корректной навигации
   const getCurrentPath = () => {
     return stepId ? '/goal' : '';
   };
+
+  // Перезапуск анимации при смене страницы
+  useEffect(() => {
+    const basePath = getCurrentPath();
+    if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 4)) {
+      setShouldAnimate(false);
+      // Небольшая задержка для сброса анимации
+      setTimeout(() => setShouldAnimate(true), 10);
+    }
+  }, [currentPageId]);
+
+  // Инициализация анимации при первой загрузке
+  useEffect(() => {
+    const basePath = getCurrentPath();
+    if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 4)) {
+      setShouldAnimate(true);
+    }
+  }, []);
 
   // Обработка нажатия Enter для splash страницы
   useEffect(() => {
@@ -79,7 +100,8 @@ const QuizPage: React.FC = () => {
             const basePath = getCurrentPath();
             navigate(`${basePath}/${nextPageId}`);
           } else {
-            console.log('Квиз завершен');
+            // После завершения goal секции переходим к user/1
+            navigate('/user/1');
           }
         }, 500);
       }
@@ -94,7 +116,8 @@ const QuizPage: React.FC = () => {
       const basePath = getCurrentPath();
       navigate(`${basePath}/${nextPageId}`);
     } else {
-      console.log('Квиз завершен', selectedValues);
+      // После завершения goal секции переходим к user/1
+      navigate('/user/1');
     }
   };
 
@@ -115,8 +138,8 @@ const QuizPage: React.FC = () => {
       className += ' has-continue-button';
     }
     
-    // Добавляем специфичный класс для goal страниц 2, 3, 5
-    if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 5)) {
+    // Добавляем специфичный класс для goal страниц 2, 3, 4, 5
+    if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 4 || currentPageId === 5)) {
       className += ` goal-page-${currentPageId}`;
     }
     
@@ -127,13 +150,12 @@ const QuizPage: React.FC = () => {
     <div className={getContainerClassName()}>
       {!pageData.isSplashPage && (
         <Header 
-          progress={pageData.progress}
           onBackClick={handleBackClick}
           showBackButton={currentPageId > 1}
         />
       )}
       
-      <main className="content-wrapper">
+      <main className={`content-wrapper ${shouldAnimate ? 'animate-in' : ''}`}>
         {pageData.isSplashPage ? (
           <SplashPage 
             title={pageData.title}

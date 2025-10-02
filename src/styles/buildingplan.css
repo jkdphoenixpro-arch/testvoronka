@@ -1,0 +1,420 @@
+/* Building Plan Page Styles - точно по макету Figma */
+
+/* Базовый контейнер */
+.building-plan-container {
+  background: linear-gradient(180deg, #E0E0FF 0%, #F4F4F4 100%);
+}
+
+/* Content wrapper используем стандартную структуру */
+.building-plan-container .content-wrapper {
+  padding: 24px 20px 0;
+  gap: 24px;
+}
+
+/* Content по макету */
+.building-plan-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Steps Section - Frame 470051 */
+.steps-section {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Title wrapper адаптивный */
+.building-plan-title-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.building-plan-title-wrapper .heading-container {
+  padding: 0;
+}
+
+.building-plan-title {
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #281A4B;
+  margin: 0;
+  text-align: center;
+}
+
+/* Steps container */
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* Progress Step */
+.progress-step {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* Неактивные шаги (0% прогресса) */
+.progress-step.inactive {
+  opacity: 0.20;
+}
+
+.step-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.step-title {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #281A4B;
+  flex: 1;
+}
+
+.step-progress-percent {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #281A4B;
+  text-align: right;
+}
+
+/* Progress Bar Container - базовый стиль */
+.progress-bar-container {
+  width: 100%;
+  height: 20px;
+  background: rgba(77, 54, 138, 0.1);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Специфичный стиль для building-plan-container */
+.building-plan-container .progress-bar-container {
+  height: 8px;
+}
+
+.progress-bar-background {
+  height: 8px;
+  background: #7554CC;
+  border-radius: 9999px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* transition убран, управление через JavaScript */
+}
+
+/* Специфичный стиль для progress-bar-background в building-plan-container */
+.building-plan-container .progress-bar-background {
+  height: 8px;
+}
+
+/* Анимация прогресс-баров управляется через JavaScript */
+.progress-step-1,
+.progress-step-2,
+.progress-step-3,
+.progress-step-4 {
+  /* transition убран, анимация через JavaScript */
+}
+
+/* Frame 470054 - Testimonial Section */
+.testimonial-section {
+  width: 100%;
+  max-width: 400px;
+  min-height: 214px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Heading 4 */
+.testimonial-title {
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #281A4B;
+  text-align: center;
+  margin: 0;
+}
+
+/* Frame 2085663709 - Dots */
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  width: 40px;
+  height: 8px;
+  margin: 0 auto;
+  margin-top: 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4D368A;
+}
+
+/* Background - testimonial card */
+.buildingplan-testimonial-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  min-height: 160px;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Testimonial content внутри карточки - адаптивные размеры */
+.buildingplan-testimonial-card .testimonial-content-advanced {
+  min-height: 128px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+/* Header в testimonial */
+.buildingplan-testimonial-card .testimonial-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0;
+  gap: 16px;
+}
+
+/* User info - Frame 2085663693 */
+.buildingplan-testimonial-card .user-info {
+  width: 70px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.buildingplan-testimonial-card .user-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background: #7554CC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buildingplan-testimonial-card .user-avatar span {
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+  width: 8px;
+  height: 16px;
+}
+
+.buildingplan-testimonial-card .user-details {
+  display: flex;
+  align-items: center;
+  height: 20px;
+}
+
+.buildingplan-testimonial-card .user-details span {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #281A4B;
+}
+
+/* Rating - точно 88x16 из макета */
+.buildingplan-testimonial-card .rating {
+  width: 88px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.buildingplan-testimonial-card .rating img {
+  width: 88px;
+  height: 16px;
+}
+
+/* Testimonial content - текст */
+.buildingplan-testimonial-card .testimonial-text {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 8px;
+  flex: 1;
+}
+
+.buildingplan-testimonial-card .testimonial-text p {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #281A4B;
+  margin: 0;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Feedback Modal Styles - точно по макету Figma */
+.feedback-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(77, 54, 138, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.feedback-modal {
+  width: 400px;
+  height: 256px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 20px 40px rgba(40, 26, 75, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 40px;
+  position: relative;
+}
+
+.modal-title-wrapper {
+  width: 320px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.modal-title {
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: #281A4B;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.modal-button-wrapper {
+  width: 320px;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-option-button {
+  width: 320px;
+  height: 52px;
+  background: #FFFFFF;
+  border: 1px solid #D2D0E1;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-option-button:hover {
+  background: rgba(117, 84, 204, 0.05);
+  border-color: #7554CC;
+}
+
+.modal-option-button:active {
+  background: rgba(117, 84, 204, 0.1);
+}
+
+.modal-option-button span {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #281A4B;
+}
+
+/* Mobile version - стандартный подход приложения */
+@media (max-width: 768px) {
+  .building-plan-content {
+    max-width: 350px;
+  }
+  
+  .steps-section {
+    max-width: 350px;
+  }
+  
+  .testimonial-section {
+    max-width: 350px;
+  }
+  
+  .buildingplan-testimonial-card {
+    max-width: 350px;
+  }
+  
+  .building-plan-title {
+    max-width: 310px;
+  }
+  
+  /* Мобильные стили для progress-bar-container */
+  .building-plan-container .progress-bar-container {
+    height: 8px;
+  }
+  
+  .building-plan-container .progress-bar-background {
+    height: 8px;
+  }
+  
+  /* Мобильные стили для модального окна */
+  .feedback-modal {
+    width: 350px;
+    height: 256px;
+    padding: 35px;
+  }
+  
+  .modal-title-wrapper {
+    width: 280px;
+  }
+  
+  .modal-button-wrapper {
+    width: 280px;
+  }
+  
+  .modal-option-button {
+    width: 280px;
+  }
+}

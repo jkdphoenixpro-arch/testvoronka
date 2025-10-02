@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Lottie from 'lottie-react';
+import { usePreloadedAnimation } from '../hooks/usePreloadedAnimation';
 import Header from './Header';
 import ContinueButton from './ContinueButton';
 import '../styles/lifestyle.css';
@@ -119,10 +121,43 @@ export default function LifestylePage() {
   const currentStep = lifestyleSteps[currentStepId as keyof typeof lifestyleSteps] || lifestyleSteps[1];
   
   const [selectedOptions, setSelectedOptions] = useState<number[]>(currentStep.initialSelected);
+  const lottieRef = useRef<any>(null);
+  const [isLottieReady, setIsLottieReady] = useState(false);
+  const { animationData, isReady, shouldPlay } = usePreloadedAnimation('lifestyle');
   
   useEffect(() => {
     setSelectedOptions(currentStep.initialSelected);
-  }, [currentStepId, currentStep.initialSelected]);
+  }, [currentStep.initialSelected]);
+
+  // Обработчик завершения анимации
+  const handleAnimationComplete = () => {
+    if (lottieRef.current) {
+      // Останавливаем анимацию на последнем кадре
+      lottieRef.current.pause();
+    }
+  };
+
+  // Обработчик готовности Lottie
+  const handleLottieReady = () => {
+    if (lottieRef.current) {
+      // Сбрасываем анимацию на первый кадр
+      lottieRef.current.goToAndStop(0, true);
+    }
+    setIsLottieReady(true);
+  };
+
+  // Управление воспроизведением анимации
+  React.useEffect(() => {
+    if (lottieRef.current && isLottieReady && shouldPlay && currentStepId === 7) {
+      // Сбрасываем на начало и запускаем только на 7 шаге
+      lottieRef.current.goToAndStop(0, true);
+      setTimeout(() => {
+        if (lottieRef.current) {
+          lottieRef.current.play();
+        }
+      }, 50);
+    }
+  }, [isLottieReady, shouldPlay, currentStepId]);
 
   const handleOptionClick = (index: number) => {
     setSelectedOptions([index]);
@@ -153,7 +188,8 @@ export default function LifestylePage() {
     } else if (currentStepId === 6) {
       navigate('/lifestyle/7');
     } else if (currentStepId === 7) {
-      console.log('Lifestyle completed');
+      // После завершения lifestyle секции переходим к statements/1
+      navigate('/statements/1');
     } else {
       navigate('/lifestyle/1');
     }
@@ -170,7 +206,6 @@ export default function LifestylePage() {
   return (
     <div className={getContainerClassName()}>
       <Header 
-        progress={currentStep.progress}
         onBackClick={handleBackClick}
         showBackButton={true}
       />
@@ -191,7 +226,23 @@ export default function LifestylePage() {
               <div className="chart-section">
                 <div className="chart-block">
                   <div className="chart-image">
-                    <img src={currentStep.imageSrc} alt="Age Back chart" />
+                    {currentStepId === 7 && isReady && animationData ? (
+                      <Lottie 
+                        animationData={animationData}
+                        loop={false}
+                        autoplay={false}
+                        onComplete={handleAnimationComplete}
+                        onDOMLoaded={handleLottieReady}
+                        lottieRef={lottieRef}
+                        style={{ width: '100%', height: '100%' }}
+                        rendererSettings={{
+                          preserveAspectRatio: 'xMidYMid meet'
+                        }}
+                      />
+                    ) : (
+                      // Fallback изображение при загрузке или ошибке
+                      <img src={currentStep.imageSrc} alt="Age Back chart" />
+                    )}
                   </div>
                 </div>
                 

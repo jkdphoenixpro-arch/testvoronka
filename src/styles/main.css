@@ -1,4 +1,3 @@
-
 :root {
     --color-primary-text: #28194B;
     --color-secondary-text: #504372;
@@ -15,6 +14,7 @@
     --content-top-margin: 24px;
     --option-spacing: 8px;
     --option-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+    --animation-transition: 0.3s ease-in-out;
 }
 
 
@@ -24,7 +24,9 @@
     box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
     height: 100%;
     overflow: hidden;
 }
@@ -55,7 +57,6 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    background: var(--bg-gradient);
     overflow: hidden;
 }
 
@@ -166,6 +167,27 @@ body {
     justify-content: flex-start;
 }
 
+/* Анимация появления для goal страниц 2, 3, 4 */
+.quiz-container.goal-page-2 .content-wrapper.animate-in,
+.quiz-container.goal-page-3 .content-wrapper.animate-in,
+.quiz-container.goal-page-4 .content-wrapper.animate-in {
+    animation: fadeInScale 1s ease forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
 
 .title-wrapper {
     text-align: center;
@@ -194,6 +216,7 @@ body {
 
 .quiz-container.goal-page-2 .question-title,
 .quiz-container.goal-page-3 .question-title,
+.quiz-container.goal-page-4 .question-title,
 .quiz-container.goal-page-5 .question-title,
 .user-container.user-step-5 .question-title,
 .user-container.user-step-6 .question-title,
@@ -406,60 +429,60 @@ body {
 }
 
 .button-text {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
 }
 
 
 .continue-button-wrapper {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--desktop-max-width);
-  height: 92px;
-  padding: 20px;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: var(--desktop-max-width);
+    height: 92px;
+    padding: 20px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
 }
 
 @media (max-width: 440px) {
-  .continue-button-wrapper {
-    max-width: var(--mobile-max-width);
-  }
+    .continue-button-wrapper {
+        max-width: var(--mobile-max-width);
+    }
 }
 
 .continue-button-wrapper .continue-button {
-  width: 100%;
-  max-width: 400px;
-  height: 52px;
-  background: var(--color-selected-bg);
-  border: none;
-  border-radius: 20px;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 22px;
-  color: var(--color-white);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+    width: 100%;
+    max-width: 400px;
+    height: 52px;
+    background: var(--color-selected-bg);
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    color: var(--color-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 @media (max-width: 440px) {
-  .continue-button-wrapper .continue-button {
-    max-width: 350px;
-  }
+    .continue-button-wrapper .continue-button {
+        max-width: 350px;
+    }
 }
 
 .continue-button-wrapper .continue-button:hover {
-  background: #5A4099;
+    background: #5A4099;
 }
 
 
@@ -472,43 +495,43 @@ body {
         position: relative;
         overflow: hidden;
     }
-    
+
 
     .content-wrapper {
         padding: var(--content-top-margin) var(--container-padding) 0;
     }
-    
+
     .options-wrapper {
         max-width: 350px;
     }
-    
+
     .single-select-option {
         max-width: 350px;
     }
-    
+
     .title-wrapper {
         max-width: 350px;
         margin: 0 auto;
     }
-    
+
     .question-title {
         max-width: 310px;
     }
-    
+
     .question-subtitle {
         max-width: 310px;
     }
-    
+
 
     .multi-select-option {
         max-width: 350px;
         margin: 0 auto;
     }
-    
+
     .continue-button {
         max-width: 350px;
     }
-    
+
     .bottom-bar {
         max-width: var(--mobile-max-width);
         padding: 20px 16px;
@@ -581,36 +604,37 @@ body {
         max-width: 400px;
         margin: 0 auto;
     }
-    
+
     .image-container {
         width: 350px;
         height: 300px;
         margin: 0 auto;
         margin-left: 25px;
     }
-    
+
     .rating-section {
         max-width: 400px;
         margin: 0 auto;
     }
 }
+
 @media (max-width: 768px) {
     .testimonial-content {
         max-width: 350px;
         margin: 0 auto;
     }
-    
+
     .testimonial-section {
         max-width: 350px;
         margin: 0 auto;
     }
-    
+
     .image-container {
         width: 350px;
         height: 300px;
         margin: 0 auto;
     }
-    
+
     .rating-section {
         max-width: 350px;
         margin: 0 auto;
@@ -706,16 +730,16 @@ body {
         max-width: 400px;
         margin: 0 auto;
     }
-    
+
     .chart-block {
         max-width: 400px;
         min-height: 278.857px;
     }
-    
+
     .chart-image {
         height: 246.857px;
     }
-    
+
     .info-block {
         max-width: 400px;
         margin: 0 auto;
@@ -723,26 +747,27 @@ body {
         align-items: center;
     }
 }
+
 @media (max-width: 768px) {
     .chart-content {
         max-width: 350px;
         margin: 0 auto;
     }
-    
+
     .chart-section {
         max-width: 350px;
         margin: 0 auto;
     }
-    
+
     .chart-block {
         max-width: 350px;
         min-height: 245.317px;
     }
-    
+
     .chart-image {
         height: 213.317px;
     }
-    
+
     .info-block {
         max-width: 350px;
         margin: 0 auto;
@@ -750,7 +775,7 @@ body {
         align-items: center;
         padding: 16px;
     }
-    
+
     .info-text p {
         line-height: 20px;
     }
@@ -896,6 +921,19 @@ body {
     width: 100%;
 }
 
+/* Специфичный стиль для quiz-container (goal/1) */
+.quiz-container .progress-bar-container {
+    height: 20px;
+    background: rgba(77, 54, 138, 0.1);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.building-plan-container .progress-bar-container {
+    height: 8px !important;
+}
+
 .progress-bar-bg {
     width: 100%;
     height: 20px;
@@ -939,35 +977,44 @@ body {
         margin: 0 auto;
         padding: 0 20px 100px;
     }
-    
+
     .splash-image {
         width: 400px;
         height: 400px;
         margin: 0 auto;
     }
-    
+
     .award-section {
         width: 146px;
         margin: 0 auto;
     }
-    
+
     .splash-bottom {
         max-width: 440px;
     }
-    
+
     .progress-section {
         max-width: 400px;
         margin: 0 auto;
     }
-    
+
     .progress-bar-container {
         width: 100%;
     }
-    
+
+    /* Специфичный стиль для quiz-container в десктоп */
+    .quiz-container .progress-bar-container {
+        height: 20px;
+        background: rgba(77, 54, 138, 0.1);
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+    }
+
     .progress-bar-bg {
         width: 100%;
     }
-    
+
     .progress-percentage {
         left: 50%;
         transform: translate(-50%, -50%);
@@ -981,37 +1028,46 @@ body {
         margin: 0 auto;
         padding: 24px 20px 100px;
     }
-    
+
     .splash-image {
         width: 350px;
         height: 350px;
         margin: 0 auto;
         flex-shrink: 0;
     }
-    
+
     .award-section {
         width: 146px;
         margin: 0 auto;
         flex-shrink: 0;
     }
-    
+
     .splash-bottom {
         max-width: 390px;
     }
-    
+
     .progress-section {
         max-width: 350px;
         margin: 0 auto;
     }
-    
+
     .progress-bar-container {
         width: 100%;
     }
-    
+
+    /* Специфичный стиль для quiz-container в мобильном */
+    .quiz-container .progress-bar-container {
+        height: 20px;
+        background: rgba(77, 54, 138, 0.1);
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+    }
+
     .progress-bar-bg {
         width: 100%;
     }
-    
+
     .progress-percentage {
         left: 50%;
         transform: translate(-50%, -50%);
@@ -1023,8 +1079,61 @@ body {
     :root {
         --container-padding: 16px;
     }
-    
+
     .quiz-container {
         max-width: 100%;
+    }
+}
+
+/* ==============================================
+   LOTTIE ANIMATION OPTIMIZATIONS
+   ============================================== */
+
+/* Основные оптимизации для всех анимационных контейнеров */
+.chart-image,
+.image-container,
+.improvements-chart {
+    will-change: opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    position: relative;
+}
+
+/* Плавные переходы для анимаций */
+.chart-image>*,
+.image-container>*,
+.improvements-chart>* {
+    transition: opacity var(--animation-transition);
+    -webkit-transition: opacity var(--animation-transition);
+}
+
+/* Оптимизация для Lottie SVG рендеринга */
+.chart-image svg,
+.image-container svg,
+.improvements-chart svg {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Предотвращение мерцания во время переходов */
+.chart-image img,
+.image-container img,
+.improvements-chart img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Оптимизация для мобильных устройств */
+@media (max-width: 768px) {
+
+    .chart-image,
+    .image-container,
+    .improvements-chart {
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
 }
