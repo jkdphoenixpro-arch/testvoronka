@@ -47,7 +47,7 @@ const StatementsPage: React.FC = () => {
   
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
-  // Сброс выбранного значения при смене этапа
+
   useEffect(() => {
     setSelectedValue(null);
   }, [currentStepId]);
@@ -68,7 +68,7 @@ const StatementsPage: React.FC = () => {
     if (nextStatement) {
       navigate(`/statements/${nextStepId}`);
     } else {
-      // После завершения statements переходим к buildingplan/1
+
       navigate('/buildingplan/1');
     }
   };
@@ -78,7 +78,7 @@ const StatementsPage: React.FC = () => {
     if (prevStepId >= 1) {
       navigate(`/statements/${prevStepId}`);
     } else {
-      // На первом этапе ничего не делаем
+
       return;
     }
   };

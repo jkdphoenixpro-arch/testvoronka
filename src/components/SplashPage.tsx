@@ -12,7 +12,7 @@ const SplashPage: React.FC<SplashPageProps> = ({ title, subtitle }) => {
   const location = useLocation();
   const { stepId } = useParams<{ stepId?: string }>();
   
-  // Проверяем, находимся ли мы на маршруте /goal/1
+
   const isGoalRoute = location.pathname === '/goal/1';
 
   useEffect(() => {
@@ -27,11 +27,11 @@ const SplashPage: React.FC<SplashPageProps> = ({ title, subtitle }) => {
       if (newProgress < 100) {
         requestAnimationFrame(updateProgress);
       } else {
-        // Когда загрузка завершена, переходим на 2-й этап
+
         setTimeout(() => {
           const basePath = stepId ? '/goal' : '';
           navigate(`${basePath}/2`);
-        }, 500); // Небольшая задержка перед переходом
+        }, 500);
       }
     };
 

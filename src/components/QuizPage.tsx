@@ -16,7 +16,7 @@ const QuizPage: React.FC = () => {
   const currentPageId = stepId ? parseInt(stepId) : pageId ? parseInt(pageId) : 1;
   const pageData: QuizPageData | undefined = quizPages.find(page => page.id === currentPageId);
   
-  // Состояние для хранения выбранных вариантов
+
   const [selectedValues, setSelectedValues] = useState<string[]>(() => {
     if (!pageData) return [];
     if (pageData.isMultiSelect) {
@@ -27,25 +27,25 @@ const QuizPage: React.FC = () => {
     }
   });
 
-  // Состояние для управления анимацией
+
   const [shouldAnimate, setShouldAnimate] = useState(false);
   
-  // Получаем текущий путь для корректной навигации
+
   const getCurrentPath = () => {
     return stepId ? '/goal' : '';
   };
 
-  // Перезапуск анимации при смене страницы
+
   useEffect(() => {
     const basePath = getCurrentPath();
     if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 4)) {
       setShouldAnimate(false);
-      // Небольшая задержка для сброса анимации
+
       setTimeout(() => setShouldAnimate(true), 10);
     }
   }, [currentPageId]);
 
-  // Инициализация анимации при первой загрузке
+
   useEffect(() => {
     const basePath = getCurrentPath();
     if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 4)) {
@@ -53,7 +53,7 @@ const QuizPage: React.FC = () => {
     }
   }, []);
 
-  // Обработка нажатия Enter для splash страницы
+
   useEffect(() => {
     if (pageData && pageData.isSplashPage) {
       const handleKeyPress = (event: KeyboardEvent) => {
@@ -78,7 +78,7 @@ const QuizPage: React.FC = () => {
     if (!pageData) return;
     
     if (pageData.isMultiSelect) {
-      // Мультивыбор: добавляем/удаляем значение
+
       setSelectedValues(prev => {
         if (prev.includes(value)) {
           return prev.filter(v => v !== value);
@@ -87,10 +87,10 @@ const QuizPage: React.FC = () => {
         }
       });
     } else {
-      // Одиночный выбор
+
       setSelectedValues([value]);
       
-      // Автоматический переход только для страниц без showContinueButton
+
       if (!pageData.showContinueButton) {
         setTimeout(() => {
           const nextPageId = currentPageId + 1;
@@ -100,7 +100,7 @@ const QuizPage: React.FC = () => {
             const basePath = getCurrentPath();
             navigate(`${basePath}/${nextPageId}`);
           } else {
-            // После завершения goal секции переходим к user/1
+
             navigate('/user/1');
           }
         }, 500);
@@ -116,7 +116,7 @@ const QuizPage: React.FC = () => {
       const basePath = getCurrentPath();
       navigate(`${basePath}/${nextPageId}`);
     } else {
-      // После завершения goal секции переходим к user/1
+
       navigate('/user/1');
     }
   };
@@ -129,7 +129,7 @@ const QuizPage: React.FC = () => {
     }
   };
 
-  // Формируем className для контейнера
+
   const getContainerClassName = () => {
     const basePath = getCurrentPath();
     let className = 'quiz-container';
@@ -138,7 +138,7 @@ const QuizPage: React.FC = () => {
       className += ' has-continue-button';
     }
     
-    // Добавляем специфичный класс для goal страниц 2, 3, 4, 5
+
     if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 4 || currentPageId === 5)) {
       className += ` goal-page-${currentPageId}`;
     }

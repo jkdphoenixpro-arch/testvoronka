@@ -167,7 +167,7 @@ body {
     justify-content: flex-start;
 }
 
-/* Анимация появления для goal страниц 2, 3, 4 */
+
 .quiz-container.goal-page-2 .content-wrapper.animate-in,
 .quiz-container.goal-page-3 .content-wrapper.animate-in,
 .quiz-container.goal-page-4 .content-wrapper.animate-in {
@@ -921,7 +921,7 @@ body {
     width: 100%;
 }
 
-/* Специфичный стиль для quiz-container (goal/1) */
+
 .quiz-container .progress-bar-container {
     height: 20px;
     background: rgba(77, 54, 138, 0.1);
@@ -1002,7 +1002,7 @@ body {
         width: 100%;
     }
 
-    /* Специфичный стиль для quiz-container в десктоп */
+
     .quiz-container .progress-bar-container {
         height: 20px;
         background: rgba(77, 54, 138, 0.1);
@@ -1055,7 +1055,7 @@ body {
         width: 100%;
     }
 
-    /* Специфичный стиль для quiz-container в мобильном */
+
     .quiz-container .progress-bar-container {
         height: 20px;
         background: rgba(77, 54, 138, 0.1);
@@ -1085,11 +1085,9 @@ body {
     }
 }
 
-/* ==============================================
-   LOTTIE ANIMATION OPTIMIZATIONS
-   ============================================== */
 
-/* Основные оптимизации для всех анимационных контейнеров */
+
+
 .chart-image,
 .image-container,
 .improvements-chart {
@@ -1100,7 +1098,7 @@ body {
     position: relative;
 }
 
-/* Плавные переходы для анимаций */
+
 .chart-image>*,
 .image-container>*,
 .improvements-chart>* {
@@ -1108,7 +1106,7 @@ body {
     -webkit-transition: opacity var(--animation-transition);
 }
 
-/* Оптимизация для Lottie SVG рендеринга */
+
 .chart-image svg,
 .image-container svg,
 .improvements-chart svg {
@@ -1117,7 +1115,7 @@ body {
     -webkit-transform: translateZ(0);
 }
 
-/* Предотвращение мерцания во время переходов */
+
 .chart-image img,
 .image-container img,
 .improvements-chart img {
@@ -1127,7 +1125,7 @@ body {
     -webkit-backface-visibility: hidden;
 }
 
-/* Оптимизация для мобильных устройств */
+
 @media (max-width: 768px) {
 
     .chart-image,

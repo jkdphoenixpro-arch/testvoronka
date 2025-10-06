@@ -12,7 +12,7 @@ const AnimationContext = createContext<AnimationContextType>({
   loadingProgress: 0
 });
 
-// Список всех анимаций в приложении
+
 const ANIMATIONS = [
   { name: 'testimonials', path: '/animate/Testimonials.json' },
   { name: 'lifestyle', path: '/animate/Progress-Care-level.json' },

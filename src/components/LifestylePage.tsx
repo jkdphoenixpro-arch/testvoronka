@@ -129,27 +129,24 @@ export default function LifestylePage() {
     setSelectedOptions(currentStep.initialSelected);
   }, [currentStep.initialSelected]);
 
-  // Обработчик завершения анимации
+
   const handleAnimationComplete = () => {
     if (lottieRef.current) {
-      // Останавливаем анимацию на последнем кадре
       lottieRef.current.pause();
     }
   };
 
-  // Обработчик готовности Lottie
+
   const handleLottieReady = () => {
     if (lottieRef.current) {
-      // Сбрасываем анимацию на первый кадр
       lottieRef.current.goToAndStop(0, true);
     }
     setIsLottieReady(true);
   };
 
-  // Управление воспроизведением анимации
+
   React.useEffect(() => {
     if (lottieRef.current && isLottieReady && shouldPlay && currentStepId === 7) {
-      // Сбрасываем на начало и запускаем только на 7 шаге
       lottieRef.current.goToAndStop(0, true);
       setTimeout(() => {
         if (lottieRef.current) {
@@ -188,7 +185,7 @@ export default function LifestylePage() {
     } else if (currentStepId === 6) {
       navigate('/lifestyle/7');
     } else if (currentStepId === 7) {
-      // После завершения lifestyle секции переходим к statements/1
+
       navigate('/statements/1');
     } else {
       navigate('/lifestyle/1');
@@ -240,7 +237,7 @@ export default function LifestylePage() {
                         }}
                       />
                     ) : (
-                      // Fallback изображение при загрузке или ошибке
+
                       <img src={currentStep.imageSrc} alt="Age Back chart" />
                     )}
                   </div>

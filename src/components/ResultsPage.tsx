@@ -6,12 +6,12 @@ import '../styles/results.css';
 const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
 
-  // Управление скроллом на уровне body
+
   useEffect(() => {
-    // Добавляем класс к body при монтировании
+
     document.body.classList.add('results-page');
     
-    // Убираем класс при размонтировании
+
     return () => {
       document.body.classList.remove('results-page');
     };
@@ -22,8 +22,7 @@ const ResultsPage: React.FC = () => {
   };
 
   const handleContinueClick = () => {
-    // Здесь будет переход на следующую страницу
-    console.log('Continue clicked');
+    navigate('/paywall');
   };
 
   return (
@@ -37,7 +36,6 @@ const ResultsPage: React.FC = () => {
               width="6" 
               height="12" 
               onError={(e) => {
-                // Fallback SVG если изображение не загружается
                 e.currentTarget.style.display = 'none';
                 const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                 svg.setAttribute('width', '6');
@@ -56,7 +54,7 @@ const ResultsPage: React.FC = () => {
       
       <main className="content-wrapper">
         <div className="results-content">
-          {/* Заголовок и описание */}
+
           <div className="results-header">
             <div className="heading-container">
               <h1 className="results-title">100% Personalized Anti-Age Program is Ready!</h1>
@@ -66,9 +64,9 @@ const ResultsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Основные секции */}
+
           <div className="results-sections">
-            {/* Секция Goal */}
+
             <div className="result-card">
               <div className="card-header">
                 <div className="icon-wrapper">
@@ -92,7 +90,7 @@ const ResultsPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Секция Issue areas */}
+
             <div className="result-card issue-areas-card">
               <div className="card-header">
                 <div className="icon-wrapper">
@@ -123,7 +121,7 @@ const ResultsPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Секция Improvements */}
+
             <div className="result-card improvements-card">
               <div className="card-header">
                 <div className="header-left">
@@ -145,10 +143,10 @@ const ResultsPage: React.FC = () => {
                 <span className="time-label">8 weeks</span>
               </div>
               
-              {/* Изображение для improvements */}
+
               <div className="improvements-chart">
                 <img 
-                  src="/image/chart-placeholder.png" 
+                  src="/image/results-8w.webp" 
                   alt="Improvements Chart" 
                   className="chart-image"
                   onError={(e) => {
@@ -161,7 +159,7 @@ const ResultsPage: React.FC = () => {
         </div>
       </main>
 
-      {/* Кнопка Continue - используем стандартный компонент */}
+
       <ContinueButton onClick={handleContinueClick} />
     </div>
   );

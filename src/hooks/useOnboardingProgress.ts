@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
 
-// Определяем все шаги онбординга от goal/1 до statements/4
+
 const ONBOARDING_STEPS = [
-    // Goal steps (7 шагов)
+
     { route: '/goal/1', step: 1 },
     { route: '/goal/2', step: 2 },
     { route: '/goal/3', step: 3 },
@@ -11,7 +11,7 @@ const ONBOARDING_STEPS = [
     { route: '/goal/6', step: 6 },
     { route: '/goal/7', step: 7 },
 
-    // User steps (7 шагов)
+
     { route: '/user/1', step: 8 },
     { route: '/user/2', step: 9 },
     { route: '/user/3', step: 10 },
@@ -20,7 +20,7 @@ const ONBOARDING_STEPS = [
     { route: '/user/6', step: 13 },
     { route: '/user/7', step: 14 },
 
-    // Lifestyle steps (7 шагов)
+
     { route: '/lifestyle/1', step: 15 },
     { route: '/lifestyle/2', step: 16 },
     { route: '/lifestyle/3', step: 17 },
@@ -29,29 +29,28 @@ const ONBOARDING_STEPS = [
     { route: '/lifestyle/6', step: 20 },
     { route: '/lifestyle/7', step: 21 },
 
-    // Statements steps (4 шага)
+
     { route: '/statements/1', step: 22 },
     { route: '/statements/2', step: 23 },
     { route: '/statements/3', step: 24 },
     { route: '/statements/4', step: 25 }
 ];
 
-const TOTAL_STEPS = ONBOARDING_STEPS.length; // 25 шагов
-const MAX_PROGRESS = 99; // Максимальный прогресс 99%
+const TOTAL_STEPS = ONBOARDING_STEPS.length;
+const MAX_PROGRESS = 99;
 
 export const useOnboardingProgress = () => {
     const location = useLocation();
 
-    // Находим текущий шаг
+
     const currentStepData = ONBOARDING_STEPS.find(step =>
         location.pathname === step.route
     );
 
-    // Если не найден в основном списке, проверяем паттерны
     let currentStep = currentStepData?.step || 0;
 
     if (!currentStepData) {
-        // Проверяем паттерны для случаев, когда точный маршрут не найден
+
         if (location.pathname.startsWith('/goal/')) {
             const stepId = parseInt(location.pathname.split('/')[2]);
             if (stepId >= 1 && stepId <= 7) {
@@ -75,10 +74,10 @@ export const useOnboardingProgress = () => {
         }
     }
 
-    // Вычисляем прогресс (равномерное распределение от 0% до 99%)
+
     const progress = currentStep > 0 ? Math.round((currentStep / TOTAL_STEPS) * MAX_PROGRESS) : 0;
 
-    // Проверяем, находимся ли мы в онбординге
+
     const isInOnboarding = currentStep > 0;
 
     return {

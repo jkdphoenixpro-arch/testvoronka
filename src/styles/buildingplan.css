@@ -1,17 +1,17 @@
-/* Building Plan Page Styles - точно по макету Figma */
 
-/* Базовый контейнер */
+
+
 .building-plan-container {
   background: linear-gradient(180deg, #E0E0FF 0%, #F4F4F4 100%);
 }
 
-/* Content wrapper используем стандартную структуру */
+
 .building-plan-container .content-wrapper {
   padding: 24px 20px 0;
   gap: 24px;
 }
 
-/* Content по макету */
+
 .building-plan-content {
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@
   margin: 0 auto;
 }
 
-/* Steps Section - Frame 470051 */
+
 .steps-section {
   width: 100%;
   max-width: 400px;
@@ -29,7 +29,7 @@
   gap: 24px;
 }
 
-/* Title wrapper адаптивный */
+
 .building-plan-title-wrapper {
   width: 100%;
   display: flex;
@@ -51,7 +51,7 @@
   text-align: center;
 }
 
-/* Steps container */
+
 .steps-container {
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@
   width: 100%;
 }
 
-/* Progress Step */
+
 .progress-step {
   width: 100%;
   display: flex;
@@ -69,7 +69,7 @@
   transition: opacity 0.5s ease;
 }
 
-/* Неактивные шаги (0% прогресса) */
+
 .progress-step.inactive {
   opacity: 0.20;
 }
@@ -99,7 +99,7 @@
   text-align: right;
 }
 
-/* Progress Bar Container - базовый стиль */
+
 .progress-bar-container {
   width: 100%;
   height: 20px;
@@ -109,7 +109,7 @@
   overflow: hidden;
 }
 
-/* Специфичный стиль для building-plan-container */
+
 .building-plan-container .progress-bar-container {
   height: 8px;
 }
@@ -121,23 +121,23 @@
   position: absolute;
   top: 0;
   left: 0;
-  /* transition убран, управление через JavaScript */
+
 }
 
-/* Специфичный стиль для progress-bar-background в building-plan-container */
+
 .building-plan-container .progress-bar-background {
   height: 8px;
 }
 
-/* Анимация прогресс-баров управляется через JavaScript */
+
 .progress-step-1,
 .progress-step-2,
 .progress-step-3,
 .progress-step-4 {
-  /* transition убран, анимация через JavaScript */
+
 }
 
-/* Frame 470054 - Testimonial Section */
+
 .testimonial-section {
   width: 100%;
   max-width: 400px;
@@ -147,7 +147,7 @@
   gap: 12px;
 }
 
-/* Heading 4 */
+
 .testimonial-title {
   font-family: Inter, sans-serif;
   font-weight: 600;
@@ -158,7 +158,7 @@
   margin: 0;
 }
 
-/* Frame 2085663709 - Dots */
+
 .testimonial-dots {
   display: flex;
   justify-content: center;
@@ -176,7 +176,7 @@
   background: #4D368A;
 }
 
-/* Background - testimonial card */
+
 .buildingplan-testimonial-card {
   background: #FFFFFF;
   border-radius: 20px;
@@ -190,7 +190,7 @@
   flex-direction: column;
 }
 
-/* Testimonial content внутри карточки - адаптивные размеры */
+
 .buildingplan-testimonial-card .testimonial-content-advanced {
   min-height: 128px;
   padding: 16px;
@@ -200,7 +200,7 @@
   flex: 1;
 }
 
-/* Header в testimonial */
+
 .buildingplan-testimonial-card .testimonial-header {
   width: 100%;
   display: flex;
@@ -210,7 +210,7 @@
   gap: 16px;
 }
 
-/* User info - Frame 2085663693 */
+
 .buildingplan-testimonial-card .user-info {
   width: 70px;
   height: 20px;
@@ -253,7 +253,7 @@
   color: #281A4B;
 }
 
-/* Rating - точно 88x16 из макета */
+
 .buildingplan-testimonial-card .rating {
   width: 88px;
   height: 16px;
@@ -265,7 +265,7 @@
   height: 16px;
 }
 
-/* Testimonial content - текст */
+
 .buildingplan-testimonial-card .testimonial-text {
   width: 100%;
   min-height: 100px;
@@ -285,7 +285,7 @@
   overflow-wrap: break-word;
 }
 
-/* Feedback Modal Styles - точно по макету Figma */
+
 .feedback-modal-overlay {
   position: fixed;
   top: 0;
@@ -368,7 +368,7 @@
   color: #281A4B;
 }
 
-/* Mobile version - стандартный подход приложения */
+
 @media (max-width: 768px) {
   .building-plan-content {
     max-width: 350px;
@@ -390,7 +390,7 @@
     max-width: 310px;
   }
   
-  /* Мобильные стили для progress-bar-container */
+
   .building-plan-container .progress-bar-container {
     height: 8px;
   }
@@ -399,7 +399,7 @@
     height: 8px;
   }
   
-  /* Мобильные стили для модального окна */
+
   .feedback-modal {
     width: 350px;
     height: 256px;

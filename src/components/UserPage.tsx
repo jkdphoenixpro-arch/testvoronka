@@ -4,13 +4,13 @@ import Header from './Header';
 import '../styles/user.css';
 import '../styles/testimonial.css';
 
-// Интерфейс для testimonial карточки
+
 interface TestimonialItem {
   percentage: string;
   description: string;
 }
 
-// Интерфейс для шага user
+
 interface UserStep {
   title: string;
   subtitle: string;
@@ -22,7 +22,7 @@ interface UserStep {
   testimonials?: TestimonialItem[];
 }
 
-// Данные для разных шагов user
+
 const userSteps: Record<number, UserStep> = {
   1: {
     title: "Your face shows your story. Which areas concern you most?",
@@ -66,7 +66,7 @@ const userSteps: Record<number, UserStep> = {
   4: {
     title: "You're not alone! Most people notice the same areas first.",
     subtitle: "The good news? With the right approach, these zones respond faster than you think.",
-    optionNames: [], // Нет опций для выбора
+    optionNames: [],
     initialSelected: [],
     progress: 35,
     stepClass: 'user-step-4',
@@ -88,7 +88,7 @@ const userSteps: Record<number, UserStep> = {
       'Rarely - only during intense activity',
       'Never - I feel great most of the time'
     ],
-    initialSelected: [], // Пользователь сам выбирает
+    initialSelected: [],
     progress: 40,
     stepClass: 'user-step-5'
   },
@@ -102,7 +102,7 @@ const userSteps: Record<number, UserStep> = {
       'Low energy, often feel tired or drained',
       'Very low energy, struggle to get through the day'
     ],
-    initialSelected: [], // Пользователь сам выбирает
+    initialSelected: [],
     progress: 45,
     stepClass: 'user-step-6'
   },
@@ -123,7 +123,7 @@ const userSteps: Record<number, UserStep> = {
   }
 };
 
-// User онбординг с поддержкой нескольких шагов. Единый DOM для desktop и mobile, адаптация через CSS.
+
 export default function UserPage() {
   const { stepId } = useParams();
   const navigate = useNavigate();
@@ -132,59 +132,59 @@ export default function UserPage() {
   
   const [selectedOptions, setSelectedOptions] = useState<number[]>(currentStep.initialSelected);
 
-  // Состояние для управления анимацией
+
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
-  // Перезапуск анимации при смене шага на user/4
+
   useEffect(() => {
     if (currentStepId === 4) {
       setShouldAnimate(false);
-      // Небольшая задержка для сброса анимации
+
       setTimeout(() => setShouldAnimate(true), 10);
     }
   }, [currentStepId]);
 
-  // Инициализация анимации при первой загрузке
+
   useEffect(() => {
     if (currentStepId === 4) {
       setShouldAnimate(true);
     }
   }, []);
 
-  // Обновляем выбранные опции при смене шага
+
   useEffect(() => {
     setSelectedOptions(currentStep.initialSelected);
   }, [currentStepId, currentStep.initialSelected]);
 
   const handleOptionClick = (index: number) => {
     if (currentStepId === 5 || currentStepId === 6) {
-      // Для 5-го и 6-го шагов: выбираем опцию и сразу переходим на следующий шаг
+
       setSelectedOptions([index]);
       setTimeout(() => {
         goNext();
-      }, 300); // Небольшая задержка для визуального эффекта
+      }, 300);
       return;
     }
 
     setSelectedOptions(prev => {
       if (prev.includes(index)) {
-        // Убираем из выбранных
+
         return prev.filter(i => i !== index);
       } else if (prev.length < 3) {
-        // Добавляем, если меньше 3
+
         return [...prev, index];
       }
-      // Если уже 3 выбрано, ничего не делаем
+
       return prev;
     });
   };
 
   const handleBackClick = () => {
     if (currentStepId === 1) {
-      // На первом этапе ничего не делаем
+
       return;
     }
-    // Логика возврата назад
+
     navigate(-1);
   };
 
@@ -202,18 +202,18 @@ export default function UserPage() {
     } else if (currentStepId === 6) {
       navigate('/user/7');
     } else if (currentStepId === 7) {
-      // После завершения user секции переходим к lifestyle/1
+
       navigate('/lifestyle/1');
     } else {
       navigate('/user/1');
     }
   };
 
-  // Формируем className для контейнера
+
   const getContainerClassName = () => {
     let className = 'quiz-container user-container';
     
-    // Добавляем специфичный класс для user страниц 5, 6
+
     if (currentStepId === 5 || currentStepId === 6) {
       className += ` user-step-${currentStepId}`;
     } else {
@@ -298,7 +298,7 @@ export default function UserPage() {
               {currentStep.optionNames.map((name, index) => {
               const isSelected = selectedOptions.includes(index);
               
-              // Ширины кнопок для разных шагов
+
               const widthClasses = {
                 1: [
                   'pill-w98', 'pill-w76', 'pill-w122',

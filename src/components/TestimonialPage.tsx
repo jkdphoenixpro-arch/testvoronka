@@ -12,33 +12,30 @@ const TestimonialPage: React.FC<TestimonialPageProps> = ({ title, subtitle }) =>
   const [isLottieReady, setIsLottieReady] = useState(false);
   const { animationData, isReady, shouldPlay } = usePreloadedAnimation('testimonials');
 
-  // Обработчик завершения анимации
+
   const handleAnimationComplete = () => {
     if (lottieRef.current) {
-      // Останавливаем анимацию на последнем кадре
       lottieRef.current.pause();
     }
   };
 
-  // Обработчик готовности Lottie
+
   const handleLottieReady = () => {
     if (lottieRef.current) {
-      // Сбрасываем анимацию на первый кадр
       lottieRef.current.goToAndStop(0, true);
     }
     setIsLottieReady(true);
   };
 
-  // Управление воспроизведением анимации
+
   React.useEffect(() => {
     if (lottieRef.current && isLottieReady && shouldPlay) {
-      // Сбрасываем на начало и запускаем
       lottieRef.current.goToAndStop(0, true);
       setTimeout(() => {
         if (lottieRef.current) {
           lottieRef.current.play();
         }
-      }, 50); // Небольшая задержка для стабильности
+      }, 50);
     }
   }, [isLottieReady, shouldPlay]);
 
@@ -55,7 +52,7 @@ const TestimonialPage: React.FC<TestimonialPageProps> = ({ title, subtitle }) =>
 
       <div className="testimonial-section">
         <div className="image-container" style={{ position: 'relative' }}>
-          {/* Fallback изображение - всегда показываем как основу */}
+
           <img 
             src="/image/testimonials.webp" 
             alt="Testimonials" 
@@ -69,7 +66,7 @@ const TestimonialPage: React.FC<TestimonialPageProps> = ({ title, subtitle }) =>
               left: 0
             }}
           />
-          {/* Lottie анимация */}
+
           {isReady && animationData && (
             <div
               style={{

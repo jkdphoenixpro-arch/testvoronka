@@ -15,7 +15,6 @@ const BuildingPlanPage: React.FC = () => {
   const { stepId } = useParams<{ stepId: string }>();
   const navigate = useNavigate();
   
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const currentStepId = stepId ? parseInt(stepId) : 1;
   
   const [progressSteps, setProgressSteps] = useState<ProgressStep[]>([
@@ -49,7 +48,6 @@ const BuildingPlanPage: React.FC = () => {
     }
   ]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentProgress, setCurrentProgress] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showSecondModal, setShowSecondModal] = useState(false);
@@ -57,7 +55,7 @@ const BuildingPlanPage: React.FC = () => {
   const continueLoadingRef = useRef<(() => void) | null>(null);
   const continueSecondLoadingRef = useRef<(() => void) | null>(null);
 
-  // Плавная анимация прогресс бара
+
   const animateProgressBar = (stepId: number, targetPercent: number, duration: number = 2500): Promise<void> => {
     return new Promise((resolve) => {
       const startTime = Date.now();
@@ -66,7 +64,7 @@ const BuildingPlanPage: React.FC = () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
         
-        // Линейная интерполяция для плавности
+
         const currentPercent = Math.round(targetPercent * progress);
         
         setProgressSteps(prev => prev.map(step => 
@@ -81,7 +79,7 @@ const BuildingPlanPage: React.FC = () => {
         if (progress < 1) {
           requestAnimationFrame(updateProgress);
         } else {
-          // Убеждаемся, что финальное значение точно установлено
+
           setProgressSteps(prev => prev.map(step => 
             step.id === stepId ? { 
               ...step, 
@@ -100,35 +98,35 @@ const BuildingPlanPage: React.FC = () => {
   
 
   useEffect(() => {
-    // Последовательная загрузка прогресс-баров
+
     const loadProgressBars = async () => {
-      // Первый прогресс-бар загружается с анимацией до 100%
+
       await animateProgressBar(1, 100, 2500);
       
-      // Показываем модальное окно сразу после завершения первого прогресс бара
+
       setShowModal(true);
       isPausedRef.current = true;
       
-      // Ожидаем пока пользователь не закроет модальное окно
+
       const continueLoading = () => {
-        // Остальные прогресс-бары загружаются по очереди
+
         const loadRemainingSteps = async () => {
-          // Второй прогресс бар
+
           await animateProgressBar(2, 100, 2500);
           
-          // Третий прогресс бар
+
           await animateProgressBar(3, 100, 2500);
           
-          // Показываем второй попап после третьего прогресс бара
+
           setShowSecondModal(true);
           isPausedRef.current = true;
           
-          // Ожидаем пока пользователь не закроет второй попап
+
           const continueFinalLoading = () => {
-            // Четвёртый (последний) прогресс бар
+
             const loadFinalStep = async () => {
               await animateProgressBar(4, 100, 2500);
-              // После завершения всех прогресс баров переходим на страницу результатов
+
               navigate('/results');
             };
             loadFinalStep();
@@ -192,7 +190,6 @@ const BuildingPlanPage: React.FC = () => {
               width="6" 
               height="12" 
               onError={(e) => {
-                // Fallback SVG если изображение не загружается
                 e.currentTarget.style.display = 'none';
                 const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                 svg.setAttribute('width', '6');
@@ -211,16 +208,16 @@ const BuildingPlanPage: React.FC = () => {
       
       <main className="content-wrapper">
         <div className="building-plan-content">
-          {/* Основная секция с шагами */}
+
           <div className="steps-section">
-            {/* Заголовок */}
+
             <div className="building-plan-title-wrapper">
               <div className="heading-container">
                 <h1 className="building-plan-title">Building your anti-aging plan...</h1>
               </div>
             </div>
 
-            {/* Шаги прогресса */}
+
             <div className="steps-container">
               {progressSteps.map((step, index) => {
                 const isInactive = step.progressPercent === '0%';
@@ -250,18 +247,18 @@ const BuildingPlanPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Секция с отзывом - Frame 470054 */}
+
           <div className="testimonial-section">
             <h2 className="testimonial-title">Trusted by over 500K+ users</h2>
             
-            {/* Точки навигации */}
+
             <div className="testimonial-dots">
               <div className="dot active"></div>
               <div className="dot"></div>
               <div className="dot"></div>
             </div>
 
-            {/* Карточка отзыва */}
+
             <div className="buildingplan-testimonial-card">
               <div className="testimonial-content-advanced">
                 <div className="testimonial-header">

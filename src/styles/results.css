@@ -1,7 +1,6 @@
-/* Results Page Styles - точно по макету Figma */
 
-/* Переопределение глобальных стилей для страницы results */
-/* Включаем скролл на body для страницы results */
+
+
 body.results-page {
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -9,30 +8,30 @@ body.results-page {
   min-height: 100vh !important;
 }
 
-/* Переопределяем стили App для results */
+
 body.results-page .App {
   overflow: visible !important;
   height: auto !important;
   min-height: 100vh !important;
 }
 
-/* Переопределяем стили #root для results */
+
 body.results-page #root {
   overflow: visible !important;
   height: auto !important;
   min-height: 100vh !important;
 }
 
-/* Основной контейнер - без скролла, позволяем естественному растягиванию */
+
 .quiz-container.results-container {
-  height: auto !important; /* Автоматическая высота по контенту */
-  min-height: 100vh !important; /* Минимум на весь экран */
-  overflow: visible !important; /* Никакого скролла на контейнере */
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow: visible !important;
   display: flex !important;
   flex-direction: column !important;
 }
 
-/* Контент wrapper */
+
 .results-container .content-wrapper {
   flex: 1 !important;
   padding: 24px 20px 0 !important;
@@ -43,7 +42,7 @@ body.results-page #root {
   flex-direction: column !important;
 }
 
-/* Results content */
+
 .results-content {
   display: flex;
   flex-direction: column;
@@ -52,7 +51,7 @@ body.results-page #root {
   margin: 0 auto;
 }
 
-/* Header Section */
+
 .results-header {
   width: 100%;
   display: flex;
@@ -92,7 +91,7 @@ body.results-page #root {
   margin: 0;
 }
 
-/* Results sections */
+
 .results-sections {
   display: flex;
   flex-direction: column;
@@ -100,7 +99,7 @@ body.results-page #root {
   width: 100%;
 }
 
-/* Result card base */
+
 .result-card {
   background: #FFFFFF;
   border-radius: 20px;
@@ -111,7 +110,7 @@ body.results-page #root {
   gap: 16px;
 }
 
-/* Card header */
+
 .card-header {
   display: flex;
   align-items: center;
@@ -125,7 +124,7 @@ body.results-page #root {
   flex: 1;
 }
 
-/* Icon wrapper */
+
 .icon-wrapper {
   width: 36px;
   height: 36px;
@@ -165,7 +164,7 @@ body.results-page #root {
   color: #50436D;
 }
 
-/* Goal section */
+
 .goal-tags {
   display: flex;
   flex-wrap: wrap;
@@ -184,7 +183,7 @@ body.results-page #root {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Issue areas section */
+
 .issue-areas-card {
   min-height: 200px;
 }
@@ -207,7 +206,7 @@ body.results-page #root {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Improvements section */
+
 .improvements-card {
   min-height: 228px;
 }
@@ -218,9 +217,8 @@ body.results-page #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(77, 54, 138, 0.05);
+  background: #ffffff;
   border-radius: 12px;
-  border: 1px dashed rgba(77, 54, 138, 0.2);
 }
 
 .chart-image {
@@ -229,7 +227,7 @@ body.results-page #root {
   object-fit: contain;
 }
 
-/* Кнопка в конце страницы - стандартный подход */
+
 .results-container .bottom-bar {
   position: static !important;
   transform: none !important;
@@ -243,7 +241,7 @@ body.results-page #root {
   justify-content: center !important;
 }
 
-/* Mobile version */
+
 @media (max-width: 768px) {
   .results-container .content-wrapper {
     padding: 16px 16px 0 !important;

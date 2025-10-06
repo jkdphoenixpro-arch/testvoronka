@@ -266,7 +266,7 @@ export default function ProfilingPage() {
               {currentStep.optionNames.map((name, index) => {
               const isSelected = selectedOptions.includes(index);
               
-              // Ширины кнопок для разных шагов
+
               const widthClasses = {
                 1: [
                   'pill-w98', 'pill-w76', 'pill-w122',

@@ -12,33 +12,30 @@ const ChartPage: React.FC<ChartPageProps> = ({ title, subtitle }) => {
   const [isLottieReady, setIsLottieReady] = useState(false);
   const { animationData, isReady, shouldPlay } = usePreloadedAnimation('chart');
 
-  // Обработчик завершения анимации
+
   const handleAnimationComplete = () => {
     if (lottieRef.current) {
-      // Останавливаем анимацию на последнем кадре
       lottieRef.current.pause();
     }
   };
 
-  // Обработчик готовности Lottie
+
   const handleLottieReady = () => {
     if (lottieRef.current) {
-      // Сбрасываем анимацию на первый кадр
       lottieRef.current.goToAndStop(0, true);
     }
     setIsLottieReady(true);
   };
 
-  // Управление воспроизведением анимации
+
   React.useEffect(() => {
     if (lottieRef.current && isLottieReady && shouldPlay) {
-      // Сбрасываем на начало и запускаем
       lottieRef.current.goToAndStop(0, true);
       setTimeout(() => {
         if (lottieRef.current) {
           lottieRef.current.play();
         }
-      }, 50); // Небольшая задержка для стабильности
+      }, 50);
     }
   }, [isLottieReady, shouldPlay]);
 
@@ -56,7 +53,7 @@ const ChartPage: React.FC<ChartPageProps> = ({ title, subtitle }) => {
       <div className="chart-section">
         <div className="chart-block">
           <div className="chart-image" style={{ position: 'relative' }}>
-            {/* Fallback изображение - всегда показываем как основу */}
+
             <img 
               src="/image/chart-results.svg" 
               alt="Age Back results chart" 
@@ -70,7 +67,7 @@ const ChartPage: React.FC<ChartPageProps> = ({ title, subtitle }) => {
                 left: 0
               }}
             />
-            {/* Lottie анимация */}
+
             {isReady && animationData && (
               <div
                 style={{

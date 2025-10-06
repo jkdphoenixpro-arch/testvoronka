@@ -17,7 +17,7 @@
   justify-content: flex-start;
 }
 
-/* Анимация появления для user-step-4 */
+
 .user-container.user-step-4 .content-wrapper.animate-in {
   animation: fadeInScale 1s ease forwards;
 }
