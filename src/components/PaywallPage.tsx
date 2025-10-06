@@ -413,7 +413,7 @@ const PaywallPage: React.FC = () => {
           <div className="offer-alert">
             <div className="alert-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" fill="white"/>
+                
               </svg>
             </div>
             <span>This offer expires in {formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}</span>
