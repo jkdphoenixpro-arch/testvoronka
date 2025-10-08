@@ -66,7 +66,7 @@ export const quizPages: QuizPageData[] = [
     options: [
       { value: "face-neck", text: "Face & neck", icon: "face&neck", selected: false },
       { value: "belly-waist", text: "Belly & waist", icon: "belly&waist", selected: false },
-      { value: "back-posture", text: "Back & posture", icon: "back&posture", selected: true },
+      { value: "back-posture", text: "Back & posture", icon: "back&posture", selected: false },
       { value: "strength-bodytone", text: "Strength & body tone", icon: "strength&bodytone", selected: false },
       { value: "joints-flexibility", text: "Joints & flexibility", icon: "joints&flexibility", selected: false }
     ]

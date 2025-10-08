@@ -71,6 +71,18 @@ const QuizPage: React.FC = () => {
     }
   }, [pageData, navigate, stepId]);
 
+  // Сбрасываем selectedValues при смене страницы
+  useEffect(() => {
+    if (!pageData) return;
+    
+    if (pageData.isMultiSelect) {
+      setSelectedValues(pageData.options.filter(option => option.selected).map(option => option.value));
+    } else {
+      const selected = pageData.options.find(option => option.selected);
+      setSelectedValues(selected ? [selected.value] : []);
+    }
+  }, [currentPageId, pageData]);
+
   if (!pageData) {
     const basePath = getCurrentPath();
     navigate(`${basePath}/1`);
@@ -118,6 +130,11 @@ const QuizPage: React.FC = () => {
   };
   
   const handleContinueClick = () => {
+    // Проверяем, можно ли продолжить
+    if (!pageData.isTestimonialPage && !pageData.isChartPage && selectedValues.length === 0) {
+      return; // Не продолжаем, если ничего не выбрано
+    }
+    
     const nextPageId = currentPageId + 1;
     const nextPage = quizPages.find(page => page.id === nextPageId);
     
@@ -234,7 +251,18 @@ const QuizPage: React.FC = () => {
       {pageData.showContinueButton && (
         <ContinueButton
           onClick={handleContinueClick}
-          disabled={pageData.isTestimonialPage || pageData.isChartPage ? false : selectedValues.length === 0}
+          disabled={(() => {
+            // Для testimonial и chart страниц кнопка всегда активна
+            if (pageData.isTestimonialPage || pageData.isChartPage) {
+              return false;
+            }
+            // Для multi-select страниц (goal/4) кнопка неактивна, если ничего не выбрано
+            if (pageData.isMultiSelect) {
+              return selectedValues.length === 0;
+            }
+            // Для других страниц кнопка неактивна, если ничего не выбрано
+            return selectedValues.length === 0;
+          })()}
         />
       )}
     </div>
