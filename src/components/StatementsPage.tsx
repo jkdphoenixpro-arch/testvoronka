@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from './Header';
+import { getPreviousStep } from '../utils/navigationUtils';
 import ScaleButton from './ScaleButton';
-import ContinueButton from './ContinueButton';
 
 interface StatementData {
   id: number;
@@ -20,20 +20,20 @@ const statementsData: StatementData[] = [
   },
   {
     id: 2,
-    question: "I tend to compare myself to others and it makes me frustrated",
-    statement: "The reflection in the mirror affects my mood and my self-esteem",
+    question: "Do you relate to the following statement?",
+    statement: "I tend to compare myself to others and it makes me frustrated",
     progress: 30
   },
   {
     id: 3,
-    question: "My apperance may affect my relationships",
-    statement: "The reflection in the mirror affects my mood and my self-esteem",
+    question: "Do you relate to the following statement?",
+    statement: "My appearance may affect my relationships",
     progress: 45
   },
   {
     id: 4,
-    question: "I'm afraid that people won't like me if i look older",
-    statement: "The reflection in the mirror affects my mood and my self-esteem",
+    question: "Do you relate to the following statement?",
+    statement: "I'm afraid that people won't like me if I look older",
     progress: 60
   }
 ];
@@ -41,6 +41,7 @@ const statementsData: StatementData[] = [
 const StatementsPage: React.FC = () => {
   const { stepId } = useParams<{ stepId: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const currentStepId = stepId ? parseInt(stepId) : 1;
   const statementData = statementsData.find(statement => statement.id === currentStepId);
@@ -59,18 +60,19 @@ const StatementsPage: React.FC = () => {
 
   const handleScaleClick = (value: number) => {
     setSelectedValue(value);
-  };
-
-  const handleContinueClick = () => {
-    const nextStepId = currentStepId + 1;
-    const nextStatement = statementsData.find(statement => statement.id === nextStepId);
     
-    if (nextStatement) {
-      navigate(`/statements/${nextStepId}`);
-    } else {
-
-      navigate('/buildingplan/1');
-    }
+    // Автоматический переход после выбора
+    setTimeout(() => {
+      const nextStepId = currentStepId + 1;
+      const nextStatement = statementsData.find(statement => statement.id === nextStepId);
+      
+      if (nextStatement) {
+        navigate(`/statements/${nextStepId}`);
+      } else {
+        // Переход к следующему разделу после последней страницы
+        navigate('/buildingplan/1');
+      }
+    }, 500); // Небольшая задержка для визуального отклика
   };
 
   const handleBackClick = () => {
@@ -78,8 +80,11 @@ const StatementsPage: React.FC = () => {
     if (prevStepId >= 1) {
       navigate(`/statements/${prevStepId}`);
     } else {
-
-      return;
+      // Для первой страницы statements переходим на предыдущую секцию (lifestyle/7)
+      const previousStep = getPreviousStep(location.pathname);
+      if (previousStep) {
+        navigate(previousStep);
+      }
     }
   };
 
@@ -100,14 +105,19 @@ const StatementsPage: React.FC = () => {
 
         <div className="scale-wrapper">
           <div className="scale-options">
-            {[1, 2, 3, 4, 5].map((value) => (
-              <ScaleButton
-                key={value}
-                value={value}
-                selected={selectedValue === value}
-                onClick={handleScaleClick}
-              />
-            ))}
+            {[1, 2, 3, 4, 5].map((value, index) => {
+              const animationClass = `animated-option delay-${Math.min(index + 1, 15)}`;
+              const uniqueKey = `${currentStepId}-${value}`;
+              return (
+                <ScaleButton
+                  key={uniqueKey}
+                  value={value}
+                  selected={selectedValue === value}
+                  onClick={handleScaleClick}
+                  className={animationClass}
+                />
+              );
+            })}
           </div>
           <div className="scale-labels">
             <span className="scale-label-left">Strongly disagree</span>
@@ -115,11 +125,6 @@ const StatementsPage: React.FC = () => {
           </div>
         </div>
       </main>
-
-      <ContinueButton
-        onClick={handleContinueClick}
-        disabled={selectedValue === null}
-      />
     </div>
   );
 };

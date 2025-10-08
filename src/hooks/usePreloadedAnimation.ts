@@ -27,16 +27,17 @@ export const usePreloadedAnimation = (animationName: string) => {
 
   useEffect(() => {
     if (hasData && !hasError) {
-
+      // Уменьшаем задержки для более быстрого отклика
       const timeout = setTimeout(() => {
         requestAnimationFrame(() => {
           setIsAnimationReady(true);
 
+          // Уменьшаем задержку shouldPlay с 30ms до 5ms
           setTimeout(() => {
             setShouldPlay(true);
-          }, 100);
+          }, 5);
         });
-      }, 50);
+      }, 5); // Уменьшаем базовую задержку с 20ms до 5ms
       
       return () => clearTimeout(timeout);
     } else {

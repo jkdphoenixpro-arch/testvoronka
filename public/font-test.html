@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SF Pro Display Font Test</title>
+    <style>
+        /* Font Face Declarations - SF Pro Display */
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: url('./fonts/SFProDisplay/SF-Pro-Display-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: url('./fonts/SFProDisplay/SF-Pro-Display-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: url('./fonts/SFProDisplay/SF-Pro-Display-Semibold.otf') format('opentype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: url('./fonts/SFProDisplay/SF-Pro-Display-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Font Face Declarations - Inter */
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/Inter/Inter/Inter-ExtraBold.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .font-test {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .font-weight {
+            font-size: 24px;
+            margin: 15px 0;
+            font-family: 'SF Pro Display';
+        }
+
+        .weight-100 { font-weight: 100; }
+        .weight-200 { font-weight: 200; }
+        .weight-300 { font-weight: 300; }
+        .weight-400 { font-weight: 400; }
+        .weight-500 { font-weight: 500; }
+        .weight-600 { font-weight: 600; }
+        .weight-700 { font-weight: 700; }
+        .weight-800 { font-weight: 800; }
+        .weight-900 { font-weight: 900; }
+
+        .label {
+            font-size: 14px;
+            color: #666;
+            margin-right: 20px;
+            display: inline-block;
+            width: 200px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SF Pro Display Font Weight Test</h1>
+    
+    <div class="font-test">
+        <h2>Подключенные шрифты SF Pro Display:</h2>
+        
+        <div class="font-weight weight-400">
+            <span class="label">font-weight: 400 (Regular)</span>
+            Age Back - Your personalised anti-aging program
+        </div>
+        
+        <div class="font-weight weight-500">
+            <span class="label">font-weight: 500 (Medium)</span>
+            Age Back - Your personalised anti-aging program
+        </div>
+        
+        <div class="font-weight weight-600">
+            <span class="label">font-weight: 600 (Semibold)</span>
+            Age Back - Your personalised anti-aging program
+        </div>
+        
+        <div class="font-weight weight-700">
+            <span class="label">font-weight: 700 (Bold)</span>
+            Age Back - Your personalised anti-aging program
+        </div>
+    </div>
+    
+    <div class="font-test">
+        <h2>Подключенные шрифты Inter:</h2>
+        
+        <div class="font-weight" style="font-family: 'Inter'; font-weight: 800;">
+            <span class="label">font-weight: 800 (ExtraBold)</span>
+            Age Back - Your personalised anti-aging program
+        </div>
+    </div>
+
+    <div class="font-test">
+        <h2>Примеры использования в CSS:</h2>
+        <pre style="background: #f8f8f8; padding: 15px; border-radius: 4px; font-size: 14px;">
+/* SF Pro Display - Обычный текст (по умолчанию) */
+.text-regular {
+    font-family: 'SF Pro Display';
+    font-weight: 400;
+}
+
+/* SF Pro Display - Средний текст */
+.text-medium {
+    font-family: 'SF Pro Display';
+    font-weight: 500;
+}
+
+/* SF Pro Display - Полужирный */
+.text-semibold {
+    font-family: 'SF Pro Display';
+    font-weight: 600;
+}
+
+/* SF Pro Display - Жирный */
+.text-bold {
+    font-family: 'SF Pro Display';
+    font-weight: 700;
+}
+
+/* Inter - Экстра жирный */
+.text-extrabold {
+    font-family: 'Inter';
+    font-weight: 800;
+}
+        </pre>
+    </div>
+</body>
+</html>

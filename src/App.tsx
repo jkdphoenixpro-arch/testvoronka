@@ -6,6 +6,7 @@ import LifestylePage from './components/LifestylePage';
 import StatementsPage from './components/StatementsPage';
 import BuildingPlanPage from './components/BuildingPlanPage';
 import ResultsPage from './components/ResultsPage';
+import EnterEmailPage from './components/EnterEmailPage';
 import PaywallPage from './components/PaywallPage';
 import { AnimationProvider } from './contexts/AnimationContext';
 import './styles/main.css';
@@ -24,6 +25,7 @@ function App() {
             <Route path="/statements/:stepId" element={<StatementsPage />} />
             <Route path="/buildingplan/:stepId" element={<BuildingPlanPage />} />
             <Route path="/results" element={<ResultsPage />} />
+            <Route path="/enteremail" element={<EnterEmailPage />} />
             <Route path="/paywall" element={<PaywallPage />} />
             {/* Старые маршруты для совместимости */}
             <Route path="/:pageId" element={<QuizPage />} />

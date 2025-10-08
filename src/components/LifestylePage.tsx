@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { getPreviousStep } from '../utils/navigationUtils';
 import Lottie from 'lottie-react';
 import { usePreloadedAnimation } from '../hooks/usePreloadedAnimation';
 import Header from './Header';
@@ -117,6 +118,7 @@ const lifestyleSteps: Record<number, LifestyleStep> = {
 export default function LifestylePage() {
   const { stepId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const currentStepId = parseInt(stepId || '1');
   const currentStep = lifestyleSteps[currentStepId as keyof typeof lifestyleSteps] || lifestyleSteps[1];
   
@@ -166,9 +168,16 @@ export default function LifestylePage() {
 
   const handleBackClick = () => {
     if (currentStepId === 1) {
+      // Для первой страницы lifestyle переходим на предыдущую секцию (user/7)
+      const previousStep = getPreviousStep(location.pathname);
+      if (previousStep) {
+        navigate(previousStep);
+      }
       return;
     }
-    navigate(-1);
+    
+    // Для остальных страниц в секции - обычный переход на предыдущую страницу в секции
+    navigate(`/lifestyle/${currentStepId - 1}`);
   };
 
   const goNext = () => {
@@ -272,11 +281,12 @@ export default function LifestylePage() {
           <div className="options-wrapper">
             {currentStep.optionNames?.map((name, index) => {
               const isSelected = selectedOptions.includes(index);
+              const uniqueKey = `${currentStepId}-${index}`;
               
               return (
                 <button 
-                  key={index}
-                  className={`single-select-option ${isSelected ? 'selected' : ''}`}
+                  key={uniqueKey}
+                  className={`single-select-option ${isSelected ? 'selected' : ''} animated-option delay-${Math.min(index + 1, 15)}`}
                   onClick={() => handleOptionClick(index)}
                 >
                   <span className="option-text">{name}</span>

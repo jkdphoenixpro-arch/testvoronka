@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ContinueButton from './ContinueButton';
 import '../styles/paywall.css';
 
 const PaywallPage: React.FC = () => {
@@ -81,9 +80,7 @@ const PaywallPage: React.FC = () => {
           
           <div className="offer-alert">
             <div className="alert-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                
-              </svg>
+              <img src="/image/timer-icon.svg" alt="Timer" width="24" height="24" />
             </div>
             <span>This offer expires in {formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}</span>
           </div>
@@ -115,10 +112,14 @@ const PaywallPage: React.FC = () => {
                 </div>
                 <div className="plan-info">
                   <div className="plan-name">4-Week plan</div>
-                  <div className="plan-price-old">$38.95 → $6.99</div>
+                  <div className="plan-price-old">
+                    <span className="old-price">$38.95</span>
+                    <span className="price-arrow">→</span>
+                    <span className="new-price">$6.99</span>
+                  </div>
                 </div>
               </div>
-              <div className="plan-pricing">
+              <div className={`plan-pricing ${selectedPlan === '4-week' ? 'highlighted' : ''}`}>
                 <div className="price-per-day">$1.30</div>
                 <div className="price-main">$0.99</div>
                 <div className="price-label">per day</div>
@@ -151,10 +152,14 @@ const PaywallPage: React.FC = () => {
                 </div>
                 <div className="plan-info">
                   <div className="plan-name">8-Week plan</div>
-                  <div className="plan-price-old">$38.95 → $15.99</div>
+                  <div className="plan-price-old">
+                    <span className="old-price">$38.95</span>
+                    <span className="price-arrow">→</span>
+                    <span className="new-price">$15.99</span>
+                  </div>
                 </div>
               </div>
-              <div className="plan-pricing highlighted">
+              <div className={`plan-pricing ${selectedPlan === '8-week' ? 'highlighted' : ''}`}>
                 <div className="price-per-day">$1.30</div>
                 <div className="price-main">$0.53</div>
                 <div className="price-label">per day</div>
@@ -187,10 +192,14 @@ const PaywallPage: React.FC = () => {
                 </div>
                 <div className="plan-info">
                   <div className="plan-name">12-Week plan</div>
-                  <div className="plan-price-old">$66.65 → $25.99</div>
+                  <div className="plan-price-old">
+                    <span className="old-price">$66.65</span>
+                    <span className="price-arrow">→</span>
+                    <span className="new-price">$25.99</span>
+                  </div>
                 </div>
               </div>
-              <div className="plan-pricing">
+              <div className={`plan-pricing ${selectedPlan === '12-week' ? 'highlighted' : ''}`}>
                 <div className="price-per-day">$1.30</div>
                 <div className="price-main">$0.29</div>
                 <div className="price-label">per day</div>
@@ -210,16 +219,16 @@ const PaywallPage: React.FC = () => {
             <p className="security-text">All transactions are secure and encrypted with SSL/TLS encryption</p>
             <div className="payment-methods">
               <div className="payment-card">
-                <span className="payment-text">VISA</span>
+                <img src="/image/Visa.svg" alt="Visa" />
               </div>
               <div className="payment-card">
-                <span className="payment-text">MC</span>
+                <img src="/image/Mastercard.svg" alt="Mastercard" />
               </div>
               <div className="payment-card">
-                <span className="payment-text">AMEX</span>
+                <img src="/image/American-Express.svg" alt="American Express" />
               </div>
               <div className="payment-card">
-                <span className="payment-text">DISC</span>
+                <img src="/image/Discover.svg" alt="Discover" />
               </div>
             </div>
           </div>
@@ -371,7 +380,7 @@ const PaywallPage: React.FC = () => {
                 </div>
               </div>
               <p className="testimonial-text">
-                "Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face, increase flexibility. I feel more energetic and confident. It's a truly great solution for taking care of myself"
+                “Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face, increase flexibility. I feel more energetic and confident. It's a truly great solution for taking care of myself”
               </p>
             </div>
             <div className="testimonial-card">
@@ -385,7 +394,7 @@ const PaywallPage: React.FC = () => {
                 </div>
               </div>
               <p className="testimonial-text">
-                "Amazing results in just 8 weeks! My face looks more toned and my posture has improved significantly. The exercises are easy to follow and fit perfectly into my daily routine."
+                "Age Back completely changed my daily routine! After just 6 weeks, I noticed significant improvements in my posture and energy levels. My friends keep asking what I'm doing differently. This app is a game-changer"
               </p>
             </div>
             <div className="testimonial-card">
@@ -399,7 +408,7 @@ const PaywallPage: React.FC = () => {
                 </div>
               </div>
               <p className="testimonial-text">
-                "I love how the program is personalized to my needs. The science-based approach gives me confidence that I'm doing the right exercises for my age and goals."
+                "I was skeptical at first, but Age Back delivered amazing results! My skin looks more radiant, my back pain is gone, and I feel 10 years younger. The personalized approach really works. Highly recommended!"
               </p>
             </div>
           </div>
@@ -412,9 +421,7 @@ const PaywallPage: React.FC = () => {
           
           <div className="offer-alert">
             <div className="alert-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                
-              </svg>
+              <img src="/image/timer-icon.svg" alt="Timer" width="24" height="24" />
             </div>
             <span>This offer expires in {formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}</span>
           </div>
@@ -446,10 +453,14 @@ const PaywallPage: React.FC = () => {
                 </div>
                 <div className="plan-info">
                   <div className="plan-name">4-Week plan</div>
-                  <div className="plan-price-old">$38.95 → $6.99</div>
+                  <div className="plan-price-old">
+                    <span className="old-price">$38.95</span>
+                    <span className="price-arrow">→</span>
+                    <span className="new-price">$6.99</span>
+                  </div>
                 </div>
               </div>
-              <div className="plan-pricing">
+              <div className={`plan-pricing ${selectedPlan === '4-week' ? 'highlighted' : ''}`}>
                 <div className="price-per-day">$1.30</div>
                 <div className="price-main">$0.99</div>
                 <div className="price-label">per day</div>
@@ -482,10 +493,14 @@ const PaywallPage: React.FC = () => {
                 </div>
                 <div className="plan-info">
                   <div className="plan-name">8-Week plan</div>
-                  <div className="plan-price-old">$38.95 → $15.99</div>
+                  <div className="plan-price-old">
+                    <span className="old-price">$38.95</span>
+                    <span className="price-arrow">→</span>
+                    <span className="new-price">$15.99</span>
+                  </div>
                 </div>
               </div>
-              <div className="plan-pricing highlighted">
+              <div className={`plan-pricing ${selectedPlan === '8-week' ? 'highlighted' : ''}`}>
                 <div className="price-per-day">$1.30</div>
                 <div className="price-main">$0.53</div>
                 <div className="price-label">per day</div>
@@ -518,10 +533,14 @@ const PaywallPage: React.FC = () => {
                 </div>
                 <div className="plan-info">
                   <div className="plan-name">12-Week plan</div>
-                  <div className="plan-price-old">$66.65 → $25.99</div>
+                  <div className="plan-price-old">
+                    <span className="old-price">$66.65</span>
+                    <span className="price-arrow">→</span>
+                    <span className="new-price">$25.99</span>
+                  </div>
                 </div>
               </div>
-              <div className="plan-pricing">
+              <div className={`plan-pricing ${selectedPlan === '12-week' ? 'highlighted' : ''}`}>
                 <div className="price-per-day">$1.30</div>
                 <div className="price-main">$0.29</div>
                 <div className="price-label">per day</div>
@@ -568,8 +587,6 @@ const PaywallPage: React.FC = () => {
         </div>
         </div>
       </main>
-
-      <ContinueButton onClick={handleContinueClick} />
     </div>
   );
 };

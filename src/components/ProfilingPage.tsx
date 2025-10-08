@@ -114,7 +114,7 @@ const profilingSteps: Record<number, ProfilingStep> = {
     testimonials: [
       {
         percentage: "",
-        description: "Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face. I feel more energetic and confident. Great solution for taking care of myself"
+        description: "“Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face. I feel more energetic and confident. Great solution for taking care of myself”"
       }
     ]
   }
@@ -249,10 +249,11 @@ export default function ProfilingPage() {
           <div className="options-wrapper">
             {currentStep.optionNames.map((name, index) => {
               const isSelected = selectedOptions.includes(index);
+              const uniqueKey = `${currentStepId}-${index}`;
               return (
                 <button 
-                  key={index}
-                  className={`single-select-option ${isSelected ? 'selected' : ''}`}
+                  key={uniqueKey}
+                  className={`single-select-option ${isSelected ? 'selected' : ''} animated-option delay-${Math.min(index + 1, 15)}`}
                   onClick={() => handleOptionClick(index)}
                 >
                   <span className="option-text">{name}</span>
@@ -289,11 +290,12 @@ export default function ProfilingPage() {
               };
               
               const widthClass = widthClasses[currentStepId as keyof typeof widthClasses]?.[index] || 'pill-w120';
+              const uniqueKey = `${currentStepId}-${index}`;
               
               return (
                 <button 
-                  key={index}
-                  className={`pill ${widthClass} ${isSelected ? 'pill-primary' : ''}`}
+                  key={uniqueKey}
+                  className={`pill ${widthClass} ${isSelected ? 'pill-primary' : ''} animated-option delay-${Math.min(index + 1, 15)}`}
                   onClick={() => handleOptionClick(index)}
                 >
                   {name}

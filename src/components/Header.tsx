@@ -1,6 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useOnboardingProgress } from '../hooks/useOnboardingProgress';
+import { getPreviousStep } from '../utils/navigationUtils';
 
 interface HeaderProps {
   progress?: number;
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ progress: localProgress, onBackClick, showBackButton = true }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { progress: onboardingProgress, isInOnboarding } = useOnboardingProgress();
   
   const isGoalRoute = location.pathname.startsWith('/goal/');
@@ -20,11 +22,26 @@ const Header: React.FC<HeaderProps> = ({ progress: localProgress, onBackClick, s
   const currentStep = location.pathname.split('/').pop();
   const shouldShowArrowLeft = ((isGoalRoute && currentStep !== '1') || isUserRoute || isLifestyleRoute || isStatementsRoute) && showBackButton;
   
+  const handleBackClick = () => {
+    if (onBackClick) {
+      // Если передан кастомный обработчик, используем его
+      onBackClick();
+    } else {
+      // Иначе используем логику автоматического перехода на предыдущий этап
+      const previousStep = getPreviousStep(location.pathname);
+      if (previousStep) {
+        navigate(previousStep);
+      } else {
+        console.warn('Предыдущий этап не найден для:', location.pathname);
+      }
+    }
+  };
+  
   return (
     <header className="top-bar">
       <nav className="navbar">
         {shouldShowArrowLeft ? (
-          <button className="back-button goal-back-button" aria-label="Назад" onClick={onBackClick}>
+          <button className="back-button goal-back-button" aria-label="Назад" onClick={handleBackClick}>
             <img 
               src="/image/arrow_left.svg" 
               alt="Back" 
@@ -36,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ progress: localProgress, onBackClick, s
             />
           </button>
         ) : showBackButton ? (
-          <button className="back-button" aria-label="Назад" onClick={onBackClick}>
+          <button className="back-button" aria-label="Назад" onClick={handleBackClick}>
             <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 11L1 6L5 1" stroke="#28194B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

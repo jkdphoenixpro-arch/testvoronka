@@ -14,8 +14,9 @@ const TestimonialPage: React.FC<TestimonialPageProps> = ({ title, subtitle }) =>
 
 
   const handleAnimationComplete = () => {
+    // Оставляем анимацию на последнем кадре после завершения
     if (lottieRef.current) {
-      lottieRef.current.pause();
+      // Анимация автоматически остается на последнем кадре
     }
   };
 
@@ -24,18 +25,21 @@ const TestimonialPage: React.FC<TestimonialPageProps> = ({ title, subtitle }) =>
     if (lottieRef.current) {
       lottieRef.current.goToAndStop(0, true);
     }
+    // Убираем setTimeout для мгновенной готовности
     setIsLottieReady(true);
   };
 
 
   React.useEffect(() => {
     if (lottieRef.current && isLottieReady && shouldPlay) {
+      // Гарантируем, что анимация начинается с первого кадра
       lottieRef.current.goToAndStop(0, true);
-      setTimeout(() => {
+      // Убираем setTimeout для мгновенного запуска
+      requestAnimationFrame(() => {
         if (lottieRef.current) {
           lottieRef.current.play();
         }
-      }, 50);
+      });
     }
   }, [isLottieReady, shouldPlay]);
 
@@ -53,27 +57,15 @@ const TestimonialPage: React.FC<TestimonialPageProps> = ({ title, subtitle }) =>
       <div className="testimonial-section">
         <div className="image-container" style={{ position: 'relative' }}>
 
-          <img 
-            src="/image/testimonials.webp" 
-            alt="Testimonials" 
-            style={{
-              width: '100%',
-              height: '100%',
-              opacity: (isReady && animationData && isLottieReady) ? 0 : 1,
-              transition: 'opacity 0.3s ease-in-out',
-              position: 'absolute',
-              top: 0,
-              left: 0
-            }}
-          />
+          {/* Статичное изображение скрыто - показываем только анимацию */}
 
-          {isReady && animationData && (
+          {isReady && animationData && shouldPlay && (
             <div
               style={{
                 width: '100%',
                 height: '100%',
                 opacity: isLottieReady ? 1 : 0,
-                transition: 'opacity 0.3s ease-in-out',
+                transition: 'opacity 0.1s ease-in-out',
                 position: 'absolute',
                 top: 0,
                 left: 0

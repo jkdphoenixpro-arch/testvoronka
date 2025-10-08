@@ -1,15 +1,24 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ContinueButton from './ContinueButton';
 import '../styles/results.css';
+import { getPreviousStep } from '../utils/navigationUtils';
+import { getSelectedGoals, getSelectedIssueAreas } from '../utils/userSelections';
 
 const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  
+  // Состояние для выборов пользователя
+  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
+  const [selectedIssueAreas, setSelectedIssueAreas] = useState<string[]>([]);
 
   useEffect(() => {
-
     document.body.classList.add('results-page');
+    
+    // Загружаем выборы пользователя
+    setSelectedGoals(getSelectedGoals());
+    setSelectedIssueAreas(getSelectedIssueAreas());
     
 
     return () => {
@@ -18,11 +27,17 @@ const ResultsPage: React.FC = () => {
   }, []);
 
   const handleBackClick = () => {
-    navigate('/buildingplan/1');
+    const previousStep = getPreviousStep(location.pathname);
+    if (previousStep) {
+      navigate(previousStep);
+    } else {
+      // Fallback на buildingplan/1 если предыдущий этап не найден
+      navigate('/buildingplan/1');
+    }
   };
 
   const handleContinueClick = () => {
-    navigate('/paywall');
+    navigate('/enteremail');
   };
 
   return (
@@ -85,8 +100,16 @@ const ResultsPage: React.FC = () => {
                 <span className="card-title">Goal</span>
               </div>
               <div className="goal-tags">
-                <div className="goal-tag">Slow down aging</div>
-                <div className="goal-tag">Moving freely</div>
+                {selectedGoals.length > 0 ? (
+                  selectedGoals.map((goal, index) => (
+                    <div key={index} className="goal-tag">{goal}</div>
+                  ))
+                ) : (
+                  <>
+                    <div className="goal-tag">Slow down aging</div>
+                    <div className="goal-tag">Moving freely</div>
+                  </>
+                )}
               </div>
             </div>
 
@@ -109,15 +132,23 @@ const ResultsPage: React.FC = () => {
                 <span className="card-title">Issue areas</span>
               </div>
               <div className="issue-tags">
-                <div className="issue-tag">Drooping eyelids</div>
-                <div className="issue-tag">Dark circles</div>
-                <div className="issue-tag">Skin elasticity</div>
-                <div className="issue-tag">Back</div>
-                <div className="issue-tag">Slouching</div>
-                <div className="issue-tag">Legs</div>
-                <div className="issue-tag">Neck stiffness</div>
-                <div className="issue-tag">Knees</div>
-                <div className="issue-tag">Joint pain</div>
+                {selectedIssueAreas.length > 0 ? (
+                  selectedIssueAreas.map((issue, index) => (
+                    <div key={index} className="issue-tag">{issue}</div>
+                  ))
+                ) : (
+                  <>
+                    <div className="issue-tag">Drooping eyelids</div>
+                    <div className="issue-tag">Dark circles</div>
+                    <div className="issue-tag">Skin elasticity</div>
+                    <div className="issue-tag">Back</div>
+                    <div className="issue-tag">Slouching</div>
+                    <div className="issue-tag">Legs</div>
+                    <div className="issue-tag">Neck stiffness</div>
+                    <div className="issue-tag">Knees</div>
+                    <div className="issue-tag">Joint pain</div>
+                  </>
+                )}
               </div>
             </div>
 

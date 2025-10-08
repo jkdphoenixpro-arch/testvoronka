@@ -4,12 +4,13 @@ interface ScaleButtonProps {
   value: number;
   selected: boolean;
   onClick: (value: number) => void;
+  className?: string;
 }
 
-const ScaleButton: React.FC<ScaleButtonProps> = ({ value, selected, onClick }) => {
+const ScaleButton: React.FC<ScaleButtonProps> = ({ value, selected, onClick, className = '' }) => {
   return (
     <button
-      className={`scale-button ${selected ? 'selected' : ''}`}
+      className={`scale-button ${selected ? 'selected' : ''} ${className}`}
       onClick={() => onClick(value)}
       type="button"
     >

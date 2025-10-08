@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Header from './Header';
+import { getPreviousStep } from '../utils/navigationUtils';
+import { saveIssueAreaSelections } from '../utils/userSelections';
 import '../styles/user.css';
 import '../styles/testimonial.css';
 
@@ -28,12 +30,12 @@ const userSteps: Record<number, UserStep> = {
     title: "Your face shows your story. Which areas concern you most?",
     subtitle: "Select up to 3 options",
     optionNames: [
-      'Forehead', 'Eyes', 'Wrinkles',
-      'Elasticity', 'Age spots', 'Acne scars', 
-      'Under eye', 'Dark circles', 'Puffiness',
-      'Freckles', 'Rosacea'
+      'Wrinkles', 'Jowls', 'Double chin',
+      'Puffiness', 'Drooping eyelids', 'Dark circles', 
+      'Skin elasticity', 'Nasolabial folds', 'Crow’s feet',
+      'Redness', 'Venus rings'
     ],
-    initialSelected: [4, 5, 6],
+    initialSelected: [],
     progress: 15,
     stepClass: 'user-step-1'
   },
@@ -41,12 +43,12 @@ const userSteps: Record<number, UserStep> = {
     title: "Your body deserves attention. Where do you feel changes or tension?",
     subtitle: "Select up to 3 options",
     optionNames: [
-      'Shoulders', 'Neck', 'Back',
-      'Posture', 'Lower back', 'Knees',
-      'Hips', 'Joint stiffness', 'Mobility',
-      'Energy', 'Overall tension'
+      'Neck hump', 'Belly', 'Back',
+      'Posture', 'Slouching', 'Legs',
+      'Shoulders', 'Muscle weakness', 'Thighs / buttocks',
+      'Pelvis', 'Core strength'
     ],
-    initialSelected: [2, 4, 5],
+    initialSelected: [],
     progress: 25,
     stepClass: 'user-step-2'
   },
@@ -54,12 +56,12 @@ const userSteps: Record<number, UserStep> = {
     title: "Move freely. Where do you notice stiffness or limited flexibility?",
     subtitle: "Select up to 3 options",
     optionNames: [
-      'Whole body', 'Lower extremities', 'Muscle tension',
-      'Hip', 'Knees', 'Ankles', 'Shoulders',
-      'Neck', 'Spinal mobility', 'Joint stiffness',
-      'Overall flexibility'
+      'Neck stiffness', 'Shoulder mobility', 'Back flexibility',
+      'Hips', 'Knees', 'Ankles', 'Stiffness',
+      'Coordination', 'Weak flexibility', 'Joint pain',
+      'Core stability'
     ],
-    initialSelected: [0, 4, 9],
+    initialSelected: [],
     progress: 30,
     stepClass: 'user-step-3'
   },
@@ -82,11 +84,11 @@ const userSteps: Record<number, UserStep> = {
     title: "Listen to your body. How often does it signal discomfort?",
     subtitle: "",
     optionNames: [
-      'Daily - constant signals I can\'t ignore',
-      'Several times a week',
-      'Once a week or less',
-      'Rarely - only during intense activity',
-      'Never - I feel great most of the time'
+      'Never, I feel comfortable',
+      'Rarely, minor discomfort',
+      'Sometimes, occasional aches',
+      'Often, noticeable pain',
+      'Constantly, frequent discomfort'
     ],
     initialSelected: [],
     progress: 40,
@@ -96,11 +98,11 @@ const userSteps: Record<number, UserStep> = {
     title: "Which best describes your typical energy level?",
     subtitle: "",
     optionNames: [
-      'High energy all day, rarely need breaks',
-      'Good energy most of the day with occasional dips',
-      'Moderate energy, need regular breaks',
-      'Low energy, often feel tired or drained',
-      'Very low energy, struggle to get through the day'
+      'Barely have energy to get through the day',
+      'Often feel drained or fatigued',
+      'Energy varies during the day',
+      'Generally energetic and productive',
+      'Full of vitality and motivation'
     ],
     initialSelected: [],
     progress: 45,
@@ -117,7 +119,7 @@ const userSteps: Record<number, UserStep> = {
     testimonials: [
       {
         percentage: "",
-        description: "Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face. I feel more energetic and confident. Great solution for taking care of myself"
+        description: "“Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face. I feel more energetic and confident. Great solution for taking care of myself”"
       }
     ]
   }
@@ -127,29 +129,13 @@ const userSteps: Record<number, UserStep> = {
 export default function UserPage() {
   const { stepId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const currentStepId = parseInt(stepId || '1');
   const currentStep = userSteps[currentStepId as keyof typeof userSteps] || userSteps[1];
   
   const [selectedOptions, setSelectedOptions] = useState<number[]>(currentStep.initialSelected);
 
 
-  const [shouldAnimate, setShouldAnimate] = useState(false);
-
-
-  useEffect(() => {
-    if (currentStepId === 4) {
-      setShouldAnimate(false);
-
-      setTimeout(() => setShouldAnimate(true), 10);
-    }
-  }, [currentStepId]);
-
-
-  useEffect(() => {
-    if (currentStepId === 4) {
-      setShouldAnimate(true);
-    }
-  }, []);
 
 
   useEffect(() => {
@@ -167,25 +153,35 @@ export default function UserPage() {
     }
 
     setSelectedOptions(prev => {
-      if (prev.includes(index)) {
-
-        return prev.filter(i => i !== index);
-      } else if (prev.length < 3) {
-
-        return [...prev, index];
+      const newSelection = prev.includes(index)
+        ? prev.filter(i => i !== index)
+        : prev.length < 3
+        ? [...prev, index]
+        : prev;
+      
+      // Сохраняем выборы для user/1, user/2, user/3
+      if (currentStepId >= 1 && currentStepId <= 3) {
+        const selectedNames = newSelection.map(i => currentStep.optionNames[i]);
+        const pageKey = `user${currentStepId}` as 'user1' | 'user2' | 'user3';
+        saveIssueAreaSelections(pageKey, selectedNames);
       }
-
-      return prev;
+      
+      return newSelection;
     });
   };
 
   const handleBackClick = () => {
     if (currentStepId === 1) {
-
+      // Для первой страницы user переходим на предыдущую секцию (goal/7)
+      const previousStep = getPreviousStep(location.pathname);
+      if (previousStep) {
+        navigate(previousStep);
+      }
       return;
     }
-
-    navigate(-1);
+    
+    // Для остальных страниц в секции - обычный переход на предыдущую страницу в секции
+    navigate(`/user/${currentStepId - 1}`);
   };
 
   const goNext = () => {
@@ -230,7 +226,7 @@ export default function UserPage() {
         showBackButton={true}
       />
       
-      <main className={`content-wrapper ${shouldAnimate ? 'animate-in' : ''}`}>
+      <main className="content-wrapper">
         <div className="title-wrapper">
           <div className="heading-container">
             <h2 className="question-title">{currentStep.title}</h2>
@@ -281,10 +277,12 @@ export default function UserPage() {
           <div className="options-wrapper">
             {currentStep.optionNames.map((name, index) => {
               const isSelected = selectedOptions.includes(index);
+              const animationClass = `animated-option delay-${Math.min(index + 1, 15)}`;
+              const uniqueKey = `${currentStepId}-${index}`;
               return (
                 <button 
-                  key={index}
-                  className={`single-select-option ${isSelected ? 'selected' : ''}`}
+                  key={uniqueKey}
+                  className={`single-select-option ${isSelected ? 'selected' : ''} ${animationClass}`}
                   onClick={() => handleOptionClick(index)}
                 >
                   <span className="option-text">{name}</span>
@@ -321,11 +319,13 @@ export default function UserPage() {
               };
               
               const widthClass = widthClasses[currentStepId as keyof typeof widthClasses]?.[index] || 'pill-w120';
+              const animationClass = `animated-option delay-${Math.min(index + 1, 15)}`;
+              const uniqueKey = `${currentStepId}-${index}`;
               
               return (
                 <button 
-                  key={index}
-                  className={`pill ${widthClass} ${isSelected ? 'pill-primary' : ''}`}
+                  key={uniqueKey}
+                  className={`pill ${widthClass} ${isSelected ? 'pill-primary' : ''} ${animationClass}`}
                   onClick={() => handleOptionClick(index)}
                 >
                   {name}
@@ -337,9 +337,15 @@ export default function UserPage() {
         )}
       </main>
       
-      {(currentStepId === 4 || currentStepId === 7 || (currentStepId <= 3 && selectedOptions.length > 0)) && (
+      {(currentStepId === 4 || currentStepId === 7 || (currentStepId <= 3)) && (
         <div className="continue-button-wrapper">
-          <button className="continue-button" onClick={goNext}>
+          <button 
+            className={`continue-button ${
+              currentStepId <= 3 && selectedOptions.length < 3 ? 'disabled' : ''
+            }`} 
+            onClick={currentStepId <= 3 && selectedOptions.length < 3 ? undefined : goNext}
+            disabled={currentStepId <= 3 && selectedOptions.length < 3}
+          >
             Continue
           </button>
         </div>

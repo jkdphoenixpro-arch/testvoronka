@@ -42,7 +42,7 @@
 }
 
 .building-plan-title {
-  font-family: Inter, sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
@@ -82,7 +82,8 @@
 }
 
 .step-title {
-  font-family: Inter, sans-serif;
+  text-align: left;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -91,7 +92,7 @@
 }
 
 .step-progress-percent {
-  font-family: Inter, sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -149,7 +150,7 @@
 
 
 .testimonial-title {
-  font-family: Inter, sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 22px;
@@ -173,6 +174,17 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  background: #D2D0E1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot:hover {
+  background: #B0A8C1;
+  transform: scale(1.2);
+}
+
+.dot.active {
   background: #4D368A;
 }
 
@@ -198,6 +210,11 @@
   flex-direction: column;
   gap: 8px;
   flex: 1;
+  transition: opacity 0.1s ease;
+}
+
+.buildingplan-testimonial-card .testimonial-content-advanced.transitioning {
+  opacity: 0;
 }
 
 
@@ -230,7 +247,7 @@
 }
 
 .buildingplan-testimonial-card .user-avatar span {
-  font-family: Inter, sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 600;
   font-size: 12px;
   line-height: 16px;
@@ -246,7 +263,7 @@
 }
 
 .buildingplan-testimonial-card .user-details span {
-  font-family: Inter, sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
@@ -274,15 +291,19 @@
 }
 
 .buildingplan-testimonial-card .testimonial-text p {
-  font-family: Inter, sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   color: #281A4B;
   margin: 0;
   text-align: left;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  transition: opacity 0.4s ease;
+}
+.building-plan-content .testimonial-title{
+  font-size: 18px;
 }
 
 
@@ -320,7 +341,7 @@
 }
 
 .modal-title {
-  font-family: Inter, sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
@@ -361,7 +382,7 @@
 }
 
 .modal-option-button span {
-  font-family: Inter, sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;

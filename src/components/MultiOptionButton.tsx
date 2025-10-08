@@ -6,12 +6,13 @@ interface MultiOptionButtonProps {
   option: QuizOption;
   selected: boolean;
   onClick: (value: string) => void;
+  className?: string;
 }
 
-const MultiOptionButton: React.FC<MultiOptionButtonProps> = ({ option, selected, onClick }) => {
+const MultiOptionButton: React.FC<MultiOptionButtonProps> = ({ option, selected, onClick, className = '' }) => {
   return (
     <button 
-      className={`multi-select-option ${selected ? 'selected' : ''}`}
+      className={`multi-select-option ${selected ? 'selected' : ''} ${className}`}
       data-value={option.value}
       tabIndex={0}
       onClick={() => onClick(option.value)}

@@ -1,4 +1,4 @@
-/* Body styles for paywall page */
+
 body.paywall-page {
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -18,7 +18,7 @@ body.paywall-page #root {
   min-height: 100vh !important;
 }
 
-/* Main container */
+
 .quiz-container.paywall-container {
   height: auto !important;
   min-height: 100vh !important;
@@ -46,7 +46,7 @@ body.paywall-page #root {
   width: 100%;
 }
 
-/* Discount Navbar */
+
 .discount-navbar {
   background: white;
   border-radius: 20px;
@@ -96,18 +96,18 @@ body.paywall-page #root {
   border-radius: 12px;
   padding: 10px 16px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
 
-/* Hero Section */
+
 .hero-section {
   margin-top: 24px;
 }
 
 .hero-title {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 600;
   color: #28194B;
   text-align: left;
   margin: 0 0 24px 0;
@@ -134,7 +134,6 @@ body.paywall-page #root {
   flex: 1;
   text-align: center;
   font-size: 16px;
-  font-weight: 500;
   color: #28194B;
   padding: 14px 0;
   font-weight: 600;
@@ -163,16 +162,16 @@ body.paywall-page #root {
   object-fit: cover;
 }
 
-/* Results Section */
+
 .results-section {
   margin-bottom: 40px;
 }
 
 .section-title {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 600;
   color: #28194B;
-  margin: 0 0 24px 0;
+  margin: 0 auto 24px auto;
   line-height: 1.25;
   padding: 0 16px;
 }
@@ -200,10 +199,10 @@ body.paywall-page #root {
 .offer-alert span {
   color: white;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* Pricing Plans */
+
 .pricing-plans {
   display: flex;
   flex-direction: column;
@@ -215,7 +214,7 @@ body.paywall-page #root {
   background: white;
   border: 2px solid transparent;
   border-radius: 20px;
-  padding: 22px 16px;
+  padding: 4px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -254,6 +253,8 @@ body.paywall-page #root {
 }
 
 .plan-badge.popular {
+  font-size: 12px;
+  font-weight: 500;
   background: #7554CC;
   border: 2px solid white;
   width: 59px;
@@ -304,11 +305,25 @@ body.paywall-page #root {
 .plan-price-old {
   font-size: 14px;
   color: #50436D;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-/* Стили для зачеркивания первой цены */
+
 .old-price {
   text-decoration: line-through;
+  color: #999;
+}
+
+.price-arrow {
+  color: #999;
+}
+
+.new-price {
+  color: #999;
+  font-weight: 600;
 }
 
 .plan-pricing {
@@ -324,25 +339,27 @@ body.paywall-page #root {
 }
 
 .price-per-day {
-  font-size: 11px;
+  font-size: 12px;
   color: #504369;
   margin-bottom: 2px;
+  font-weight: 400;
 }
 
 .price-main {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 600;
   color: #28194B;
   line-height: 1;
 }
 
 .price-label {
-  font-size: 11px;
+  font-size: 12px;
   color: #504369;
   margin-top: 2px;
+  font-weight: 400;
 }
 
-/* CTA Section */
+
 .cta-section {
   display: flex;
   flex-direction: column;
@@ -355,8 +372,8 @@ body.paywall-page #root {
   border: none;
   border-radius: 20px;
   padding: 16px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
   cursor: pointer;
   width: 100%;
 }
@@ -366,7 +383,7 @@ body.paywall-page #root {
   color: #504369;
 }
 
-/* Security Section */
+
 .security-section {
   background: rgba(77, 54, 138, 0.1);
   border-radius: 20px;
@@ -382,13 +399,14 @@ body.paywall-page #root {
 
 .security-title {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: #28194B;
   margin: 0;
 }
 
 .security-text {
   font-size: 16px;
+  font-weight: 400;
   color: #504369;
   margin: 0;
 }
@@ -411,7 +429,7 @@ body.paywall-page #root {
 }
 
 .payment-card img {
-  height: 20px;
+  height: 37px;
   width: auto;
 }
 
@@ -421,17 +439,19 @@ body.paywall-page #root {
   color: #504369;
 }
 
-/* Social Proof */
+
 .social-proof {
   margin-bottom: 40px;
 }
 
 .social-proof-text {
+  width: 100%;
   text-align: center;
   font-size: 18px;
   color: #28194B;
-  margin-bottom: 16px;
-  font-weight: 600;
+  max-width: 235px;
+  margin: 0 auto 16px auto;
+  font-weight: 500;
 }
 
 .user-ticker {
@@ -498,7 +518,7 @@ body.paywall-page #root {
   color: #28194B;
 }
 
-/* Science Section */
+
 .science-section {
   margin-bottom: 40px;
 }
@@ -528,6 +548,7 @@ body.paywall-page #root {
   font-size: 14px;
   color: #504369;
   margin: 0;
+  text-align: left;
 }
 
 .fact-image {
@@ -543,7 +564,7 @@ body.paywall-page #root {
   object-fit: cover;
 }
 
-/* Benefits Section */
+
 .benefits-section {
   margin-bottom: 40px;
 }
@@ -596,7 +617,7 @@ body.paywall-page #root {
   line-height: 1.4;
 }
 
-/* What You Get Section */
+
 .what-you-get-section {
   margin-bottom: 40px;
 }
@@ -668,7 +689,7 @@ body.paywall-page #root {
   line-height: 1.4;
 }
 
-/* Testimonials Section */
+
 .testimonials-section {
   margin-bottom: 40px;
 }
@@ -681,7 +702,7 @@ body.paywall-page #root {
 }
 
 .testimonial-card {
-  width: 400px;
+  width: 100%;
   background: white;
   border-radius: 20px;
   padding: 16px;
@@ -698,7 +719,7 @@ body.paywall-page #root {
 .user-info {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .user-avatar {
@@ -710,8 +731,8 @@ body.paywall-page #root {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .user-name {
@@ -735,19 +756,19 @@ body.paywall-page #root {
   color: #28194B;
   line-height: 1.4;
   margin: 0;
+  text-align: left;
 }
 
-/* Final CTA Section */
+
 .final-cta-section {
   margin-bottom: 40px;
 }
 
-/* Guarantee Section */
+
 .guarantee-section {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 40px;
   text-align: left;
 }
 
@@ -771,6 +792,7 @@ body.paywall-page #root {
   color: #28194B;
   margin: 0;
   flex: 1;
+  max-width: 165px;
 }
 
 .guarantee-badge {
@@ -790,7 +812,7 @@ body.paywall-page #root {
   font-size: 16px;
   color: #28194B;
   line-height: 1.4;
-  margin: 0;
+  font-weight: 400;
 }
 
 .security-info {
@@ -821,28 +843,30 @@ body.paywall-page #root {
   color: #504369;
   margin: 0;
   line-height: 1.4;
+  font-weight: 400;
 }
 
-/* Contact Section */
+
 .contact-section {
   text-align: center;
   padding: 0 20px;
 }
 
 .contact-text {
-  font-size: 14px;
+  font-size: 16px;
   color: #504369;
   margin-bottom: 2px;
+  font-weight: 400;
 }
 
 .contact-link {
-  font-size: 14px;
+  font-size: 16px;
   color: #4D368A;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
 
-/* Bottom bar override */
+
 .paywall-container .bottom-bar {
   position: static !important;
   transform: none !important;
@@ -856,7 +880,7 @@ body.paywall-page #root {
   justify-content: center !important;
 }
 
-/* Mobile Responsive */
+
 @media (max-width: 768px) {
   .paywall-container .content-wrapper {
     padding: 0 16px 0 !important;

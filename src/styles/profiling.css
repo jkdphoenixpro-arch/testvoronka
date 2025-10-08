@@ -67,7 +67,7 @@
   background: #FFFFFF;
   border: none;
   border-radius: 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 22px;
   color: #28194B;
@@ -77,10 +77,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .pill:hover {
-  opacity: 0.8;
+  opacity: 0.8 !important;
+}
+
+.pill:active {
+  transform: scale(0.98) !important;
 }
 
 .pill-primary {

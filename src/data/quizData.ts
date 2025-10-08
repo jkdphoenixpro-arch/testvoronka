@@ -49,11 +49,11 @@ export const quizPages: QuizPageData[] = [
     progress: 25,
     className: "page-2",
     options: [
-      { value: "lose-weight", text: "Lose weight", selected: true },
-      { value: "gain-energy", text: "Gain energy" },
-      { value: "improve-mobility", text: "Improve mobility" },
-      { value: "reduce-pain", text: "Reduce pain" },
-      { value: "feel-younger", text: "Feel younger" }
+      { value: "Slow down aging", text: "Slow down aging", selected: true },
+      { value: "Look fresher and younger", text: "Look fresher and younger" },
+      { value: "Feel more energetic and active", text: "Feel more energetic and active" },
+      { value: "Regain daily energy", text: "Regain daily energy" },
+      { value: "Improve body & shape", text: "Improve body & shape" }
     ]
   },
   {
@@ -76,13 +76,12 @@ export const quizPages: QuizPageData[] = [
     title: "If you could turn back time, what would you want to feel?",
     progress: 50,
     className: "page-5",
-    showContinueButton: true,
     options: [
-      { value: "more-energetic", text: "More energetic" },
-      { value: "stronger", text: "Stronger" },
-      { value: "confident", text: "More confident" },
-      { value: "pain-free", text: "Pain-free" },
-      { value: "flexible", text: "More flexible" }
+      { value: "Feeling strong from the inside out", text: "Feeling strong from the inside out" },
+      { value: "Moving freely and effortlessly", text: "Moving freely and effortlessly" },
+      { value: "Seeing a fresher, younger reflection", text: "Seeing a fresher, younger reflection" },
+      { value: "Feeling as I did in my prime", text: "Feeling as I did in my prime" },
+      { value: "Regaining daily energy", text: "Regaining daily energy" }
     ]
   },
   {

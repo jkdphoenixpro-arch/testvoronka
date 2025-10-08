@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import '../styles/buildingplan.css';
 import FeedbackModal from './FeedbackModal';
+import { getPreviousStep } from '../utils/navigationUtils';
 
 interface ProgressStep {
   id: number;
@@ -11,9 +12,39 @@ interface ProgressStep {
   progressWidth?: string;
 }
 
+interface TestimonialData {
+  id: number;
+  name: string;
+  avatar: string;
+  text: string;
+}
+
+// Данные для testimonials
+const testimonialsData: TestimonialData[] = [
+  {
+    id: 1,
+    name: "Jessica",
+    avatar: "J",
+    text: "Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face, increase flexibility. I feel more energetic and confident. It's a truly great solution for taking care of myself"
+  },
+  {
+    id: 2,
+    name: "Michael",
+    avatar: "M", 
+    text: "Age Back completely changed my daily routine! After just 6 weeks, I noticed significant improvements in my posture and energy levels. My friends keep asking what I'm doing differently. This app is a game-changer"
+  },
+  {
+    id: 3,
+    name: "Sarah",
+    avatar: "S",
+    text: "I was skeptical at first, but Age Back delivered amazing results! My skin looks more radiant, my back pain is gone, and I feel 10 years younger. The personalized approach really works. Highly recommended!"
+  }
+];
+
 const BuildingPlanPage: React.FC = () => {
   const { stepId } = useParams<{ stepId: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const currentStepId = stepId ? parseInt(stepId) : 1;
   
@@ -51,6 +82,8 @@ const BuildingPlanPage: React.FC = () => {
   const [currentProgress, setCurrentProgress] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showSecondModal, setShowSecondModal] = useState(false);
+  const [activeTestimonialId, setActiveTestimonialId] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const isPausedRef = useRef(false);
   const continueLoadingRef = useRef<(() => void) | null>(null);
   const continueSecondLoadingRef = useRef<(() => void) | null>(null);
@@ -144,7 +177,13 @@ const BuildingPlanPage: React.FC = () => {
   }, []);
 
   const handleBackClick = () => {
-    navigate('/statements/4');
+    const previousStep = getPreviousStep(location.pathname);
+    if (previousStep) {
+      navigate(previousStep);
+    } else {
+      // Fallback на последний этап statements если предыдущий этап не найден
+      navigate('/statements/4');
+    }
   };
   
   const handleModalYes = () => {
@@ -178,6 +217,26 @@ const BuildingPlanPage: React.FC = () => {
       continueSecondLoadingRef.current();
     }
   };
+  
+  // Функция для плавного переключения testimonial
+  const handleDotClick = (testimonialId: number) => {
+    if (testimonialId !== activeTestimonialId && !isTransitioning) {
+      setIsTransitioning(true);
+      
+      // Начало fade out анимации
+      setTimeout(() => {
+        setActiveTestimonialId(testimonialId);
+        
+        // Конец fade in анимации
+        setTimeout(() => {
+          setIsTransitioning(false);
+        }, 100);
+      }, 100);
+    }
+  };
+  
+  // Получаем активный testimonial
+  const activeTestimonial = testimonialsData.find(t => t.id === activeTestimonialId) || testimonialsData[0];
 
   return (
     <div className="quiz-container building-plan-container">
@@ -253,25 +312,32 @@ const BuildingPlanPage: React.FC = () => {
             
 
             <div className="testimonial-dots">
-              <div className="dot active"></div>
-              <div className="dot"></div>
-              <div className="dot"></div>
+              {testimonialsData.map((testimonial) => (
+                <div 
+                  key={testimonial.id}
+                  className={`dot ${activeTestimonialId === testimonial.id ? 'active' : ''}`}
+                  onClick={() => handleDotClick(testimonial.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View testimonial from ${testimonial.name}`}
+                />
+              ))}
             </div>
 
 
             <div className="buildingplan-testimonial-card">
-              <div className="testimonial-content-advanced">
+              <div className={`testimonial-content-advanced ${isTransitioning ? 'transitioning' : ''}`}>
                 <div className="testimonial-header">
                   <div className="user-info">
-                    <div className="user-avatar"><span>J</span></div>
-                    <div className="user-details"><span>Jessica</span></div>
+                    <div className="user-avatar"><span>{activeTestimonial.avatar}</span></div>
+                    <div className="user-details"><span>{activeTestimonial.name}</span></div>
                   </div>
                   <div className="rating">
                     <img src="/image/rating.svg" alt="Rating" />
                   </div>
                 </div>
                 <div className="testimonial-text">
-                  <p>“Using Age Back, I’ve experienced a complete transformation! The app has helped improve my posture, refresh and tone my face, increase flexibility. I feel more energetic and confident. It’s a truly great solution for taking care of myself”</p>
+                  <p>{activeTestimonial.text}</p>
                 </div>
               </div>
             </div>
