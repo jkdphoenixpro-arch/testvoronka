@@ -362,8 +362,8 @@
 .modal-option-button {
   width: 320px;
   height: 52px;
-  background: #FFFFFF;
-  border: 1px solid #D2D0E1;
+  background: #eeebf4;
+  border: none;
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -373,12 +373,13 @@
 }
 
 .modal-option-button:hover {
-  background: rgba(117, 84, 204, 0.05);
-  border-color: #7554CC;
+  background: #e5e1ee;
+  border: none;
 }
 
 .modal-option-button:active {
-  background: rgba(117, 84, 204, 0.1);
+  background: #eeebf4;
+  border: none;
 }
 
 .modal-option-button span {

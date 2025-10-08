@@ -62,7 +62,7 @@
   line-height: 22px;
   color: #28194B;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -81,7 +81,7 @@
 .user-container.user-step-3 .pill:hover {
   opacity: 1 !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08) !important;
 }
 
 
@@ -90,7 +90,7 @@
 .user-container.user-step-3 .pill:active {
   transform: scale(0.98) !important;
   opacity: 1 !important;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08) !important;
 }
 
 
