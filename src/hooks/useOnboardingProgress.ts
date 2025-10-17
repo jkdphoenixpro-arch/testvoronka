@@ -75,7 +75,19 @@ export const useOnboardingProgress = () => {
     }
 
 
-    const progress = currentStep > 0 ? Math.round((currentStep / TOTAL_STEPS) * MAX_PROGRESS) : 0;
+    // Расчет прогресса: первые 6 этапов = 30%, оставшиеся 19 этапов = 30%-99%
+    let progress = 0;
+    if (currentStep > 0) {
+        if (currentStep <= 6) {
+            // Первые 6 этапов: от 0% до 30%
+            progress = Math.round((currentStep / 6) * 30);
+        } else {
+            // Оставшиеся 19 этапов: от 30% до 99%
+            const remainingSteps = currentStep - 6;
+            const remainingTotal = TOTAL_STEPS - 6;
+            progress = 30 + Math.round((remainingSteps / remainingTotal) * (MAX_PROGRESS - 30));
+        }
+    }
 
 
     const isInOnboarding = currentStep > 0;

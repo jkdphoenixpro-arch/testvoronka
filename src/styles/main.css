@@ -220,25 +220,6 @@ body {
 }
 
 
-.quiz-container.goal-page-2 .content-wrapper.animate-in,
-.quiz-container.goal-page-3 .content-wrapper.animate-in,
-.quiz-container.goal-page-4 .content-wrapper.animate-in {
-    animation: fadeInScale 1s ease forwards;
-}
-
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-        filter: blur(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
-    }
-}
 
 
 @keyframes fadeLeft {

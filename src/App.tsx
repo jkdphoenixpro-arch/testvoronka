@@ -8,6 +8,10 @@ import BuildingPlanPage from './components/BuildingPlanPage';
 import ResultsPage from './components/ResultsPage';
 import EnterEmailPage from './components/EnterEmailPage';
 import PaywallPage from './components/PaywallPage';
+import SuccessPage from './components/SuccessPage';
+import SignInPage from './components/SignInPage';
+import RecoverPasswordPage from './components/RecoverPasswordPage';
+import RoutinePage from './components/RoutinePage';
 import { AnimationProvider } from './contexts/AnimationContext';
 import './styles/main.css';
 import './styles/statements.css';
@@ -27,6 +31,10 @@ function App() {
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/enteremail" element={<EnterEmailPage />} />
             <Route path="/paywall" element={<PaywallPage />} />
+            <Route path="/success" element={<SuccessPage />} />
+            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/recover-password" element={<RecoverPasswordPage />} />
+            <Route path="/routine" element={<RoutinePage />} />
             {/* Старые маршруты для совместимости */}
             <Route path="/:pageId" element={<QuizPage />} />
           </Routes>

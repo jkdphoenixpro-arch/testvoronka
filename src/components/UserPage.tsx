@@ -28,7 +28,7 @@ interface UserStep {
 const userSteps: Record<number, UserStep> = {
   1: {
     title: "Your face shows your story. Which areas concern you most?",
-    subtitle: "Select up to 3 options",
+    subtitle: "Select 1 to 3 options",
     optionNames: [
       'Wrinkles', 'Jowls', 'Double chin',
       'Puffiness', 'Drooping eyelids', 'Dark circles', 
@@ -41,7 +41,7 @@ const userSteps: Record<number, UserStep> = {
   },
   2: {
     title: "Your body deserves attention. Where do you feel changes or tension?",
-    subtitle: "Select up to 3 options",
+    subtitle: "Select 1 to 3 options",
     optionNames: [
       'Neck hump', 'Belly', 'Back',
       'Posture', 'Slouching', 'Legs',
@@ -54,7 +54,7 @@ const userSteps: Record<number, UserStep> = {
   },
   3: {
     title: "Move freely. Where do you notice stiffness or limited flexibility?",
-    subtitle: "Select up to 3 options",
+    subtitle: "Select 1 to 3 options",
     optionNames: [
       'Neck stiffness', 'Shoulder mobility', 'Back flexibility',
       'Hips', 'Knees', 'Ankles', 'Stiffness',
@@ -341,13 +341,13 @@ export default function UserPage() {
         <div className="continue-button-wrapper">
           <button 
             className={`continue-button ${
-              currentStepId <= 3 && selectedOptions.length < 3 ? 'disabled' : ''
+              currentStepId <= 3 && selectedOptions.length === 0 ? 'disabled' : ''
             }`} 
-            onClick={currentStepId <= 3 && selectedOptions.length < 3 ? undefined : goNext}
-            disabled={currentStepId <= 3 && selectedOptions.length < 3}
+            onClick={currentStepId <= 3 && selectedOptions.length === 0 ? undefined : goNext}
+            disabled={currentStepId <= 3 && selectedOptions.length === 0}
           >
             Continue
-          </button>
+            </button>
         </div>
       )}
     </div>

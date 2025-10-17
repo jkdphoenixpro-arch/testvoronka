@@ -31,30 +31,9 @@ const QuizPage: React.FC = () => {
   });
 
 
-  const [shouldAnimate, setShouldAnimate] = useState(false);
-  
-
   const getCurrentPath = () => {
     return stepId ? '/goal' : '';
   };
-
-
-  useEffect(() => {
-    const basePath = getCurrentPath();
-    if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 4)) {
-      setShouldAnimate(false);
-
-      setTimeout(() => setShouldAnimate(true), 10);
-    }
-  }, [currentPageId]);
-
-
-  useEffect(() => {
-    const basePath = getCurrentPath();
-    if (basePath === '/goal' && (currentPageId === 2 || currentPageId === 3 || currentPageId === 4)) {
-      setShouldAnimate(true);
-    }
-  }, []);
 
 
   useEffect(() => {
@@ -185,7 +164,7 @@ const QuizPage: React.FC = () => {
         />
       )}
       
-      <main className={`content-wrapper ${shouldAnimate ? 'animate-in' : ''}`}>
+      <main className="content-wrapper">
         {pageData.isSplashPage ? (
           <SplashPage 
             title={pageData.title}

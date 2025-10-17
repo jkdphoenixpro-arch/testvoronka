@@ -1,0 +1,409 @@
+/* Routine Page Styles */
+
+/* Основной контейнер */
+.routine-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Градиентный фон - точный из Figma */
+.routine-background {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #E0E0FF 0%, #F4F4F4 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+/* Top bar - 52px высота */
+.routine-top-bar {
+  width: 100%;
+  max-width: 440px;
+  height: 52px;
+  background: #E0E0FF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+
+/* App logo в топ-баре */
+.routine-app-logo {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-logo-frame {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-logo-image {
+  width: 40px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* User profile в топ-баре */
+.routine-user-profile {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-profile-circle {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #4D368A;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-profile-image {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* Content - главное содержимое */
+.routine-content {
+  width: 100%;
+  max-width: 440px;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+/* Title wrapper - 140px высота */
+.routine-title-wrapper {
+  width: 100%;
+  max-width: 400px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Title section - 90px */
+.routine-title-section {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.routine-main-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 30px;
+  color: #28194B;
+  text-align: center;
+  margin: 0;
+  padding: 0 20px;
+}
+
+/* Description - 40px */
+.routine-description {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-description-text {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #504372;
+  text-align: center;
+  margin: 0;
+  padding: 0 20px;
+}
+
+/* Content wrapper - 628px */
+.routine-content-wrapper {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Lesson карточка - 144px высота */
+.routine-lesson {
+  width: 100%;
+  height: 144px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.routine-lesson:hover {
+  transform: translateY(-1px);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Image placeholder - 80x120 */
+.routine-lesson-image {
+  width: 80px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.routine-placeholder-image {
+  width: 100%;
+  height: 100%;
+  background: rgba(40, 25, 75, 0.1);
+  border-radius: 12px;
+}
+
+/* Lesson details */
+.routine-lesson-details {
+  flex: 1;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.routine-lesson-wrapper {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.routine-lesson-category {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #7554CC;
+  margin: 0;
+}
+
+.routine-lesson-title {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.routine-lesson-name {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #28194B;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Duration badge */
+.routine-lesson-duration {
+  width: 64px;
+  height: 26px;
+  background: rgba(77, 54, 138, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 11px 0 8px;
+}
+
+.routine-duration-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-duration-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.routine-duration-label {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #4D368A;
+}
+
+/* Checkbox */
+.routine-checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.routine-checkbox:not(.routine-checked) {
+  background: #FFFFFF;
+  border: 1px solid rgba(77, 54, 138, 0.1);
+}
+
+.routine-checkbox.routine-checked {
+  background: #4D368A;
+  border: none;
+}
+
+.routine-checkbox:hover {
+  transform: scale(1.1);
+}
+
+/* Tip of the day - 166px высота */
+.routine-tip-day {
+  width: 100%;
+  height: 166px;
+  background: rgba(77, 54, 138, 0.1);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+}
+
+.routine-tip-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.routine-tip-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #504372;
+  margin: 0;
+}
+
+.routine-tip-text-wrapper {
+  width: 100%;
+  max-width: 320px;
+}
+
+.routine-tip-text {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  color: #28194B;
+  margin: 0;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.routine-tip-icon {
+  position: absolute;
+  bottom: 20px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 36px;
+  height: 36px;
+}
+
+.routine-tip-icon-circle {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #4D368A;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.routine-tip-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 440px) {
+  .routine-content {
+    max-width: 390px;
+    padding: 24px 20px 20px;
+  }
+
+  .routine-title-wrapper {
+    max-width: 350px;
+  }
+
+  .routine-main-title {
+    padding: 0;
+    max-width: 310px;
+    margin: 0 auto;
+  }
+
+  .routine-description-text {
+    padding: 0;
+    max-width: 310px;
+    margin: 0 auto;
+  }
+
+  .routine-content-wrapper {
+    max-width: 350px;
+  }
+
+  .routine-lesson {
+    max-width: 350px;
+  }
+
+  .routine-tip-day {
+    max-width: 350px;
+  }
+
+  .routine-tip-text {
+    padding: 0;
+  }
+}
+
+/* Дополнительная адаптация для очень маленьких экранов */
+@media (max-width: 375px) {
+  .routine-content {
+    padding: 24px 16px 20px;
+  }
+}
