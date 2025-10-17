@@ -25,7 +25,7 @@ const testimonialsData: TestimonialData[] = [
     id: 1,
     name: "Jessica",
     avatar: "J",
-    text: "Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face, increase flexibility. I feel more energetic and confident. It's a truly great solution for taking care of myself"
+    text: "“Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face, increase flexibility. I feel more energetic and confident. It's a truly great solution for taking care of myself”"
   },
   {
     id: 2,
