@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from './Header';
 import { getPreviousStep } from '../utils/navigationUtils';
-import { saveGoalSelection } from '../utils/userSelections';
+import { saveGoalSelection, clearUserSelections } from '../utils/userSelections';
 import OptionButton from './OptionButton';
 import MultiOptionButton from './MultiOptionButton';
 import ContinueButton from './ContinueButton';
@@ -20,15 +20,7 @@ const QuizPage: React.FC = () => {
   const pageData: QuizPageData | undefined = quizPages.find(page => page.id === currentPageId);
   
 
-  const [selectedValues, setSelectedValues] = useState<string[]>(() => {
-    if (!pageData) return [];
-    if (pageData.isMultiSelect) {
-      return pageData.options.filter(option => option.selected).map(option => option.value);
-    } else {
-      const selected = pageData.options.find(option => option.selected);
-      return selected ? [selected.value] : [];
-    }
-  });
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
 
   const getCurrentPath = () => {
@@ -50,16 +42,17 @@ const QuizPage: React.FC = () => {
     }
   }, [pageData, navigate, stepId]);
 
+  // Очищаем все сохраненные выборы при загрузке
+  useEffect(() => {
+    clearUserSelections();
+  }, []);
+
   // Сбрасываем selectedValues при смене страницы
   useEffect(() => {
     if (!pageData) return;
     
-    if (pageData.isMultiSelect) {
-      setSelectedValues(pageData.options.filter(option => option.selected).map(option => option.value));
-    } else {
-      const selected = pageData.options.find(option => option.selected);
-      setSelectedValues(selected ? [selected.value] : []);
-    }
+    // Всегда сбрасываем выбор при переходе на новую страницу
+    setSelectedValues([]);
   }, [currentPageId, pageData]);
 
   if (!pageData) {

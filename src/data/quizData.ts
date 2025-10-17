@@ -38,7 +38,7 @@ export const quizPages: QuizPageData[] = [
     options: [
       { value: "18-25", text: "18-25" },
       { value: "26-35", text: "26-35" },
-      { value: "36-45", text: "36-45", selected: true },
+      { value: "36-45", text: "36-45" },
       { value: "46-55", text: "46-55" },
       { value: "56+", text: "56+" }
     ]
@@ -49,7 +49,7 @@ export const quizPages: QuizPageData[] = [
     progress: 25,
     className: "page-2",
     options: [
-      { value: "Slow down aging", text: "Slow down aging", selected: true },
+      { value: "Slow down aging", text: "Slow down aging" },
       { value: "Look fresher and younger", text: "Look fresher and younger" },
       { value: "Feel more energetic and active", text: "Feel more energetic and active" },
       { value: "Regain daily energy", text: "Regain daily energy" },
