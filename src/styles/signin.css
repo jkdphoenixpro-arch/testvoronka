@@ -185,6 +185,7 @@
 
 .signin-button:active {
   background: #4D368A;
+  transform: scale(0.98);
 }
 
 .signin-button-text {

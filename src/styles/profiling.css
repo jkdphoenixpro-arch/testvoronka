@@ -440,6 +440,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 @media (max-width: 440px) {
@@ -454,6 +455,7 @@
 
 .continue-button:active {
   background: #4D368A;
+  transform: scale(0.98);
 }
 
 

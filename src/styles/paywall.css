@@ -98,6 +98,11 @@ body.paywall-page #root {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.grab-offer-btn:active {
+  transform: scale(0.98);
 }
 
 
@@ -162,10 +167,6 @@ body.paywall-page #root {
   object-fit: cover;
 }
 
-
-.results-section {
-  margin-bottom: 40px;
-}
 
 .section-title {
   font-size: 28px;
@@ -376,6 +377,11 @@ body.paywall-page #root {
   font-weight: 500;
   cursor: pointer;
   width: 100%;
+  transition: all 0.2s ease;
+}
+
+.get-plan-btn:active {
+  transform: scale(0.98);
 }
 
 .guarantee-text {
@@ -437,11 +443,6 @@ body.paywall-page #root {
   font-size: 12px;
   font-weight: 600;
   color: #504369;
-}
-
-
-.social-proof {
-  margin-bottom: 40px;
 }
 
 .social-proof-text {
@@ -516,11 +517,6 @@ body.paywall-page #root {
 .user-plan {
   font-size: 12px;
   color: #28194B;
-}
-
-
-.science-section {
-  margin-bottom: 40px;
 }
 
 .fact-card {

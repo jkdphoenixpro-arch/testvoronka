@@ -1,0 +1,452 @@
+/* UserProfilePage styles - Independent styles only for profile page */
+
+/* Font faces - copied from main.css */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../../public/fonts/Inter/Inter/Inter-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variables for profile page */
+.user-profile-page {
+  --color-primary-text: #28194B;
+  --color-secondary-text: #504372;
+  --color-selected-bg: #4D368A;
+  --color-selected-text: #FFFFFF;
+  --color-white: #FFFFFF;
+  --color-progress-active: #7554CC;
+  --color-progress-bg: rgba(77, 54, 138, 0.1);
+  --bg-gradient: linear-gradient(180deg, #E0E0FF 0%, #F4F4F4 100%);
+  --desktop-max-width: 440px;
+  --mobile-max-width: 390px;
+  --desktop-height: 844px;
+  --container-padding: 20px;
+  --content-top-margin: 24px;
+  --option-spacing: 8px;
+  --option-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  --animation-transition: 0.3s ease-in-out;
+}
+
+body.user-profile-page {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--bg-gradient);
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  margin: 0;
+  padding: 0;
+}
+
+body.user-profile-page .App {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+body.user-profile-page #root {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Profile page specific quiz-container styles */
+.quiz-container.user-container {
+  width: 100%;
+  max-width: var(--desktop-max-width);
+  height: auto !important;
+  min-height: 100vh !important;
+  margin: 0 auto;
+  position: relative;
+  overflow: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.user-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Profile page specific top-bar and navbar styles */
+.user-container .top-bar {
+  width: 100%;
+  background: transparent;
+  padding: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.user-container .navbar {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 var(--container-padding);
+  justify-content: space-between;
+  position: relative;
+}
+
+.user-container .back-button {
+  font-family: 'SF Pro Display', sans-serif;
+  background: none;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: var(--container-padding);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.user-container .back-button img {
+  width: 6px;
+  height: 12px;
+  display: block;
+  object-fit: contain;
+}
+
+.user-container .app-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-container .app-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-primary-text);
+}
+
+/* Content */
+.user-container .content-wrapper {
+  flex: 1 !important;
+  padding: 24px 20px 32px !important;
+  gap: 24px !important;
+  overflow: visible !important;
+  justify-content: flex-start !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.user-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Profile Section */
+.user-profile-section {
+  width: 400px;
+  height: 156px;
+  border-radius: 20px;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-main-profile {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  margin-top: 0;
+}
+
+.user-main-profile-image {
+  width: 100%;
+  height: 100%;
+}
+
+.user-details {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.user-name-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+}
+
+.user-name {
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #281F4B;
+  margin: 0;
+}
+
+.user-pro-badge {
+  background: rgba(77, 54, 137, 0.1);
+  border-radius: 20px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.user-pro-text {
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #281F4B;
+}
+
+.user-crown-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-crown-image {
+  width: 24px;
+  height: 24px;
+}
+
+.user-email {
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #50426D;
+  margin: 0;
+  margin-top: 4px;
+}
+
+/* Goals Section */
+.user-goals-section {
+  width: 400px;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 2px rgba(43, 31, 75, 0.05);
+  border-radius: 20px;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 36px;
+}
+
+.user-section-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(77, 54, 137, 0.1);
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-section-icon-image {
+  width: 16px;
+  height: 16px;
+}
+
+.user-section-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #281F4B;
+  margin: 0;
+}
+
+.user-tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.user-tags-multiple {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.user-tag {
+  background: rgba(77, 54, 137, 0.1);
+  border-radius: 20px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.user-tag-text {
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #281F4B;
+}
+
+/* Issues Section */
+.user-issues-section {
+  width: 400px;
+  min-height: 200px;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 2px rgba(43, 31, 75, 0.05);
+  border-radius: 20px;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Info Section */
+.user-info-section {
+  width: 400px;
+  height: 228px;
+  background: rgba(77, 54, 137, 0.1);
+  border-radius: 20px;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.user-info-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info-item {
+  height: 48px;
+  border-bottom: 1px solid rgba(77, 54, 137, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  box-sizing: border-box;
+}
+
+.user-info-item-last {
+  border-bottom: none;
+}
+
+.user-info-text {
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #281F4B;
+}
+
+.user-info-arrow {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info-arrow-image {
+  width: 6px;
+  height: 12px;
+  object-fit: contain;
+  transform: rotate(180deg);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .user-container .content-wrapper {
+    padding: 16px 16px 0;
+  }
+
+  .user-content {
+    max-width: 350px;
+  }
+
+  .user-profile-section,
+  .user-goals-section,
+  .user-issues-section,
+  .user-info-section {
+    width: 100%;
+  }
+}
+

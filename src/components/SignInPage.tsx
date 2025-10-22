@@ -1,9 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/signin.css';
+import API_CONFIG from '../config/api';
 
 const SignInPage: React.FC = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/auth/signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Сохраняем информацию о пользователе в localStorage
+        localStorage.setItem('user', JSON.stringify(data.user));
+        // Переходим на страницу routine
+        navigate('/routine');
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError('Server connection error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleResendPassword = () => {
     navigate('/recover-password');
@@ -34,11 +70,25 @@ const SignInPage: React.FC = () => {
                 <div className="heading-container">
                   <h2 className="signin-title">Welcome, back to Age Back!</h2>
                 </div>
-                <p className="signin-subtitle">Check your registration email for your login password</p>
               </div>
 
               {/* Form */}
-              <div className="signin-form">
+              <form className="signin-form" onSubmit={handleSignIn}>
+                {/* Error message */}
+                {error && (
+                  <div style={{
+                    color: '#DC2626',
+                    backgroundColor: '#FEE2E2',
+                    padding: '12px',
+                    borderRadius: '8px',
+                    marginBottom: '16px',
+                    fontSize: '14px',
+                    textAlign: 'center'
+                  }}>
+                    {error}
+                  </div>
+                )}
+
                 {/* Email Input */}
                 <div className="input-container">
                   <div className="input-wrapper">
@@ -46,6 +96,11 @@ const SignInPage: React.FC = () => {
                       type="email"
                       placeholder="E-mail"
                       className="signin-input"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="off"
+                      data-lpignore="true"
+                      required
                     />
                   </div>
                 </div>
@@ -57,15 +112,22 @@ const SignInPage: React.FC = () => {
                       type="password"
                       placeholder="Password"
                       className="signin-input"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="new-password"
+                      data-lpignore="true"
+                      required
                     />
                   </div>
                 </div>
 
                 {/* Sign in Button */}
-                <button className="signin-button">
-                  <span className="signin-button-text">Sign in</span>
+                <button type="submit" className="signin-button" disabled={loading}>
+                  <span className="signin-button-text">
+                    {loading ? 'Signing in...' : 'Sign in'}
+                  </span>
                 </button>
-              </div>
+              </form>
             </div>
 
             {/* Policies */}

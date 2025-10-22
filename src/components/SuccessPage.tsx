@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import '../styles/success.css';
+import API_CONFIG from '../config/api';
 
 interface PaymentStatus {
   status: string;
@@ -12,23 +13,53 @@ const SuccessPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userPassword, setUserPassword] = useState<string | null>(null);
   const sessionId = searchParams.get('session_id');
 
   useEffect(() => {
-    if (sessionId) {
-      fetch(`http://localhost:3001/payment-status/${sessionId}`)
-        .then(response => response.json())
-        .then(data => {
-          setPaymentStatus(data);
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error('Ошибка получения статуса:', error);
-          setLoading(false);
-        });
-    } else {
+    const processPaymentSuccess = async () => {
+      if (sessionId) {
+        try {
+          // Проверяем статус оплаты
+          const statusResponse = await fetch(`${API_CONFIG.BASE_URL}/payment-status/${sessionId}`);
+          const statusData = await statusResponse.json();
+          setPaymentStatus(statusData);
+          
+          // Если оплата успешна, обновляем пользователя
+          if (statusData.status === 'paid') {
+            const leadEmail = localStorage.getItem('leadUserEmail');
+            
+            if (leadEmail) {
+              const upgradeResponse = await fetch(`${API_CONFIG.BASE_URL}/api/payment/success`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: leadEmail }),
+              });
+              
+              const upgradeData = await upgradeResponse.json();
+              
+              if (upgradeData.success) {
+                setUserPassword(upgradeData.password);
+                // Очищаем localStorage после успешного обновления
+                localStorage.removeItem('leadUserEmail');
+                console.log('Пользователь обновлён до customer, пароль:', upgradeData.password);
+              } else {
+                console.error('Ошибка обновления пользователя:', upgradeData.message);
+              }
+            }
+          }
+          
+        } catch (error) {
+          console.error('Ошибка обработки успешной оплаты:', error);
+        }
+      }
+      
       setLoading(false);
-    }
+    };
+    
+    processPaymentSuccess();
   }, [sessionId]);
 
   if (loading) {
@@ -68,11 +99,35 @@ const SuccessPage: React.FC = () => {
             {paymentStatus.amountTotal && (
               <p>Amount: ${(paymentStatus.amountTotal / 100).toFixed(2)}</p>
             )}
+            {userPassword && (
+              <div style={{
+                backgroundColor: '#F0F9FF',
+                border: '1px solid #0EA5E9',
+                borderRadius: '8px',
+                padding: '16px',
+                margin: '16px 0',
+                textAlign: 'center'
+              }}>
+                <h3 style={{ color: '#0EA5E9', marginBottom: '8px' }}>Ваш пароль для входа:</h3>
+                <p style={{ 
+                  fontSize: '18px', 
+                  fontWeight: 'bold', 
+                  fontFamily: 'monospace',
+                  color: '#1E40AF',
+                  letterSpacing: '2px'
+                }}>
+                  {userPassword}
+                </p>
+                <p style={{ fontSize: '12px', color: '#6B7280', marginTop: '8px' }}>
+                  Обязательно сохраните этот пароль!
+                </p>
+              </div>
+            )}
             <button 
               className="continue-btn"
-              onClick={() => window.location.href = '/'}
+              onClick={() => window.location.href = '/signin'}
             >
-              Continue
+              Continue to Login
             </button>
           </div>
         ) : (

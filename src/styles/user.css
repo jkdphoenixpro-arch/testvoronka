@@ -7,7 +7,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--bg-gradient);
   overflow: hidden;
   padding-bottom: 92px;
 }
@@ -80,7 +79,6 @@
 .user-container.user-step-2 .pill:hover,
 .user-container.user-step-3 .pill:hover {
   opacity: 1 !important;
-  transform: translateY(-1px) !important;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08) !important;
 }
 

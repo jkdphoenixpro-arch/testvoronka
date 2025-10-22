@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/paywall.css';
+import API_CONFIG from '../config/api';
 
 const PaywallPage: React.FC = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const PaywallPage: React.FC = () => {
         '12-week': 'pro'
       };
 
-      const response = await fetch('http://localhost:3001/create-checkout-session', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ const PaywallPage: React.FC = () => {
         '12-week': 'pro'
       };
 
-      const response = await fetch('http://localhost:3001/create-subscription-session', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/create-subscription-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

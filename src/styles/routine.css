@@ -62,6 +62,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .routine-profile-circle {
@@ -75,8 +76,8 @@
 }
 
 .routine-profile-image {
-  width: 16px;
-  height: 16px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -95,7 +96,6 @@
 .routine-title-wrapper {
   width: 100%;
   max-width: 400px;
-  height: 140px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -104,16 +104,28 @@
 /* Title section - 90px */
 .routine-title-section {
   width: 100%;
-  height: 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 4px;
+}
+
+.routine-greeting {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  color: #28194B;
+  text-align: center;
+  margin: 0;
+  padding: 0 20px;
+  color: #7554CC
 }
 
 .routine-main-title {
   font-family: 'SF Pro Display', sans-serif;
   font-weight: 600;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 30px;
   color: #28194B;
   text-align: center;
@@ -124,10 +136,22 @@
 /* Description - 40px */
 .routine-description {
   width: 100%;
-  height: 40px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2px;
+}
+
+.routine-focus-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #504372;
+  text-align: center;
+  margin: 0;
+  padding: 0 20px;
 }
 
 .routine-description-text {
@@ -158,13 +182,12 @@
   border-radius: 20px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 12px;
   gap: 16px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .routine-lesson:hover {
   transform: translateY(-1px);
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
@@ -190,7 +213,7 @@
   height: 120px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: space-between;
 }
 
 .routine-lesson-wrapper {
@@ -203,8 +226,8 @@
 
 .routine-lesson-category {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 14px;
   line-height: 16px;
   color: #7554CC;
   margin: 0;
@@ -219,8 +242,8 @@
 
 .routine-lesson-name {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 18px;
   line-height: 20px;
   color: #28194B;
   margin: 0;
@@ -232,7 +255,7 @@
 
 /* Duration badge */
 .routine-lesson-duration {
-  width: 64px;
+  width: fit-content;
   height: 26px;
   background: rgba(77, 54, 138, 0.1);
   border-radius: 20px;
@@ -240,6 +263,9 @@
   align-items: center;
   gap: 4px;
   padding: 0 11px 0 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
 }
 
 .routine-duration-icon {
@@ -258,7 +284,7 @@
 
 .routine-duration-label {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 12px;
   line-height: 14px;
   color: #4D368A;
@@ -272,8 +298,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
@@ -287,9 +311,6 @@
   border: none;
 }
 
-.routine-checkbox:hover {
-  transform: scale(1.1);
-}
 
 /* Tip of the day - 166px высота */
 .routine-tip-day {
@@ -318,22 +339,22 @@
   line-height: 20px;
   color: #504372;
   margin: 0;
+  text-align: center;
 }
 
 .routine-tip-text-wrapper {
   width: 100%;
-  max-width: 320px;
 }
 
 .routine-tip-text {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 18px;
   line-height: 20px;
   color: #28194B;
   margin: 0;
   padding: 0 20px;
-  text-align: left;
+  text-align: center;
 }
 
 .routine-tip-icon {
@@ -356,8 +377,8 @@
 }
 
 .routine-tip-icon-img {
-  width: 20px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -399,6 +420,22 @@
   .routine-tip-text {
     padding: 0;
   }
+}
+
+/* Loading и Error состояния */
+.routine-loading,
+.routine-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 18px;
+  color: #28194B;
+}
+
+.routine-error {
+  color: #D32F2F;
 }
 
 /* Дополнительная адаптация для очень маленьких экранов */

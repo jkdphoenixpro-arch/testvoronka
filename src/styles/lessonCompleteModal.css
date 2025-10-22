@@ -1,0 +1,122 @@
+/* Overlay - темный полупрозрачный фон */
+.lesson-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(77, 54, 137, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Модальное окно */
+.lesson-modal {
+  width: 400px;
+  height: 314px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(77, 54, 137, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 24px;
+}
+
+/* Контент модального окна */
+.lesson-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+/* Профиль пользователя */
+.lesson-modal-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lesson-modal-profile-circle {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #4D3689;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lesson-modal-profile-icon {
+  width: 48px;
+  height: 48px;
+}
+
+/* Заголовок и сообщение */
+.lesson-modal-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.lesson-modal-heading {
+  padding: 0 20px;
+}
+
+.lesson-modal-title {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #281949;
+  margin: 0;
+}
+
+.lesson-modal-message {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #50436D;
+  margin: 0;
+  padding: 0 20px;
+}
+
+/* Кнопка закрытия */
+.lesson-modal-close-button {
+  width: 100%;
+  height: 52px;
+  background: #FFFFFF;
+  border: 1px solid rgba(77, 54, 137, 0.1);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lesson-modal-close-button:hover {
+  background: #F8F7FB;
+}
+
+.lesson-modal-close-text {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #281949;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+  .lesson-modal {
+    width: calc(100% - 40px);
+    max-width: 400px;
+    margin: 20px;
+  }
+}

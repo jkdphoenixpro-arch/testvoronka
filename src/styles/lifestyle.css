@@ -15,6 +15,9 @@
   overflow: hidden;
   justify-content: flex-start;
 }
+.lifestyle-container.lifestyle-step-4 .content-wrapper{
+  gap: 0;
+}
 
 .lifestyle-container.lifestyle-step-4 .info-description {
   font-size: 16px;

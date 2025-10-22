@@ -100,16 +100,12 @@ const ResultsPage: React.FC = () => {
                 <span className="card-title">Goal</span>
               </div>
               <div className="goal-tags">
-                {selectedGoals.length > 0 ? (
-                  selectedGoals.map((goal, index) => (
-                    <div key={index} className="goal-tag">{goal}</div>
-                  ))
-                ) : (
-                  <>
-                    <div className="goal-tag">Slow down aging</div>
-                    <div className="goal-tag">Moving freely</div>
-                  </>
-                )}
+                <p className="goal-text">
+                  {selectedGoals.length > 0 
+                    ? selectedGoals.join(', ')
+                    : 'Slow down aging, Moving freely'
+                  }
+                </p>
               </div>
             </div>
 
@@ -132,23 +128,12 @@ const ResultsPage: React.FC = () => {
                 <span className="card-title">Issue areas</span>
               </div>
               <div className="issue-tags">
-                {selectedIssueAreas.length > 0 ? (
-                  selectedIssueAreas.map((issue, index) => (
-                    <div key={index} className="issue-tag">{issue}</div>
-                  ))
-                ) : (
-                  <>
-                    <div className="issue-tag">Drooping eyelids</div>
-                    <div className="issue-tag">Dark circles</div>
-                    <div className="issue-tag">Skin elasticity</div>
-                    <div className="issue-tag">Back</div>
-                    <div className="issue-tag">Slouching</div>
-                    <div className="issue-tag">Legs</div>
-                    <div className="issue-tag">Neck stiffness</div>
-                    <div className="issue-tag">Knees</div>
-                    <div className="issue-tag">Joint pain</div>
-                  </>
-                )}
+                <p className="issue-text">
+                  {selectedIssueAreas.length > 0 
+                    ? selectedIssueAreas.join(', ')
+                    : 'Drooping eyelids, Dark circles, Skin elasticity, Back, Slouching, Legs, Neck stiffness, Knees, Joint pain'
+                  }
+                </p>
               </div>
             </div>
 

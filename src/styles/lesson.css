@@ -1,0 +1,551 @@
+/* Lesson Page Styles */
+
+/* Основной контейнер */
+.lesson-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Градиентный фон - точный из Figma */
+.lesson-background {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #E0E0FF 0%, #F4F4F4 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+/* Top bar - 52px высота */
+.lesson-top-bar {
+  width: 100%;
+  max-width: 440px;
+  height: 52px;
+  background: #E0E0FF;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+
+/* Back button */
+.lesson-back-button {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.lesson-back-arrow {
+  width: 6px;
+  height: 12px;
+  object-fit: contain;
+}
+
+/* Content - главное содержимое */
+.lesson-content {
+  width: 100%;
+  max-width: 440px;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+/* Content wrapper */
+.lesson-content-wrapper {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Lesson details card - 618px высота */
+.lesson-details-card {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Header - 118px */
+.lesson-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lesson-header-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lesson-category {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #7554CC;
+  margin: 0;
+  text-align: center;
+}
+
+.lesson-title-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lesson-main-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 24px;
+  color: #28194B;
+  margin: 0;
+  text-align: center;
+  max-width: 250px;
+}
+
+/* Duration badge */
+.lesson-duration-badge {
+  width: fit-content;
+  height: 26px;
+  background: rgba(77, 54, 138, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 11px 0 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.lesson-duration-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lesson-duration-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.lesson-duration-label {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #4D368A;
+}
+
+/* Video section - 360x360 */
+.lesson-video-container {
+  width: 100%;
+  height: 360px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.lesson-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #FFFFFF;
+}
+
+/* Play button overlay */
+.lesson-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(80px);
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.1);
+}
+
+.lesson-play-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Description - 60px */
+.lesson-description {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.lesson-description-text {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #28194B;
+  margin: 0;
+  text-align: center;
+  max-width: 320px;
+}
+
+/* Tip/motivation card - 130px высота */
+.lesson-tip-card {
+  width: 100%;
+  background: rgba(77, 54, 138, 0.1);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.lesson-tip-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lesson-tip-label {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #504372;
+  margin: 0;
+  text-align: center;
+}
+
+.lesson-tip-text-wrapper {
+  width: 100%;
+  text-align: center;
+}
+
+.lesson-tip-text {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #28194B;
+  margin: 0;
+  padding: 0 20px;
+}
+
+/* Complete button - 52px высота */
+.lesson-button-wrapper {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lesson-complete-button {
+  width: 100%;
+  height: 52px;
+  background: #4D368A;
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+
+.lesson-complete-button:hover {
+  background: #3A2A6B;
+  transition: background-color 0.2s ease;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 440px) {
+  .lesson-content {
+    max-width: 390px;
+    padding: 24px 20px 20px;
+  }
+
+  .lesson-content-wrapper {
+    max-width: 350px;
+  }
+
+  .lesson-details-card {
+    max-width: 350px;
+  }
+
+  .lesson-tip-card {
+    max-width: 350px;
+  }
+
+  .lesson-tip-text {
+    padding: 0;
+  }
+
+  .lesson-button-wrapper {
+    max-width: 350px;
+  }
+}
+
+/* Loading и Error состояния */
+.lesson-loading,
+.lesson-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 18px;
+  color: #28194B;
+}
+
+.lesson-error {
+  color: #D32F2F;
+}
+
+/* Дополнительная адаптация для очень маленьких экранов */
+@media (max-width: 375px) {
+  .lesson-content {
+    padding: 24px 16px 20px;
+  }
+}
+
+/* Fullscreen Video Styles */
+.fullscreen-video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(77, 54, 138, 0.1);
+  backdrop-filter: blur(120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.fullscreen-video-container {
+  width: 360px;
+  height: 640px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  position: relative;
+}
+
+.fullscreen-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000000;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.fullscreen-video-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 96px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  pointer-events: none;
+}
+
+/* Новый простой timeline */
+.video-timeline-container {
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  right: 6px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 20;
+  padding: 8px 0;
+}
+
+.video-timeline-track {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background: rgba(234, 234, 234, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.video-timeline-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #FC0D1B;
+  border-radius: 2px;
+  transition: width 0.2s ease;
+  pointer-events: none;
+}
+
+.fullscreen-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(160px);
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.1);
+}
+
+.fullscreen-play-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen-close-button {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: rgba(77, 54, 138, 0.1);
+  border: none;
+  border-radius: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 25;
+}
+
+.lesson-video-container {
+  cursor: pointer;
+}
+
+.fullscreen-volume-control {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.fullscreen-volume-button {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.fullscreen-volume-button:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.volume-slider-container {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 8px 12px;
+}
+
+.volume-slider {
+  width: 80px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Мобильная адаптация для полноэкранного видео */
+@media (max-width: 440px) {
+  .fullscreen-video-container {
+    width: 350px;
+    height: 620px;
+  }
+}
+
+@media (max-width: 375px) {
+  .fullscreen-video-container {
+    width: 320px;
+    height: 568px;
+  }
+}

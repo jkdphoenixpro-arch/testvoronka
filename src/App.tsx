@@ -12,6 +12,9 @@ import SuccessPage from './components/SuccessPage';
 import SignInPage from './components/SignInPage';
 import RecoverPasswordPage from './components/RecoverPasswordPage';
 import RoutinePage from './components/RoutinePage';
+import LessonPage from './components/LessonPage';
+import UserProfilePage from './components/UserProfilePage';
+import ProtectedRoute from './components/ProtectedRoute';
 import { AnimationProvider } from './contexts/AnimationContext';
 import './styles/main.css';
 import './styles/statements.css';
@@ -34,7 +37,21 @@ function App() {
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/recover-password" element={<RecoverPasswordPage />} />
-            <Route path="/routine" element={<RoutinePage />} />
+            <Route path="/routine" element={
+              <ProtectedRoute>
+                <RoutinePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/lesson/:lessonId" element={
+              <ProtectedRoute>
+                <LessonPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <UserProfilePage />
+              </ProtectedRoute>
+            } />
             {/* Старые маршруты для совместимости */}
             <Route path="/:pageId" element={<QuizPage />} />
           </Routes>

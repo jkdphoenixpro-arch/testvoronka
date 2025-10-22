@@ -272,7 +272,7 @@ const BuildingPlanPage: React.FC = () => {
 
             <div className="building-plan-title-wrapper">
               <div className="heading-container">
-                <h1 className="building-plan-title">Building your anti-aging plan...</h1>
+                <h3 className="building-plan-title">Building your anti-aging plan...</h3>
               </div>
             </div>
 

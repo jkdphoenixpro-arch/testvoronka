@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/enteremail.css';
 import { getPreviousStep } from '../utils/navigationUtils';
+import { getSelectedGoals, getSelectedIssueAreas } from '../utils/userSelections';
+import API_CONFIG from '../config/api';
 
 const EnterEmailPage: React.FC = () => {
   const navigate = useNavigate();
@@ -10,6 +12,8 @@ const EnterEmailPage: React.FC = () => {
     name: '',
     email: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     document.body.classList.add('enteremail-page');
@@ -29,10 +33,45 @@ const EnterEmailPage: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    navigate('/paywall');
+    setError('');
+    setLoading(true);
+
+    try {
+      // Получаем данные из localStorage
+      const selectedGoals = getSelectedGoals();
+      const selectedIssueAreas = getSelectedIssueAreas();
+      
+      const userData = {
+        ...formData,
+        goals: selectedGoals,
+        issueAreas: selectedIssueAreas
+      };
+
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/users/create-lead`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Сохраняем email пользователя для дальнейшего использования при оплате
+        localStorage.setItem('leadUserEmail', data.user.email);
+        console.log('Lead created:', data.user);
+        navigate('/paywall');
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError('Ошибка подключения к серверу');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +125,20 @@ const EnterEmailPage: React.FC = () => {
           {/* Form */}
           <form className="enteremail-form" onSubmit={handleSubmit}>
             <div className="form-container">
+              {/* Error message */}
+              {error && (
+                <div style={{
+                  color: '#DC2626',
+                  backgroundColor: '#FEE2E2',
+                  padding: '12px',
+                  borderRadius: '8px',
+                  marginBottom: '16px',
+                  fontSize: '14px',
+                  textAlign: 'center'
+                }}>
+                  {error}
+                </div>
+              )}
               <div className="input-container">
                 <input
                   type="text"
@@ -108,8 +161,8 @@ const EnterEmailPage: React.FC = () => {
                   required
                 />
               </div>
-              <button type="submit" className="submit-button">
-                Submit
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? 'Создание аккаунта...' : 'Submit'}
               </button>
             </div>
           </form>
