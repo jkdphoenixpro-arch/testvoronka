@@ -14,6 +14,10 @@ const EnterEmailPage: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [showNameError, setShowNameError] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [showEmailError, setShowEmailError] = useState(false);
 
   useEffect(() => {
     document.body.classList.add('enteremail-page');
@@ -22,6 +26,30 @@ const EnterEmailPage: React.FC = () => {
       document.body.classList.remove('enteremail-page');
     };
   }, []);
+
+  const validateName = (name: string): string => {
+    if (name.length < 2) {
+      return 'Name must be at least 2 characters long';
+    }
+    if (name.length > 20) {
+      return 'Name must not exceed 20 characters';
+    }
+    if (!/^[a-zA-Zа-яА-ЯёЁ\s]+$/.test(name)) {
+      return 'Name must contain only letters (Latin or Cyrillic) and spaces';
+    }
+    return '';
+  };
+
+  const validateEmail = (email: string): string => {
+    if (!email) {
+      return 'Email is required';
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return 'Please enter a valid email address';
+    }
+    return '';
+  };
 
   const handleBackClick = () => {
     const previousStep = getPreviousStep(location.pathname);
@@ -35,6 +63,19 @@ const EnterEmailPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    
+    const nameValidationError = validateName(formData.name);
+    const emailValidationError = validateEmail(formData.email);
+    
+    setNameError(nameValidationError);
+    setShowNameError(!!nameValidationError);
+    setEmailError(emailValidationError);
+    setShowEmailError(!!emailValidationError);
+    
+    if (nameValidationError || emailValidationError) {
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -77,6 +118,14 @@ const EnterEmailPage: React.FC = () => {
       ...prev,
       [name]: value
     }));
+    
+    // Скрываем ошибку при изменении поля
+    if (name === 'name' && showNameError) {
+      setShowNameError(false);
+    }
+    if (name === 'email' && showEmailError) {
+      setShowEmailError(false);
+    }
   };
 
   return (
@@ -139,20 +188,28 @@ const EnterEmailPage: React.FC = () => {
                   placeholder="Name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="form-input"
-                  required
+                  className={`form-input ${showNameError ? 'error' : ''}`}
                 />
+                {showNameError && (
+                  <div className="error-message">
+                    {nameError}
+                  </div>
+                )}
               </div>
               <div className="input-container">
                 <input
-                  type="email"
+                  type="text"
                   name="email"
                   placeholder="E-mail"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="form-input"
-                  required
+                  className={`form-input ${showEmailError ? 'error' : ''}`}
                 />
+                {showEmailError && (
+                  <div className="error-message">
+                    {emailError}
+                  </div>
+                )}
               </div>
               <button type="submit" className="submit-button" disabled={loading}>
                 {loading ? 'Создание аккаунта...' : 'Submit'}

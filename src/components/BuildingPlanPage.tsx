@@ -87,6 +87,7 @@ const BuildingPlanPage: React.FC = () => {
   const isPausedRef = useRef(false);
   const continueLoadingRef = useRef<(() => void) | null>(null);
   const continueSecondLoadingRef = useRef<(() => void) | null>(null);
+  const testimonialTimerRef = useRef<NodeJS.Timeout | null>(null);
 
 
   const animateProgressBar = (stepId: number, targetPercent: number, duration: number = 2500): Promise<void> => {
@@ -176,6 +177,35 @@ const BuildingPlanPage: React.FC = () => {
     loadProgressBars();
   }, []);
 
+  // Автоматическая смена отзывов каждые 3 секунды
+  useEffect(() => {
+    const startTestimonialRotation = () => {
+      testimonialTimerRef.current = setInterval(() => {
+        setIsTransitioning(true);
+        
+        setTimeout(() => {
+          setActiveTestimonialId(prev => {
+            const nextId = prev >= testimonialsData.length ? 1 : prev + 1;
+            return nextId;
+          });
+          
+          setTimeout(() => {
+            setIsTransitioning(false);
+          }, 150);
+        }, 150);
+      }, 3000); // Смена каждые 3 секунды
+    };
+
+    startTestimonialRotation();
+
+    // Очищаем таймер при размонтировании компонента
+    return () => {
+      if (testimonialTimerRef.current) {
+        clearInterval(testimonialTimerRef.current);
+      }
+    };
+  }, []);
+
   const handleBackClick = () => {
     const previousStep = getPreviousStep(location.pathname);
     if (previousStep) {
@@ -221,6 +251,11 @@ const BuildingPlanPage: React.FC = () => {
   // Функция для плавного переключения testimonial
   const handleDotClick = (testimonialId: number) => {
     if (testimonialId !== activeTestimonialId && !isTransitioning) {
+      // Останавливаем автоматическую смену
+      if (testimonialTimerRef.current) {
+        clearInterval(testimonialTimerRef.current);
+      }
+      
       setIsTransitioning(true);
       
       // Начало fade out анимации
@@ -230,8 +265,24 @@ const BuildingPlanPage: React.FC = () => {
         // Конец fade in анимации
         setTimeout(() => {
           setIsTransitioning(false);
-        }, 100);
-      }, 100);
+          
+          // Перезапускаем автоматическую смену через 3 секунды после завершения анимации
+          testimonialTimerRef.current = setInterval(() => {
+            setIsTransitioning(true);
+            
+            setTimeout(() => {
+              setActiveTestimonialId(prev => {
+                const nextId = prev >= testimonialsData.length ? 1 : prev + 1;
+                return nextId;
+              });
+              
+              setTimeout(() => {
+                setIsTransitioning(false);
+              }, 150);
+            }, 150);
+          }, 3000);
+        }, 150);
+      }, 150);
     }
   };
   

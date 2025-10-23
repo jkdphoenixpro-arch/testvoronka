@@ -129,7 +129,6 @@
 /* Контейнеры инпутов */
 .input-container {
   width: 100%;
-  height: 52px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -163,6 +162,34 @@
 .signin-input::placeholder {
   color: #504372;
   font-weight: 400;
+}
+
+.signin-input:hover {
+  box-shadow: 0 0 0 1px #7554CC1A;
+}
+
+.signin-input:focus {
+  box-shadow: 0 0 0 1px #7554CC80;
+}
+
+.signin-input.error {
+  box-shadow: 0 0 0 1px #FF518033;
+  color: #504372;
+}
+
+.signin-input.error:focus {
+  box-shadow: 0 0 0 1px #FF518066;
+  color: #504372;
+}
+
+.error-message {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #FF5180;
+  margin-left: 4px;
+  text-align: left;
 }
 
 /* Кнопка Sign in */

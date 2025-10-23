@@ -69,6 +69,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUpFadeIn 0.6s ease-out forwards;
 }
 
 .scale-button:hover {
@@ -106,7 +109,7 @@
 .scale-label-left,
 .scale-label-right {
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 16px;
     color: var(--color-secondary-text);
 }
@@ -119,6 +122,39 @@
 .scale-label-right {
     max-width: 88px;
     text-align: right;
+}
+
+
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.animated-option.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animated-option.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animated-option.delay-3 {
+    animation-delay: 0.3s;
+}
+
+.animated-option.delay-4 {
+    animation-delay: 0.4s;
+}
+
+.animated-option.delay-5 {
+    animation-delay: 0.5s;
 }
 
 

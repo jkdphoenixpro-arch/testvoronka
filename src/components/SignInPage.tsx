@@ -9,10 +9,48 @@ const SignInPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [showEmailError, setShowEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  const [showPasswordError, setShowPasswordError] = useState(false);
+
+  const validateEmail = (email: string): string => {
+    if (!email) {
+      return 'Email is required';
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return 'Please enter a valid email address';
+    }
+    return '';
+  };
+
+  const validatePassword = (password: string): string => {
+    if (!password) {
+      return 'Password is required';
+    }
+    if (password.length < 6) {
+      return 'Password must be at least 6 characters long';
+    }
+    return '';
+  };
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    
+    const emailValidationError = validateEmail(email);
+    const passwordValidationError = validatePassword(password);
+    
+    setEmailError(emailValidationError);
+    setShowEmailError(!!emailValidationError);
+    setPasswordError(passwordValidationError);
+    setShowPasswordError(!!passwordValidationError);
+    
+    if (emailValidationError || passwordValidationError) {
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -83,16 +121,25 @@ const SignInPage: React.FC = () => {
                 <div className="input-container">
                   <div className="input-wrapper">
                     <input
-                      type="email"
+                      type="text"
                       placeholder="E-mail"
-                      className="signin-input"
+                      className={`signin-input ${showEmailError ? 'error' : ''}`}
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (showEmailError) {
+                          setShowEmailError(false);
+                        }
+                      }}
                       autoComplete="off"
                       data-lpignore="true"
-                      required
                     />
                   </div>
+                  {showEmailError && (
+                    <div className="error-message">
+                      {emailError}
+                    </div>
+                  )}
                 </div>
 
                 <div className="input-container">
@@ -100,14 +147,23 @@ const SignInPage: React.FC = () => {
                     <input
                       type="password"
                       placeholder="Password"
-                      className="signin-input"
+                      className={`signin-input ${showPasswordError ? 'error' : ''}`}
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        if (showPasswordError) {
+                          setShowPasswordError(false);
+                        }
+                      }}
                       autoComplete="new-password"
                       data-lpignore="true"
-                      required
                     />
                   </div>
+                  {showPasswordError && (
+                    <div className="error-message">
+                      {passwordError}
+                    </div>
+                  )}
                 </div>
 
                 <button type="submit" className="signin-button" disabled={loading}>
