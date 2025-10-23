@@ -27,12 +27,10 @@ const LessonCompleteModal: React.FC<LessonCompleteModalProps> = ({ isOpen, onClo
         const data = await response.json();
         
         if (data.success && data.user.viewedLessons) {
-          // Подсчитываем количество просмотренных уроков + текущий
           const viewedCount = Object.values(data.user.viewedLessons).filter(viewed => viewed === true).length;
-          const totalCount = viewedCount + 1; // +1 за текущий урок
+          const totalCount = viewedCount + 1;
           setCompletedLessonsCount(totalCount);
           
-          // Определяем содержимое модального окна
           updateModalContent(totalCount);
         }
       }
@@ -73,12 +71,10 @@ const LessonCompleteModal: React.FC<LessonCompleteModalProps> = ({ isOpen, onClo
 
   const handleClose = async () => {
     try {
-      // Получаем email текущего пользователя из localStorage
       const user = localStorage.getItem('user');
       if (user) {
         const userData = JSON.parse(user);
         
-        // Отмечаем урок как просмотренный
         const response = await fetch(`${API_CONFIG.BASE_URL}/api/users/mark-lesson-viewed`, {
           method: 'POST',
           headers: {
@@ -101,7 +97,6 @@ const LessonCompleteModal: React.FC<LessonCompleteModalProps> = ({ isOpen, onClo
       console.error('Ошибка при отметке урока:', error);
     }
     
-    // Закрываем модальное окно
     onClose();
   };
 
@@ -109,7 +104,6 @@ const LessonCompleteModal: React.FC<LessonCompleteModalProps> = ({ isOpen, onClo
     <div className="lesson-modal-overlay">
       <div className="lesson-modal">
         <div className="lesson-modal-content">
-          {/* User Profile Icon */}
           <div className="lesson-modal-profile">
             <div className="lesson-modal-profile-circle">
               <img 
@@ -120,7 +114,6 @@ const LessonCompleteModal: React.FC<LessonCompleteModalProps> = ({ isOpen, onClo
             </div>
           </div>
 
-          {/* Title and Message */}
           <div className="lesson-modal-title-wrapper">
             <div className="lesson-modal-heading">
               <h2 className="lesson-modal-title">{modalContent.title}</h2>
@@ -131,7 +124,6 @@ const LessonCompleteModal: React.FC<LessonCompleteModalProps> = ({ isOpen, onClo
           </div>
         </div>
 
-        {/* Close Button */}
         <button className="lesson-modal-close-button" onClick={handleClose}>
           <span className="lesson-modal-close-text">Close</span>
         </button>

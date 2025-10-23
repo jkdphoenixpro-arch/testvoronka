@@ -20,12 +20,10 @@ const SuccessPage: React.FC = () => {
     const processPaymentSuccess = async () => {
       if (sessionId) {
         try {
-          // Проверяем статус оплаты
           const statusResponse = await fetch(`${API_CONFIG.BASE_URL}/payment-status/${sessionId}`);
           const statusData = await statusResponse.json();
           setPaymentStatus(statusData);
           
-          // Если оплата успешна, обновляем пользователя
           if (statusData.status === 'paid') {
             const leadEmail = localStorage.getItem('leadUserEmail');
             
@@ -42,7 +40,6 @@ const SuccessPage: React.FC = () => {
               
               if (upgradeData.success) {
                 setUserPassword(upgradeData.password);
-                // Очищаем localStorage после успешного обновления
                 localStorage.removeItem('leadUserEmail');
                 console.log('Пользователь обновлён до customer, пароль:', upgradeData.password);
               } else {

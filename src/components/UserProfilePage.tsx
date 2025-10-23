@@ -32,7 +32,6 @@ const UserProfilePage: React.FC = () => {
 
   const loadUserData = async () => {
     try {
-      // Получаем данные авторизованного пользователя из localStorage
       const savedUser = localStorage.getItem('user');
       if (!savedUser) {
         navigate('/signin');
@@ -41,7 +40,6 @@ const UserProfilePage: React.FC = () => {
 
       const user = JSON.parse(savedUser);
       
-      // Загружаем полные данные пользователя с сервера
       const response = await fetch(`${API_CONFIG.BASE_URL}/api/users/profile/${user.email}`);
       const data = await response.json();
 
@@ -64,10 +62,8 @@ const UserProfilePage: React.FC = () => {
 
   return (
     <div className="profile-quiz-container">
-      {/* Градиентный фон */}
       <div className="profile-background">
         
-        {/* Header */}
         <div className="top-bar">
           <div className="navbar">
             <button className="back-button goal-back-button" aria-label="Назад" onClick={handleBackClick}>
@@ -93,11 +89,9 @@ const UserProfilePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Content */}
         <main className="content-wrapper">
           <div className="profile-content">
           
-          {/* Profile Section */}
           <div className="profile-user-profile-section">
             <div className="profile-user-main-profile">
               <img 
@@ -125,7 +119,6 @@ const UserProfilePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Goals Section */}
           <div className="profile-user-goals-section">
             <div className="profile-user-section-header">
               <div className="profile-user-section-icon">
@@ -157,7 +150,6 @@ const UserProfilePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Issues Section */}
           <div className="profile-user-issues-section">
             <div className="profile-user-section-header">
               <div className="profile-user-section-icon">
@@ -189,7 +181,6 @@ const UserProfilePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Info Section */}
           <div className="profile-user-info-section">
             <div className="profile-user-section-header">
               <div className="profile-user-section-icon">

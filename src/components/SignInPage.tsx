@@ -27,9 +27,7 @@ const SignInPage: React.FC = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Сохраняем информацию о пользователе в localStorage
         localStorage.setItem('user', JSON.stringify(data.user));
-        // Переходим на страницу routine
         navigate('/routine');
       } else {
         setError(data.message);
@@ -47,12 +45,9 @@ const SignInPage: React.FC = () => {
 
   return (
     <div className="signin-container">
-      {/* Главный контейнер с градиентным фоном */}
       <div className="signin-background">
-        {/* Центрированный контент (максимальная ширина 440px) */}
         <div className="signin-content">
           <div className="signin-form-wrapper">
-            {/* App Icon */}
             <div className="app-icon-section">
               <div className="app-icon-container">
                 <img 
@@ -63,18 +58,14 @@ const SignInPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Login Form */}
             <div className="login-form">
-              {/* Title wrapper */}
               <div className="signin-title-wrapper">
                 <div className="heading-container">
                   <h2 className="signin-title">Welcome, back to Age Back!</h2>
                 </div>
               </div>
 
-              {/* Form */}
               <form className="signin-form" onSubmit={handleSignIn}>
-                {/* Error message */}
                 {error && (
                   <div style={{
                     color: '#DC2626',
@@ -89,7 +80,6 @@ const SignInPage: React.FC = () => {
                   </div>
                 )}
 
-                {/* Email Input */}
                 <div className="input-container">
                   <div className="input-wrapper">
                     <input
@@ -105,7 +95,6 @@ const SignInPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Password Input */}
                 <div className="input-container">
                   <div className="input-wrapper">
                     <input
@@ -121,7 +110,6 @@ const SignInPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Sign in Button */}
                 <button type="submit" className="signin-button" disabled={loading}>
                   <span className="signin-button-text">
                     {loading ? 'Signing in...' : 'Sign in'}
@@ -130,7 +118,6 @@ const SignInPage: React.FC = () => {
               </form>
             </div>
 
-            {/* Policies */}
             <div className="signin-policies">
               <p className="password-help-text">Can't find registration password?</p>
               <div className="resend-container">

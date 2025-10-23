@@ -61,7 +61,6 @@ const StatementsPage: React.FC = () => {
   const handleScaleClick = (value: number) => {
     setSelectedValue(value);
     
-    // Автоматический переход после выбора
     setTimeout(() => {
       const nextStepId = currentStepId + 1;
       const nextStatement = statementsData.find(statement => statement.id === nextStepId);
@@ -69,10 +68,9 @@ const StatementsPage: React.FC = () => {
       if (nextStatement) {
         navigate(`/statements/${nextStepId}`);
       } else {
-        // Переход к следующему разделу после последней страницы
         navigate('/buildingplan/1');
       }
-    }, 500); // Небольшая задержка для визуального отклика
+    }, 500);
   };
 
   const handleBackClick = () => {
@@ -80,7 +78,6 @@ const StatementsPage: React.FC = () => {
     if (prevStepId >= 1) {
       navigate(`/statements/${prevStepId}`);
     } else {
-      // Для первой страницы statements переходим на предыдущую секцию (lifestyle/7)
       const previousStep = getPreviousStep(location.pathname);
       if (previousStep) {
         navigate(previousStep);

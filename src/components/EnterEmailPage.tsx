@@ -28,7 +28,6 @@ const EnterEmailPage: React.FC = () => {
     if (previousStep) {
       navigate(previousStep);
     } else {
-      // Fallback на results если предыдущий этап не найден
       navigate('/results');
     }
   };
@@ -39,7 +38,6 @@ const EnterEmailPage: React.FC = () => {
     setLoading(true);
 
     try {
-      // Получаем данные из localStorage
       const selectedGoals = getSelectedGoals();
       const selectedIssueAreas = getSelectedIssueAreas();
       
@@ -60,7 +58,6 @@ const EnterEmailPage: React.FC = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Сохраняем email пользователя для дальнейшего использования при оплате
         localStorage.setItem('leadUserEmail', data.user.email);
         console.log('Lead created:', data.user);
         navigate('/paywall');
@@ -84,7 +81,6 @@ const EnterEmailPage: React.FC = () => {
 
   return (
     <div className="quiz-container enteremail-container">
-      {/* Top Bar */}
       <div className="top-bar">
         <div className="navbar">
           <button className="back-button goal-back-button" aria-label="Назад" onClick={handleBackClick}>
@@ -112,7 +108,6 @@ const EnterEmailPage: React.FC = () => {
 
       <main className="content-wrapper">
         <div className="enteremail-content">
-          {/* Header */}
           <div className="header-container">
             <div className="heading-container">
               <h1 className="page-title">Enter your email to get your personal AgeBack plan</h1>
@@ -122,10 +117,8 @@ const EnterEmailPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Form */}
           <form className="enteremail-form" onSubmit={handleSubmit}>
             <div className="form-container">
-              {/* Error message */}
               {error && (
                 <div style={{
                   color: '#DC2626',
@@ -167,7 +160,6 @@ const EnterEmailPage: React.FC = () => {
             </div>
           </form>
 
-          {/* Policies */}
           <div className="policies-section">
             <div className="security-text">
               <div className="security-line">Your information is 100% secure.</div>

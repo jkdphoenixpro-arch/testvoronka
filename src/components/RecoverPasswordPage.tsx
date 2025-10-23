@@ -11,12 +11,9 @@ const RecoverPasswordPage: React.FC = () => {
 
   return (
     <div className="recover-password-container">
-      {/* Главный контейнер с градиентным фоном */}
       <div className="recover-password-background">
-        {/* Центрированный контент (максимальная ширина 440px) */}
         <div className="recover-password-content">
           <div className="recover-password-form-wrapper">
-            {/* App Icon */}
             <div className="recover-app-icon-section">
               <div className="recover-app-icon-container">
                 <img 
@@ -27,9 +24,7 @@ const RecoverPasswordPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Login Form */}
             <div className="recover-login-form">
-              {/* Title wrapper */}
               <div className="recover-title-wrapper">
                 <div className="recover-heading-container">
                   <h2 className="recover-title">Resend password</h2>
@@ -37,10 +32,8 @@ const RecoverPasswordPage: React.FC = () => {
                 <p className="recover-subtitle">Enter your sign-up email. We will send you your password</p>
               </div>
 
-              {/* Form Container */}
               <div className="recover-form-container">
                 <div className="recover-form">
-                  {/* Email Input */}
                   <div className="recover-input-container">
                     <div className="recover-input-wrapper">
                       <input
@@ -51,7 +44,6 @@ const RecoverPasswordPage: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Send password Button */}
                   <button className="recover-button">
                     <span className="recover-button-text">Send password</span>
                   </button>
@@ -59,7 +51,6 @@ const RecoverPasswordPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Policies */}
             <div className="recover-policies">
               <p className="remember-help-text">Remembered your password?</p>
               <div className="recover-signin-container">

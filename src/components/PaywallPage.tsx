@@ -16,7 +16,6 @@ const PaywallPage: React.FC = () => {
     };
   }, []);
 
-  // Таймер обратного отсчета
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(prev => {
@@ -40,7 +39,6 @@ const PaywallPage: React.FC = () => {
 
   const handleContinueClick = async () => {
     try {
-      // Маппинг планов на ID для бэкенда
       const planMapping: { [key: string]: string } = {
         '4-week': 'basic',
         '8-week': 'premium',
@@ -60,7 +58,6 @@ const PaywallPage: React.FC = () => {
       const data = await response.json();
 
       if (data.url) {
-        // Перенаправляем на страницу оплаты Stripe
         window.location.href = data.url;
       } else {
         console.error('Ошибка создания сессии оплаты');
@@ -72,7 +69,6 @@ const PaywallPage: React.FC = () => {
 
   const handleSubscriptionClick = async () => {
     try {
-      // Маппинг планов на ID для бэкенда
       const planMapping: { [key: string]: string } = {
         '4-week': 'basic',
         '8-week': 'premium',
@@ -92,7 +88,6 @@ const PaywallPage: React.FC = () => {
       const data = await response.json();
 
       if (data.url) {
-        // Перенаправляем на страницу оплаты Stripe для подписки
         window.location.href = data.url;
       } else {
         console.error('Ошибка создания сессии подписки');
@@ -104,7 +99,6 @@ const PaywallPage: React.FC = () => {
 
   return (
     <div className="quiz-container paywall-container">
-      {/* Discount Navbar */}
       <div className="discount-navbar">
         <div className="discount-info">
           <div className="discount-text">Discount available</div>
@@ -119,7 +113,6 @@ const PaywallPage: React.FC = () => {
 
       <main className="content-wrapper">
         <div className="paywall-content">
-          {/* Hero Section */}
           <div className="hero-section">
             <h1 className="hero-title">Your personalised Age Back plan is ready!</h1>
 
@@ -135,7 +128,6 @@ const PaywallPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Results Section */}
           <div className="results-section">
             <h2 className="section-title">Get visible results in 8 weeks!</h2>
 
@@ -146,9 +138,7 @@ const PaywallPage: React.FC = () => {
               <span>This offer expires in {formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}</span>
             </div>
 
-            {/* Pricing Plans */}
             <div className="pricing-plans">
-              {/* 4-Week Plan */}
               <div className={`plan-card ${selectedPlan === '4-week' ? 'selected' : ''}`}
                 onClick={() => setSelectedPlan('4-week')}>
                 <div className="plan-content">
@@ -187,7 +177,6 @@ const PaywallPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* 8-Week Plan */}
               <div className={`plan-card ${selectedPlan === '8-week' ? 'selected' : ''}`}
                 onClick={() => setSelectedPlan('8-week')}>
                 <div className="plan-badge best-for-you">Best for you</div>
@@ -227,7 +216,6 @@ const PaywallPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* 12-Week Plan */}
               <div className={`plan-card ${selectedPlan === '12-week' ? 'selected' : ''}`}
                 onClick={() => setSelectedPlan('12-week')}>
                 <div className="plan-badge popular">Popular</div>
@@ -273,7 +261,6 @@ const PaywallPage: React.FC = () => {
               <div className="guarantee-text">100% Money back Guarantee. Safe checkout.</div>
             </div>
           </div>
-          {/* Security Section */}
           <div className="security-section">
             <div className="security-content">
               <h3 className="security-title">Guaranteed safe checkout</h3>
@@ -295,7 +282,6 @@ const PaywallPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Social Proof */}
           <div className="social-proof">
             <div className="social-proof-text">293 people bought our plans in the last 1 hour</div>
             <div className="user-ticker">
@@ -318,7 +304,6 @@ const PaywallPage: React.FC = () => {
                   </div>
                   <div className="user-plan">12-Week Plan</div>
                 </div>
-                {/* Дублируем для бесшовной анимации */}
                 <div className="user-item">
                   <div className="user-email-mask">
                     <div className="user-email">gre***@</div>
@@ -341,7 +326,6 @@ const PaywallPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Science Section */}
           <div className="science-section">
             <h2 className="section-title">Science-backed approach</h2>
             <div className="fact-card">
@@ -355,7 +339,6 @@ const PaywallPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Benefits Section */}
           <div className="benefits-section">
             <h2 className="section-title">Double Your Results with a 15-min workout</h2>
             <div className="benefits-grid">
@@ -398,7 +381,6 @@ const PaywallPage: React.FC = () => {
             </div>
           </div>
 
-          {/* What You Get Section */}
           <div className="what-you-get-section">
             <h2 className="section-title">What you get</h2>
             <div className="features-card">
@@ -426,7 +408,6 @@ const PaywallPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Testimonials Section */}
           <div className="testimonials-section">
             <h2 className="section-title">Hear success stories from our users</h2>
             <div className="testimonials-grid">
@@ -476,7 +457,6 @@ const PaywallPage: React.FC = () => {
             <button className="get-plan-btn" onClick={handleContinueClick}>Get my plan</button>
           </div>
 
-          {/* Final CTA Section */}
           <div className="final-cta-section">
             <h2 className="section-title">Get visible results in 8 weeks!</h2>
 
@@ -487,9 +467,7 @@ const PaywallPage: React.FC = () => {
               <span>This offer expires in {formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}</span>
             </div>
 
-            {/* Repeat pricing plans */}
             <div className="pricing-plans">
-              {/* 4-Week Plan */}
               <div className={`plan-card ${selectedPlan === '4-week' ? 'selected' : ''}`}
                 onClick={() => setSelectedPlan('4-week')}>
                 <div className="plan-content">
@@ -528,7 +506,6 @@ const PaywallPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* 8-Week Plan */}
               <div className={`plan-card ${selectedPlan === '8-week' ? 'selected' : ''}`}
                 onClick={() => setSelectedPlan('8-week')}>
                 <div className="plan-badge best-for-you">Best for you</div>
@@ -568,7 +545,6 @@ const PaywallPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* 12-Week Plan */}
               <div className={`plan-card ${selectedPlan === '12-week' ? 'selected' : ''}`}
                 onClick={() => setSelectedPlan('12-week')}>
                 <div className="plan-badge popular">Popular</div>
@@ -615,7 +591,6 @@ const PaywallPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Guarantee Section */}
           <div className="guarantee-section">
             <div className="guarantee-card">
               <div className="guarantee-header">
@@ -641,7 +616,6 @@ const PaywallPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Contact Section */}
           <div className="contact-section">
             <div className="contact-text">Need any help?</div>
             <div className="contact-link">Contact us</div>

@@ -168,7 +168,6 @@ export default function LifestylePage() {
 
   const handleBackClick = () => {
     if (currentStepId === 1) {
-      // Для первой страницы lifestyle переходим на предыдущую секцию (user/7)
       const previousStep = getPreviousStep(location.pathname);
       if (previousStep) {
         navigate(previousStep);
@@ -176,7 +175,6 @@ export default function LifestylePage() {
       return;
     }
     
-    // Для остальных страниц в секции - обычный переход на предыдущую страницу в секции
     navigate(`/lifestyle/${currentStepId - 1}`);
   };
 

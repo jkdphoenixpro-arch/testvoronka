@@ -1,21 +1,17 @@
-// Утилиты для работы с выборами пользователя
-
 export interface UserSelections {
   goal: {
-    page3?: string;  // goal/3 - primary goal
-    page5?: string;  // goal/5 - what would you want to feel
+    page3?: string;
+    page5?: string;
   };
   issueAreas: {
-    user1?: string[];  // user/1 - face areas (до 3 опций)
-    user2?: string[];  // user/2 - body areas (до 3 опций)  
-    user3?: string[];  // user/3 - flexibility areas (до 3 опций)
+    user1?: string[];
+    user2?: string[];
+    user3?: string[];
   };
 }
 
-// Ключ для localStorage
 const STORAGE_KEY = 'ageBack_userSelections';
 
-// Получить сохраненные выборы пользователя
 export const getUserSelections = (): UserSelections => {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -32,21 +28,18 @@ export const getUserSelections = (): UserSelections => {
   };
 };
 
-// Сохранить выбор для goal страницы
 export const saveGoalSelection = (page: 'page3' | 'page5', value: string) => {
   const selections = getUserSelections();
   selections.goal[page] = value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
 };
 
-// Сохранить выборы для user страницы (issue areas)
 export const saveIssueAreaSelections = (page: 'user1' | 'user2' | 'user3', values: string[]) => {
   const selections = getUserSelections();
   selections.issueAreas[page] = values;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
 };
 
-// Получить все выбранные цели
 export const getSelectedGoals = (): string[] => {
   const selections = getUserSelections();
   const goals: string[] = [];
@@ -61,12 +54,10 @@ export const getSelectedGoals = (): string[] => {
   return goals;
 };
 
-// Получить все выбранные проблемные зоны
 export const getSelectedIssueAreas = (): string[] => {
   const selections = getUserSelections();
   const issueAreas: string[] = [];
   
-  // Объединяем все выборы из user/1, user/2, user/3
   if (selections.issueAreas.user1) {
     issueAreas.push(...selections.issueAreas.user1);
   }
@@ -80,7 +71,6 @@ export const getSelectedIssueAreas = (): string[] => {
   return issueAreas;
 };
 
-// Очистить все выборы (для отладки или сброса)
 export const clearUserSelections = () => {
   localStorage.removeItem(STORAGE_KEY);
 };

@@ -6,11 +6,10 @@ import API_CONFIG from '../config/api';
 
 const RoutinePage: React.FC = () => {
   const navigate = useNavigate();
-  const [completedLessons, setCompletedLessons] = useState<number[]>([0]); // Первый урок уже выполнен
+  const [completedLessons, setCompletedLessons] = useState<number[]>([0]);
   const [viewedLessons, setViewedLessons] = useState<{[key: number]: boolean}>({});
   const { lessons, loading, error } = useLessons();
 
-  // Загружаем данные о просмотренных уроках
   useEffect(() => {
     const loadUserData = async () => {
       try {
@@ -31,8 +30,6 @@ const RoutinePage: React.FC = () => {
     
     loadUserData();
   }, []);
-  
-  // В будущем состояние будет управляться через бекенд
   
   const handleLessonClick = (lessonId: number) => {
     navigate(`/lesson/${lessonId}`);
@@ -66,10 +63,8 @@ const RoutinePage: React.FC = () => {
 
   return (
     <div className="routine-container">
-      {/* Градиентный фон */}
       <div className="routine-background">
         
-        {/* Top bar */}
         <div className="routine-top-bar">
           <div className="routine-app-logo">
             <div className="routine-logo-frame">
@@ -90,10 +85,8 @@ const RoutinePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Content */}
         <div className="routine-content">
           
-          {/* Title wrapper */}
           <div className="routine-title-wrapper">
             <div className="routine-title-section">
               <h1 className="routine-greeting">Hi, Sara!</h1>
@@ -105,10 +98,8 @@ const RoutinePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Content wrapper */}
           <div className="routine-content-wrapper">
             
-            {/* Динамическое отображение уроков */}
             {lessonArray.map((lesson, index) => (
               <React.Fragment key={lesson.id}>
                 <div className="routine-lesson" onClick={() => handleLessonClick(lesson.id)}>
@@ -140,7 +131,6 @@ const RoutinePage: React.FC = () => {
                   </div>
                 </div>
                 
-                {/* Tip of the day после первого урока */}
                 {index === 0 && (
                   <div className="routine-tip-day">
                     <div className="routine-tip-content">

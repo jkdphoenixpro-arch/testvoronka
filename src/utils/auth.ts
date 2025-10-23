@@ -1,7 +1,3 @@
-/**
- * Проверяет, авторизован ли пользователь
- * @returns true если пользователь авторизован, false в противном случае
- */
 export const isAuthenticated = (): boolean => {
   try {
     const user = localStorage.getItem('user');
@@ -11,10 +7,6 @@ export const isAuthenticated = (): boolean => {
   }
 };
 
-/**
- * Получает данные авторизованного пользователя
- * @returns объект пользователя или null если не авторизован
- */
 export const getUser = () => {
   try {
     const user = localStorage.getItem('user');
@@ -24,9 +16,6 @@ export const getUser = () => {
   }
 };
 
-/**
- * Удаляет данные пользователя (выход из системы)
- */
 export const logout = () => {
   localStorage.removeItem('user');
 };
