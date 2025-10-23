@@ -22,8 +22,8 @@ export interface QuizPageData {
 export const quizPages: QuizPageData[] = [
   {
     id: 1,
-    title: "Stop aging in its tracks",
-    subtitle: "Take a 3-minute quiz to slow down time and see a fresher you",
+    title: "Start your age rewind with just 15-minutes a day",
+    subtitle: "Feel 5 years younger through a science-based method that restores posture, energy, and confidence",
     progress: 64,
     className: "splash-page",
     isSplashPage: true,
