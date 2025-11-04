@@ -5,7 +5,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--bg-gradient);
   overflow: visible;
 }
 
