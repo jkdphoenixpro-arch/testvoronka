@@ -390,7 +390,7 @@
 
 @media (max-width: 440px) {
   .profiling-step-7-testimonial {
-    max-width: 350px;
+    max-width: 400px;
     margin: 0 auto;
   }
   
@@ -445,7 +445,7 @@
 
 @media (max-width: 440px) {
   .continue-button {
-    max-width: 350px;
+    max-width: 400px;
   }
 }
 

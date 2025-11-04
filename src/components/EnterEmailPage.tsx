@@ -106,7 +106,7 @@ const EnterEmailPage: React.FC = () => {
         setError(data.message);
       }
     } catch (error) {
-      setError('Ошибка подключения к серверу');
+      setError('Error connecting to the server');
     } finally {
       setLoading(false);
     }
@@ -212,7 +212,7 @@ const EnterEmailPage: React.FC = () => {
                 )}
               </div>
               <button type="submit" className="submit-button" disabled={loading}>
-                {loading ? 'Создание аккаунта...' : 'Submit'}
+                {loading ? 'Creating an account...' : 'Submit'}
               </button>
             </div>
           </form>

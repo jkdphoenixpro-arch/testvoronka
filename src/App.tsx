@@ -14,6 +14,8 @@ import RecoverPasswordPage from './components/RecoverPasswordPage';
 import RoutinePage from './components/RoutinePage';
 import LessonPage from './components/LessonPage';
 import UserProfilePage from './components/UserProfilePage';
+import AdminPage from './components/AdminPage';
+import TestMailPage from './components/TestMailPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AnimationProvider } from './contexts/AnimationContext';
 import './styles/main.css';
@@ -52,6 +54,8 @@ function App() {
                 <UserProfilePage />
               </ProtectedRoute>
             } />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/testmail" element={<TestMailPage />} />
             {/* Старые маршруты для совместимости */}
             <Route path="/:pageId" element={<QuizPage />} />
           </Routes>

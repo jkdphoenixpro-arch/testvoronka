@@ -149,7 +149,7 @@ body.results-page #root {
 
 .card-title {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   line-height: 20px;
   color: #281A4B;
@@ -157,7 +157,7 @@ body.results-page #root {
 
 .time-label {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   line-height: 20px;
   color: #50436D;
@@ -253,12 +253,11 @@ body.results-page #root {
   }
 
   .results-content {
-    max-width: 350px;
+    max-width: 400px;
   }
   
   .results-title {
     max-width: 310px;
-    font-size: 16px;
     line-height: 22px;
   }
   
@@ -267,11 +266,10 @@ body.results-page #root {
   }
   
   .result-card {
-    max-width: 350px;
+    max-width: 400px;
   }
 
   .results-container .bottom-bar {
     padding: 16px 16px 24px !important;
-    max-width: var(--mobile-max-width) !important;
   }
 }

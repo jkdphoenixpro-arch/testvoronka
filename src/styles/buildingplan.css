@@ -311,7 +311,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: rgba(77, 54, 138, 0.1);
   display: flex;
   align-items: center;
@@ -330,19 +330,21 @@
   gap: 16px;
   padding: 40px;
   position: relative;
+  align-items: center;
 }
 
 .modal-title-wrapper {
-  width: 320px;
-  height: 48px;
+  max-width: 280px;
+  width: 100%;
   display: flex;
   align-items: center;
 }
 
 .modal-title {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 24px;
+  font-size: 22px;
   color: #281A4B;
   margin: 0;
   text-align: center;
@@ -382,7 +384,7 @@
 
 .modal-option-button span {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   color: #281A4B;
@@ -391,19 +393,19 @@
 
 @media (max-width: 768px) {
   .building-plan-content {
-    max-width: 350px;
+    max-width: 400px;
   }
   
   .steps-section {
-    max-width: 350px;
+    max-width: 400px;
   }
   
   .testimonial-section {
-    max-width: 350px;
+    max-width: 400px;
   }
   
   .buildingplan-testimonial-card {
-    max-width: 350px;
+    max-width: 400px;
   }
   
   .building-plan-title {
@@ -421,20 +423,24 @@
   
 
   .feedback-modal {
-    width: 350px;
-    height: 256px;
-    padding: 35px;
+    max-width: 400px;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .modal-title-wrapper{
+    height: auto;
+  }
+  .modal-button-wrapper{
+    max-width: 320px;
+    width: 100%;
+  }
+  .modal-option-button{
+    max-width: 320px;
+    width: 100%;
   }
   
-  .modal-title-wrapper {
-    width: 280px;
-  }
-  
-  .modal-button-wrapper {
-    width: 280px;
-  }
-  
-  .modal-option-button {
-    width: 280px;
-  }
 }

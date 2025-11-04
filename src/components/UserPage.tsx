@@ -3,6 +3,8 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Header from './Header';
 import { getPreviousStep } from '../utils/navigationUtils';
 import { saveIssueAreaSelections } from '../utils/userSelections';
+import { useImagePreloader } from '../hooks/useImagePreloader';
+import { getImagesToPreload } from '../config/imagePreloadConfig';
 import '../styles/user.css';
 import '../styles/testimonial.css';
 
@@ -135,6 +137,11 @@ export default function UserPage() {
   
   const [selectedOptions, setSelectedOptions] = useState<number[]>(currentStep.initialSelected);
 
+  // Предзагрузка изображений следующего шага
+  const currentPath = `/user/${currentStepId}`;
+  const imagesToPreload = getImagesToPreload(currentPath);
+  useImagePreloader(imagesToPreload);
+
 
 
 
@@ -231,7 +238,6 @@ export default function UserPage() {
           <div className="heading-container">
             <h2 className="question-title">{currentStep.title}</h2>
           </div>
-          <p className="question-subtitle">{currentStep.subtitle}</p>
         </div>
 
         {currentStep.isTestimonial ? (

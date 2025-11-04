@@ -2,7 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe');
 const mongoose = require('mongoose');
+const Mailgun = require('mailgun.js');
+const formData = require('form-data');
 require('dotenv').config();
+
+// Инициализация Mailgun
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({
+    username: 'api',
+    key: process.env.MAILGUN_API_KEY || 'your-mailgun-api-key',
+});
 
 // Подключение к MongoDB
 const connectDB = async () => {
@@ -658,6 +667,205 @@ app.get('/api/users/profile/:email', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: 'Server error' 
+    });
+  }
+});
+
+// Админские эндпоинты
+// Получение всех пользователей для админки
+app.get('/api/admin/users', async (req, res) => {
+  try {
+    // Получаем всех пользователей из базы данных
+    const users = await User.find({}, {
+      _id: 1,
+      name: 1,
+      email: 1,
+      role: 1,
+      password: 1,
+      createdAt: 1
+    }).sort({ createdAt: -1 }); // Сортируем по дате создания (новые сначала)
+
+    // Преобразуем данные для фронтенда
+    const formattedUsers = users.map(user => ({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role || 'lead',
+      hasPassword: !!user.password,
+      password: user.password, // Добавляем пароль для админки
+      createdAt: user.createdAt
+    }));
+
+    res.json({
+      success: true,
+      users: formattedUsers
+    });
+  } catch (error) {
+    console.error('Ошибка получения пользователей:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Ошибка получения пользователей'
+    });
+  }
+});
+
+// Изменение подписки пользователя
+app.post('/api/admin/users/:id/subscription', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { role } = req.body;
+
+    // Проверяем валидность роли
+    if (!role || !['lead', 'customer'].includes(role)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Неверная роль. Допустимые значения: lead, customer'
+      });
+    }
+
+    // Находим пользователя
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Пользователь не найден'
+      });
+    }
+
+    // Обновляем роль
+    user.role = role;
+
+    // Если меняем на customer и у пользователя нет пароля - генерируем
+    if (role === 'customer' && !user.password) {
+      const newPassword = generatePassword(10);
+      user.password = newPassword;
+      user.isEmailVerified = true;
+      // Инициализируем просмотренные уроки
+      user.viewedLessons = {
+        1: false,
+        2: false,
+        3: false
+      };
+      console.log(`Сгенерирован пароль для пользователя ${user.email}: ${newPassword}`);
+    }
+
+    // Если меняем на lead - можем оставить пароль или удалить (на ваш выбор)
+    // user.password = null; // раскомментировать если нужно удалять пароль у leads
+
+    await user.save();
+
+    res.json({
+      success: true,
+      message: `Роль пользователя изменена на ${role}`,
+      user: {
+        id: user._id,
+        role: user.role,
+        hasPassword: !!user.password,
+        password: user.password // Добавляем пароль для копирования
+      }
+    });
+  } catch (error) {
+    console.error('Ошибка изменения подписки:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Ошибка изменения подписки'
+    });
+  }
+});
+
+// Функция отправки письма с паролем
+async function sendPasswordEmail(userEmail, password, userName = 'Пользователь') {
+  // Используем ваш sandbox домен
+  const mailgunDomain = process.env.MAILGUN_SANDBOX_DOMAIN || 'sandbox2d69f3c8c1d74b7f805211c9f1354964.mailgun.org';
+  
+  const messageData = {
+    from: `Ваше приложение <postmaster@${mailgunDomain}>`,
+    to: [userEmail],
+    subject: 'Ваш пароль для доступа к курсу',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #333;">Добро пожаловать в наш курс!</h2>
+        <p>Здравствуйте, ${userName}!</p>
+        <p>Спасибо за покупку нашего курса. Ваш пароль для входа:</p>
+        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0; text-align: center;">
+          <strong style="font-size: 18px; color: #2c3e50;">${password}</strong>
+        </div>
+        <p>Сохраните этот пароль в безопасном месте. Вы можете использовать его для входа на нашем сайте.</p>
+        <p>Если у вас есть вопросы, свяжитесь с нами.</p>
+        <p>С уважением,<br>Команда поддержки</p>
+        <hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;">
+        <p style="font-size: 12px; color: #666; text-align: center;">
+          Это тестовое письмо. Если вы получили его по ошибке, просто игнорируйте.
+        </p>
+      </div>
+    `,
+    text: `
+      Добро пожаловать в наш курс!
+      
+      Здравствуйте, ${userName}!
+      
+      Спасибо за покупку нашего курса. Ваш пароль для входа: ${password}
+      
+      Сохраните этот пароль в безопасном месте.
+      
+      С уважением,
+      Команда поддержки
+      
+      ---
+      Это тестовое письмо.
+    `,
+    'h:X-Mailgun-Variables': JSON.stringify({ test: 'true' }),
+    'h:List-Unsubscribe': '<mailto:unsubscribe@example.com>'
+  };
+
+  try {
+    const result = await mg.messages.create(mailgunDomain, messageData);
+    console.log('Письмо отправлено:', result);
+    return { success: true, messageId: result.id };
+  } catch (error) {
+    console.error('Ошибка отправки письма:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+// Тестовый эндпоинт для отправки писем
+app.post('/api/test-email', async (req, res) => {
+  try {
+    const { email } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email обязателен'
+      });
+    }
+
+    // Генерируем тестовый пароль
+    const testPassword = generatePassword(8);
+    
+    // Отправляем письмо
+    const result = await sendPasswordEmail(email, testPassword, 'Тестовый пользователь');
+    
+    if (result.success) {
+      res.json({
+        success: true,
+        message: 'Тестовое письмо успешно отправлено!',
+        password: testPassword, // Возвращаем пароль для проверки
+        messageId: result.messageId
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'Ошибка отправки письма',
+        error: result.error
+      });
+    }
+    
+  } catch (error) {
+    console.error('Ошибка в тестовом эндпоинте:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Внутренняя ошибка сервера'
     });
   }
 });

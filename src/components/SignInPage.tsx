@@ -27,10 +27,7 @@ const SignInPage: React.FC = () => {
 
   const validatePassword = (password: string): string => {
     if (!password) {
-      return 'Password is required';
-    }
-    if (password.length < 6) {
-      return 'Password must be at least 6 characters long';
+      return 'Incorrect password';
     }
     return '';
   };
@@ -101,6 +98,7 @@ const SignInPage: React.FC = () => {
                 <div className="heading-container">
                   <h2 className="signin-title">Welcome, back to Age Back!</h2>
                 </div>
+                <p className="signin-subtitle">Check your registration email for your login password</p>
               </div>
 
               <form className="signin-form" onSubmit={handleSignIn}>

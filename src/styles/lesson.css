@@ -258,7 +258,7 @@
 
 .lesson-tip-text {
   font-family: 'SF Pro Display', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   line-height: 20px;
   color: #28194B;
@@ -300,20 +300,19 @@
 /* Мобильная адаптация */
 @media (max-width: 440px) {
   .lesson-content {
-    max-width: 390px;
     padding: 24px 20px 20px;
   }
 
   .lesson-content-wrapper {
-    max-width: 350px;
+    max-width: 400px;
   }
 
   .lesson-details-card {
-    max-width: 350px;
+    max-width: 400px;
   }
 
   .lesson-tip-card {
-    max-width: 350px;
+    max-width: 400px;
   }
 
   .lesson-tip-text {
@@ -321,7 +320,7 @@
   }
 
   .lesson-button-wrapper {
-    max-width: 350px;
+    max-width: 400px;
   }
 }
 
@@ -350,6 +349,7 @@
 
 /* Fullscreen Video Styles */
 .fullscreen-video-overlay {
+  padding-top: 46px;
   position: fixed;
   top: 0;
   left: 0;
@@ -364,8 +364,9 @@
 }
 
 .fullscreen-video-container {
-  width: 360px;
-  height: 640px;
+  width: fit-content;
+  height: 100%;
+  max-height: 640px;
   background: #FFFFFF;
   border-radius: 20px;
   position: relative;
@@ -538,14 +539,12 @@
 /* Мобильная адаптация для полноэкранного видео */
 @media (max-width: 440px) {
   .fullscreen-video-container {
-    width: 350px;
-    height: 620px;
+    
   }
 }
 
 @media (max-width: 375px) {
   .fullscreen-video-container {
-    width: 320px;
-    height: 568px;
+
   }
 }

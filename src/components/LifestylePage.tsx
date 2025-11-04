@@ -3,6 +3,8 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { getPreviousStep } from '../utils/navigationUtils';
 import Lottie from 'lottie-react';
 import { usePreloadedAnimation } from '../hooks/usePreloadedAnimation';
+import { useImagePreloader } from '../hooks/useImagePreloader';
+import { getImagesToPreload } from '../config/imagePreloadConfig';
 import Header from './Header';
 import ContinueButton from './ContinueButton';
 import '../styles/lifestyle.css';
@@ -126,6 +128,11 @@ export default function LifestylePage() {
   const lottieRef = useRef<any>(null);
   const [isLottieReady, setIsLottieReady] = useState(false);
   const { animationData, isReady, shouldPlay } = usePreloadedAnimation('lifestyle');
+
+  // Предзагрузка изображений следующего шага
+  const currentPath = `/lifestyle/${currentStepId}`;
+  const imagesToPreload = getImagesToPreload(currentPath);
+  useImagePreloader(imagesToPreload);
   
   useEffect(() => {
     setSelectedOptions(currentStep.initialSelected);

@@ -10,6 +10,8 @@ import TestimonialPage from './TestimonialPage';
 import ChartPage from './ChartPage';
 import SplashPage from './SplashPage';
 import { quizPages, QuizPageData } from '../data/quizData';
+import { useImagePreloader } from '../hooks/useImagePreloader';
+import { getImagesToPreload } from '../config/imagePreloadConfig';
 
 const QuizPage: React.FC = () => {
   const { pageId, stepId } = useParams<{ pageId?: string; stepId?: string }>();
@@ -22,6 +24,10 @@ const QuizPage: React.FC = () => {
 
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
+  // Предзагрузка изображений следующего шага
+  const currentPath = `/goal/${currentPageId}`;
+  const imagesToPreload = getImagesToPreload(currentPath);
+  useImagePreloader(imagesToPreload);
 
   const getCurrentPath = () => {
     return stepId ? '/goal' : '';

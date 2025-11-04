@@ -71,7 +71,7 @@
     justify-content: center;
     opacity: 0;
     transform: translateY(30px);
-    animation: slideUpFadeIn 0.6s ease-out forwards;
+    animation: slideUpFadeIn 0.5s ease-out forwards;
 }
 
 .scale-button:hover {
@@ -138,23 +138,23 @@
 
 
 .animated-option.delay-1 {
-    animation-delay: 0.1s;
+    animation-delay: 0.05s;
 }
 
 .animated-option.delay-2 {
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
 }
 
 .animated-option.delay-3 {
-    animation-delay: 0.3s;
+    animation-delay: 0.15s;
 }
 
 .animated-option.delay-4 {
-    animation-delay: 0.4s;
+    animation-delay: 0.20s;
 }
 
 .animated-option.delay-5 {
-    animation-delay: 0.5s;
+    animation-delay: 0.25s;
 }
 
 
@@ -168,7 +168,7 @@
 
 
     .statements-container .statement-question {
-        max-width: 350px;
+        max-width: 400px;
         margin: 0 auto 24px auto;
     }
 
@@ -181,18 +181,18 @@
 
 
     .scale-wrapper {
-        max-width: 350px;
+        max-width: 400px;
     }
 
 
     .scale-button {
-        max-width: 66.8px;
+        max-width: 76.8px;
         height: 56px;
     }
 
 
     .scale-labels {
-        max-width: 350px;
+        max-width: 400px;
         margin: 0 auto;
         padding: 0 0;
     }
@@ -202,11 +202,6 @@
 @media (max-width: 375px) {
     .statements-container {
         max-width: 100%;
-    }
-
-    .scale-wrapper {
-        max-width: calc(100% - 40px);
-        padding: 0 20px;
     }
 
     .scale-button {

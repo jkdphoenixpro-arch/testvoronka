@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from './Header';
 import { getPreviousStep } from '../utils/navigationUtils';
+import { useImagePreloader } from '../hooks/useImagePreloader';
+import { getImagesToPreload } from '../config/imagePreloadConfig';
 import ScaleButton from './ScaleButton';
 
 interface StatementData {
@@ -48,6 +50,10 @@ const StatementsPage: React.FC = () => {
   
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
+  // Предзагрузка изображений следующего шага
+  const currentPath = `/statements/${currentStepId}`;
+  const imagesToPreload = getImagesToPreload(currentPath);
+  useImagePreloader(imagesToPreload);
 
   useEffect(() => {
     setSelectedValue(null);

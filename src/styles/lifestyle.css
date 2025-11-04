@@ -1,18 +1,16 @@
 .lifestyle-container {
   width: 100%;
   max-width: var(--desktop-max-width);
-  height: 100vh;
-  max-height: 100vh;
   margin: 0 auto;
   position: relative;
   display: flex;
   flex-direction: column;
   background: var(--bg-gradient);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .lifestyle-container .content-wrapper {
-  overflow: hidden;
+  overflow: visible;
   justify-content: flex-start;
 }
 .lifestyle-container.lifestyle-step-4 .content-wrapper{
@@ -20,7 +18,8 @@
 }
 
 .lifestyle-container.lifestyle-step-4 .info-description {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 400;
   line-height: 1.5;
   color: #504370;
   margin: 10px 0 24px 0;

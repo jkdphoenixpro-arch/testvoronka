@@ -1,28 +1,17 @@
 .user-container {
   width: 100%;
   max-width: var(--desktop-max-width);
-  height: 100vh;
-  max-height: 100vh;
   margin: 0 auto;
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding-bottom: 92px;
 }
 
 .user-container .content-wrapper {
-  overflow: hidden;
+  overflow: visible;
   justify-content: flex-start;
 }
-
-
-
-.user-container.user-step-4 {
-  background: linear-gradient(180deg, #E0E0FF 0%, #F4F4F4 100%);
-}
-
-
 
 .user-container.user-step-1 .title-wrapper,
 .user-container.user-step-2 .title-wrapper,
@@ -108,8 +97,6 @@
 @media (max-width: 768px) {
   .user-container {
     max-width: var(--mobile-max-width);
-    height: 100vh;
-    max-height: 100vh;
     overflow: hidden;
   }
 }

@@ -17,7 +17,7 @@ const SplashPage: React.FC<SplashPageProps> = ({ title, subtitle }) => {
 
   useEffect(() => {
     const startTime = Date.now();
-    const duration = 4700;
+    const duration = 470000;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;

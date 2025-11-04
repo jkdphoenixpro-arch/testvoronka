@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useImagePreloader } from '../hooks/useImagePreloader';
+import { getImagesToPreload } from '../config/imagePreloadConfig';
 import '../styles/buildingplan.css';
 import FeedbackModal from './FeedbackModal';
 import { getPreviousStep } from '../utils/navigationUtils';
@@ -88,6 +90,11 @@ const BuildingPlanPage: React.FC = () => {
   const continueLoadingRef = useRef<(() => void) | null>(null);
   const continueSecondLoadingRef = useRef<(() => void) | null>(null);
   const testimonialTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Предзагрузка изображений следующего шага (results)
+  const currentPath = `/buildingplan/${currentStepId}`;
+  const imagesToPreload = getImagesToPreload(currentPath);
+  useImagePreloader(imagesToPreload);
 
 
   const animateProgressBar = (stepId: number, targetPercent: number, duration: number = 2500): Promise<void> => {
