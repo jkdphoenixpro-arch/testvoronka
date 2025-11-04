@@ -101,13 +101,22 @@ connectDB();
 const app = express();
 const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
 
-// Middleware
-app.use(cors({
-    origin: true, // Разрешить запросы с любого домена
-    credentials: true, // Разрешить отправку cookies и авторизационных заголовков
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-}));
+// Middleware для CORS - должен быть ПЕРВЫМ
+app.use((req, res, next) => {
+    // Разрешить запросы с любого origin
+    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    
+    // Обработка preflight запросов
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    
+    next();
+});
+
 app.use(express.json());
 
 // Тарифные планы с Price ID из Stripe
