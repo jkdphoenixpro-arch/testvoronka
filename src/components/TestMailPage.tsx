@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_CONFIG from '../config/api';
 
 const TestMailPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -28,7 +29,7 @@ const TestMailPage: React.FC = () => {
     setGeneratedPassword('');
 
     try {
-      const response = await fetch('http://localhost:3001/api/test-email', {
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/test-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
