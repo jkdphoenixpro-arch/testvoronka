@@ -3,14 +3,14 @@ const cors = require('cors');
 const stripe = require('stripe');
 const mongoose = require('mongoose');
 const Mailgun = require('mailgun.js');
-const formData = require('form-data');
+const FormData = require('form-data');
 require('dotenv').config();
 
 // Инициализация Mailgun
-const mailgun = new Mailgun(formData);
+const mailgun = new Mailgun(FormData);
 const mg = mailgun.client({
     username: 'api',
-    key: process.env.MAILGUN_API_KEY || 'your-mailgun-api-key',
+    key: process.env.MAILGUN_API_KEY,
 });
 
 // Подключение к MongoDB
@@ -784,52 +784,27 @@ app.post('/api/admin/users/:id/subscription', async (req, res) => {
 
 // Функция отправки письма с паролем
 async function sendPasswordEmail(userEmail, password, userName = 'Пользователь') {
-  // Используем ваш sandbox домен
-  const mailgunDomain = process.env.MAILGUN_SANDBOX_DOMAIN || 'sandbox2d69f3c8c1d74b7f805211c9f1354964.mailgun.org';
-  
   const messageData = {
-    from: `Ваше приложение <postmaster@${mailgunDomain}>`,
+    from: `AgeBack Coach <postmaster@mg.ageback.coach>`,
     to: [userEmail],
-    subject: 'Ваш пароль для доступа к курсу',
+    subject: 'Добро пожаловать!',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #333;">Добро пожаловать в наш курс!</h2>
-        <p>Здравствуйте, ${userName}!</p>
-        <p>Спасибо за покупку нашего курса. Ваш пароль для входа:</p>
-        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0; text-align: center;">
-          <strong style="font-size: 18px; color: #2c3e50;">${password}</strong>
+        <h2 style="color: #333;">Здравствуйте, ${userName}!</h2>
+        <p>Благодарим за регистрацию.</p>
+        <p>Ваш код для входа:</p>
+        <div style="background-color: #f0f8ff; padding: 20px; border-radius: 8px; margin: 25px 0; text-align: center; border: 2px solid #4a90e2;">
+          <span style="font-size: 24px; font-weight: bold; color: #2c3e50; letter-spacing: 2px;">${password}</span>
         </div>
-        <p>Сохраните этот пароль в безопасном месте. Вы можете использовать его для входа на нашем сайте.</p>
-        <p>Если у вас есть вопросы, свяжитесь с нами.</p>
-        <p>С уважением,<br>Команда поддержки</p>
-        <hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;">
-        <p style="font-size: 12px; color: #666; text-align: center;">
-          Это тестовое письмо. Если вы получили его по ошибке, просто игнорируйте.
-        </p>
+        <p>Сохраните этот код.</p>
+        <p>С уважением,<br>AgeBack Coach</p>
       </div>
     `,
-    text: `
-      Добро пожаловать в наш курс!
-      
-      Здравствуйте, ${userName}!
-      
-      Спасибо за покупку нашего курса. Ваш пароль для входа: ${password}
-      
-      Сохраните этот пароль в безопасном месте.
-      
-      С уважением,
-      Команда поддержки
-      
-      ---
-      Это тестовое письмо.
-    `,
-    'h:X-Mailgun-Variables': JSON.stringify({ test: 'true' }),
-    'h:List-Unsubscribe': '<mailto:unsubscribe@example.com>'
+    text: `Здравствуйте, ${userName}! Благодарим за регистрацию. Ваш код: ${password}`
   };
 
   try {
-    const result = await mg.messages.create(mailgunDomain, messageData);
-    console.log('Письмо отправлено:', result);
+    const result = await mg.messages.create('mg.ageback.coach', messageData);
     return { success: true, messageId: result.id };
   } catch (error) {
     console.error('Ошибка отправки письма:', error);

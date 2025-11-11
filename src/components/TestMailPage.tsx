@@ -9,15 +9,15 @@ const TestMailPage: React.FC = () => {
 
   const handleSendEmail = async () => {
     if (!email) {
-      setMessage('Введите email адрес');
+      setMessage('Enter email address');
       setIsError(true);
       return;
     }
 
-    // Простая валидация email
+    // Simple email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setMessage('Введите корректный email адрес');
+      setMessage('Enter a valid email address');
       setIsError(true);
       return;
     }
@@ -39,17 +39,17 @@ const TestMailPage: React.FC = () => {
       const data = await response.json();
 
       if (data.success) {
-        setMessage('Письмо успешно отправлено! Проверьте почту.');
+        setMessage('Email sent successfully! Check your inbox.');
         setGeneratedPassword(data.password);
         setIsError(false);
       } else {
-        setMessage(`Ошибка: ${data.message}`);
+        setMessage(`Error: ${data.message}`);
         setIsError(true);
       }
     } catch (error) {
-      setMessage('Ошибка соединения с сервером');
+      setMessage('Server connection error');
       setIsError(true);
-      console.error('Ошибка отправки:', error);
+      console.error('Send error:', error);
     } finally {
       setLoading(false);
     }
@@ -68,7 +68,6 @@ const TestMailPage: React.FC = () => {
         backgroundColor: 'white',
         borderRadius: '10px',
         padding: '40px',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         maxWidth: '400px',
         width: '100%'
       }}>
@@ -78,7 +77,7 @@ const TestMailPage: React.FC = () => {
           color: '#333',
           fontSize: '24px'
         }}>
-          Тест отправки писем
+          Email Sending Test
         </h1>
 
         <div style={{ marginBottom: '20px' }}>
@@ -88,13 +87,13 @@ const TestMailPage: React.FC = () => {
             color: '#555',
             fontWeight: '500'
           }}>
-            Email адрес:
+            Email address:
           </label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="test@example.com"
+            placeholder="test@email.com"
             style={{
               width: '100%',
               padding: '12px',
@@ -123,7 +122,7 @@ const TestMailPage: React.FC = () => {
             marginBottom: '20px'
           }}
         >
-          {loading ? 'Отправляется...' : 'Отправить письмо'}
+          {loading ? 'Sending...' : 'Send Email'}
         </button>
 
         {message && (
@@ -147,7 +146,7 @@ const TestMailPage: React.FC = () => {
             borderRadius: '5px',
             textAlign: 'center'
           }}>
-            <strong>Сгенерированный пароль:</strong>
+            <strong>Generated password:</strong>
             <div style={{
               fontSize: '18px',
               fontFamily: 'monospace',
@@ -163,22 +162,7 @@ const TestMailPage: React.FC = () => {
           </div>
         )}
 
-        <div style={{
-          marginTop: '20px',
-          padding: '15px',
-          backgroundColor: '#f8f9fa',
-          borderRadius: '5px',
-          fontSize: '14px',
-          color: '#666'
-        }}>
-          <strong>Инструкция:</strong>
-          <ol style={{ marginTop: '8px', paddingLeft: '20px' }}>
-            <li>Введите email адрес</li>
-            <li>Нажмите "Отправить письмо"</li>
-            <li>Проверьте почту (включая спам)</li>
-            <li>Сравните пароль из письма с показанным выше</li>
-          </ol>
-        </div>
+        
       </div>
     </div>
   );

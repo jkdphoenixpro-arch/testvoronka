@@ -603,7 +603,7 @@ body {
 
 @media (max-width: 768px) {
     .quiz-container {
-        min-height: 100vh;
+        min-height: max-content;
         position: relative;
         overflow: visible;
     }
@@ -1193,6 +1193,7 @@ body {
 
     .quiz-container {
         max-width: 100%;
+        min-height: max-content;
     }
 }
 

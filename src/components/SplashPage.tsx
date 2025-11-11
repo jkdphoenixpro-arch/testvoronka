@@ -17,7 +17,7 @@ const SplashPage: React.FC<SplashPageProps> = ({ title, subtitle }) => {
 
   useEffect(() => {
     const startTime = Date.now();
-    const duration = 470000;
+    const duration = 4700;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
@@ -98,6 +98,7 @@ const SplashPage: React.FC<SplashPageProps> = ({ title, subtitle }) => {
               </>
             )}
           </div>
+          <div className="botton-section"></div>
         </div>
       </div>
       

@@ -9,7 +9,7 @@ export const IMAGE_PRELOAD_MAP: Record<string, string[]> = {
   '/goal/3': [],
   '/goal/4': [],
   '/goal/5': [],
-  '/goal/6': ['/image/rating.svg'], // следующий шаг goal/7 использует rating.svg
+  '/goal/6': ['/image/rating.svg', '/image/znak.svg'], // следующий шаг goal/7 использует rating.svg и znak.svg
   '/goal/7': ['/image/before&after.webp', '/image/rating.svg'], // следующий шаг user/1
 
   // User steps (user/1 - user/7)
