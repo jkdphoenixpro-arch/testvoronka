@@ -1022,6 +1022,10 @@ body {
         max-width: 400px;
     }
 
+    .chart-image {
+        height: 213.317px;
+    }
+
     .info-block {
         max-width: 400px;
         margin: 0 auto;
