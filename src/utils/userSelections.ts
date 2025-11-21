@@ -2,11 +2,17 @@ export interface UserSelections {
   goal: {
     page3?: string;
     page5?: string;
+    goalNew6?: string;
   };
   issueAreas: {
     user1?: string[];
     user2?: string[];
     user3?: string[];
+  };
+  challenges: {
+    userNew1?: string[];
+    userNew3?: string[];
+    userNew5?: string[];
   };
 }
 
@@ -24,19 +30,24 @@ export const getUserSelections = (): UserSelections => {
   
   return {
     goal: {},
-    issueAreas: {}
+    issueAreas: {},
+    challenges: {}
   };
 };
 
-export const saveGoalSelection = (page: 'page3' | 'page5', value: string) => {
+export const saveGoalSelection = (page: string, value: string) => {
   const selections = getUserSelections();
-  selections.goal[page] = value;
+  // Приводим к типу ключа
+  const key = page as 'page3' | 'page5';
+  selections.goal[key] = value;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
 };
 
-export const saveIssueAreaSelections = (page: 'user1' | 'user2' | 'user3', values: string[]) => {
+export const saveIssueAreaSelections = (page: string, values: string[]) => {
   const selections = getUserSelections();
-  selections.issueAreas[page] = values;
+  // Приводим к типу ключа
+  const key = page as 'user1' | 'user2' | 'user3';
+  selections.issueAreas[key] = values;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
 };
 
@@ -69,6 +80,40 @@ export const getSelectedIssueAreas = (): string[] => {
   }
   
   return issueAreas;
+};
+
+export const saveChallengeSelections = (page: string, values: string[]) => {
+  const selections = getUserSelections();
+  const key = page as 'userNew1' | 'userNew3' | 'userNew5';
+  selections.challenges[key] = values;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(selections));
+};
+
+export const getAllChallenges = (): string[] => {
+  const selections = getUserSelections();
+  const challenges: string[] = [];
+  
+  if (selections.challenges?.userNew1) {
+    challenges.push(...selections.challenges.userNew1);
+  }
+  if (selections.challenges?.userNew3) {
+    challenges.push(...selections.challenges.userNew3);
+  }
+  if (selections.challenges?.userNew5) {
+    challenges.push(...selections.challenges.userNew5);
+  }
+  
+  return challenges;
+};
+
+export const getAgeGroup = (): string => {
+  const selections = getUserSelections();
+  return selections.goal.page3 || '30s';
+};
+
+export const getMotivation = (): string => {
+  const selections = getUserSelections();
+  return selections.goal.goalNew6 || 'Feel confident';
 };
 
 export const clearUserSelections = () => {

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from './Header';
-import { getPreviousStep } from '../utils/navigationUtils';
 import { useImagePreloader } from '../hooks/useImagePreloader';
-import { getImagesToPreload } from '../config/imagePreloadConfig';
+import { getStepByRoute, getNextStep, getPreviousStepByRoute } from '../config/onboardingConfig';
 import ScaleButton from './ScaleButton';
 
 interface StatementData {
@@ -13,32 +12,7 @@ interface StatementData {
   progress: number;
 }
 
-const statementsData: StatementData[] = [
-  {
-    id: 1,
-    question: "Do you relate to the following statement?",
-    statement: "The reflection in the mirror affects my mood and my self-esteem",
-    progress: 15
-  },
-  {
-    id: 2,
-    question: "Do you relate to the following statement?",
-    statement: "I tend to compare myself to others and it makes me frustrated",
-    progress: 30
-  },
-  {
-    id: 3,
-    question: "Do you relate to the following statement?",
-    statement: "My appearance may affect my relationships",
-    progress: 45
-  },
-  {
-    id: 4,
-    question: "Do you relate to the following statement?",
-    statement: "I'm afraid that people won't like me if I look older",
-    progress: 60
-  }
-];
+// Данные steps statements берутся из централизованного конфига (src/config/onboardingConfig.ts)
 
 const StatementsPage: React.FC = () => {
   const { stepId } = useParams<{ stepId: string }>();
@@ -46,48 +20,38 @@ const StatementsPage: React.FC = () => {
   const location = useLocation();
   
   const currentStepId = stepId ? parseInt(stepId) : 1;
-  const statementData = statementsData.find(statement => statement.id === currentStepId);
-  
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
-  // Предзагрузка изображений следующего шага
   const currentPath = `/statements/${currentStepId}`;
-  const imagesToPreload = getImagesToPreload(currentPath);
-  useImagePreloader(imagesToPreload);
+  const stepConfig = getStepByRoute(currentPath);
+
+  // Предзагрузка изображений следующего шага из конфига
+  useImagePreloader(stepConfig?.imagesToPreload || []);
 
   useEffect(() => {
     setSelectedValue(null);
   }, [currentStepId]);
 
-  if (!statementData) {
+  if (!stepConfig) {
     navigate('/statements/1');
     return null;
   }
 
   const handleScaleClick = (value: number) => {
     setSelectedValue(value);
-    
     setTimeout(() => {
-      const nextStepId = currentStepId + 1;
-      const nextStatement = statementsData.find(statement => statement.id === nextStepId);
-      
-      if (nextStatement) {
-        navigate(`/statements/${nextStepId}`);
-      } else {
-        navigate('/buildingplan/1');
+      if (!stepConfig) return;
+      const next = getNextStep(stepConfig.id);
+      if (next) {
+        navigate(next.route);
       }
     }, 500);
   };
 
   const handleBackClick = () => {
-    const prevStepId = currentStepId - 1;
-    if (prevStepId >= 1) {
-      navigate(`/statements/${prevStepId}`);
-    } else {
-      const previousStep = getPreviousStep(location.pathname);
-      if (previousStep) {
-        navigate(previousStep);
-      }
+    const prev = getPreviousStepByRoute(currentPath);
+    if (prev) {
+      navigate(prev.route);
     }
   };
 
@@ -95,14 +59,14 @@ const StatementsPage: React.FC = () => {
     <div className="statements-container">
       <Header
         onBackClick={handleBackClick}
-        showBackButton={true}
+        showBackButton={!!getPreviousStepByRoute(currentPath)}
       />
       
       <main className="content-wrapper">
         <div className="title-wrapper">
-          <p className="statement-question">{statementData.question}</p>
+          <p className="statement-question">{stepConfig.question}</p>
           <div className="heading-container">
-            <h2 className="statement-title">"{statementData.statement}"</h2>
+            <h2 className="statement-title">"{stepConfig.statement}"</h2>
           </div>
         </div>
 

@@ -156,6 +156,13 @@ body.user-profile-page #root {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+}
+
+.user-container .app-rewind-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .user-container .app-name {

@@ -1,11 +1,5 @@
 
 
-
-.building-plan-container {
-  background: linear-gradient(180deg, #E0E0FF 0%, #F4F4F4 100%);
-}
-
-
 .building-plan-container .content-wrapper {
   padding: 24px 20px 0;
   gap: 24px;
@@ -80,7 +74,7 @@
   align-items: center;
 }
 
-.step-title {
+.building-plan-container .step-title {
   text-align: left;
   font-family: 'SF Pro Display', sans-serif;
   font-weight: 400;

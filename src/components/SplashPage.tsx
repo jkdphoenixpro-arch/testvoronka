@@ -43,10 +43,10 @@ const SplashPage: React.FC<SplashPageProps> = ({ title, subtitle }) => {
         <div className="content-wrapper">
           <div className="title-wrapper">
             <div className="heading-container">
-              <h1 className="splash-title">{title}</h1>
+              <h1 className="splash-title" dangerouslySetInnerHTML={{ __html: title || '' }}></h1>
             </div>
             {subtitle && (
-              <p className="splash-subtitle">{subtitle}</p>
+              <p className="splash-subtitle" dangerouslySetInnerHTML={{ __html: subtitle }} />
             )}
           </div>
 
@@ -60,43 +60,7 @@ const SplashPage: React.FC<SplashPageProps> = ({ title, subtitle }) => {
                 e.currentTarget.style.display = 'block';
               }}
             />
-          </div>
-
-          <div className="award-section">
-            {isGoalRoute ? (
-              <img 
-                src="/image/award.svg" 
-                alt="Award"
-                onError={(e) => {
-                  console.error('Failed to load award image:', e.currentTarget.src);
-                }}
-              />
-            ) : (
-              <>
-                <div className="award-icon award-icon-left">
-                  <img 
-                    src="/image/first_ico_left.svg" 
-                    alt="Award left"
-                    onError={(e) => {
-                      console.error('Failed to load left icon:', e.currentTarget.src);
-                    }}
-                  />
-                </div>
-                <div className="award-text">
-                  <div className="award-title">#1</div>
-                  <div className="award-subtitle">Anti-aging apps</div>
-                </div>
-                <div className="award-icon award-icon-right">
-                  <img 
-                    src="/image/first_ico_right.svg" 
-                    alt="Award right"
-                    onError={(e) => {
-                      console.error('Failed to load right icon:', e.currentTarget.src);
-                    }}
-                  />
-                </div>
-              </>
-            )}
+            
           </div>
           <div className="botton-section"></div>
         </div>

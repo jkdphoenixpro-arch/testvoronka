@@ -165,6 +165,13 @@ body.profile-page #root {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+}
+
+.profile-quiz-container .app-rewind-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .profile-quiz-container .app-name {

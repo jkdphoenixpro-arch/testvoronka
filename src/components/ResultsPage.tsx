@@ -62,6 +62,7 @@ const ResultsPage: React.FC = () => {
             />
           </button>
           <div className="app-icon">
+            <img src="/image/rewind-icon-24px.svg" alt="" className="app-rewind-icon" />
             <span className="app-name">Age Back</span>
           </div>
         </div>

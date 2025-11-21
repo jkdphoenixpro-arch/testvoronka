@@ -18,9 +18,10 @@ const Header: React.FC<HeaderProps> = ({ progress: localProgress, onBackClick, s
   const isUserRoute = location.pathname.startsWith('/user/');
   const isLifestyleRoute = location.pathname.startsWith('/lifestyle/');
   const isStatementsRoute = location.pathname.startsWith('/statements/');
+  const isCreatePlanRoute = location.pathname === '/create-plan';
   
   const currentStep = location.pathname.split('/').pop();
-  const shouldShowArrowLeft = ((isGoalRoute && currentStep !== '1') || isUserRoute || isLifestyleRoute || isStatementsRoute) && showBackButton;
+  const shouldShowArrowLeft = ((isGoalRoute && currentStep !== '1') || isUserRoute || isLifestyleRoute || isStatementsRoute || isCreatePlanRoute) && showBackButton;
   
   const handleBackClick = () => {
     if (onBackClick) {
@@ -61,6 +62,7 @@ const Header: React.FC<HeaderProps> = ({ progress: localProgress, onBackClick, s
         ) : null}
         
         <div className="app-icon">
+          <img src="/image/rewind-icon-24px.svg" alt="" className="app-rewind-icon" />
           <span className="app-name">Age Back</span>
         </div>
       </nav>

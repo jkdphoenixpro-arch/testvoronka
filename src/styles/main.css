@@ -154,6 +154,11 @@ body {
     height: 12px;
 }
 
+.botton-section{
+    height: 46px;
+    padding: 20px 0;
+}
+
 .goal-back-button img {
     width: 6px;
     height: 12px;
@@ -171,6 +176,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
+}
+
+.app-rewind-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 .app-name {
@@ -261,7 +273,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 0 20px;
+   padding: 0 20px;
 }
 
 
@@ -272,7 +284,7 @@ body {
 
 
 .quiz-container.goal-page-1 .heading-container {
-    padding-top: 40px;
+    padding-top: 24px;
 }
 
 .question-title {
@@ -458,8 +470,8 @@ body {
 }
 
 .checkbox.checked {
-    background: #FF5180;
-    border-color: #FF5180;
+    background: #7554CC;
+    border-color: #7554CC;
 }
 
 .checkmark {
@@ -548,6 +560,9 @@ body {
     .content-wrapper{
         padding: var(--content-top-margin) 20px 0;
     }
+    .title-wrapper{
+        padding: 0;
+    }
     .bottom-bar{
         padding: 20px 20px !important;
     }
@@ -613,12 +628,6 @@ body {
         padding: 0;
     }
 
-
-    .title-wrapper {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
     .multi-select-option {
         max-width: 400px;
         margin: 0 auto;
@@ -650,6 +659,15 @@ body {
 }
 
 .quiz-container.building-plan-container .testimonial-section{
+    gap: 0;
+}
+
+/* Убираем gap для страницы goal/new8 */
+.quiz-container.goal-page-6 .testimonial-content {
+    gap: 0;
+}
+
+.quiz-container.goal-page-6 .testimonial-section {
     gap: 0;
 }
 
@@ -761,7 +779,6 @@ body {
 .chart-block {
     background: var(--color-white);
     border-radius: 20px;
-    padding: 16px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
@@ -829,6 +846,127 @@ body {
 
 .quiz-container.goal-page-7 .info-text p {
     text-align: left;
+}
+
+/* Удаляем background и box-shadow только для goal/new5 */
+.quiz-container.goal-page-new5 .chart-block {
+    background: none;
+    box-shadow: none;
+}
+
+/* Стили info-block для goal/new5 */
+.quiz-container.goal-page-new5 .info-block {
+    background: var(--color-white);
+    align-items: center;
+    gap: 16px !important;
+}
+
+.quiz-container.goal-page-new5 .info-icon {
+    width: auto;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0;
+}
+
+.quiz-container.goal-page-new5 .info-text p {
+    font-size: 16px;
+    line-height: 20px;
+    text-align: left;
+}
+
+/* Стили для user/new2 - аналогичные goal/new5 */
+.user-container.user-step-new2 .chart-block {
+    background: none;
+    box-shadow: none;
+}
+
+.user-container.user-step-new2 .info-block {
+    background: var(--color-white);
+    align-items: center;
+    gap: 16px !important;
+}
+
+.user-container.user-step-new2 .info-icon {
+    width: auto;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0;
+}
+
+.user-container.user-step-new2 .info-text p {
+    font-size: 16px;
+    line-height: 20px;
+    text-align: left;
+}
+
+/* Стили для user-step-new7 - info-block как testimonial */
+.user-container.user-step-new7 .chart-block {
+    background: none;
+    box-shadow: none;
+}
+
+.user-container.user-step-new7 .info-block {
+    background: var(--color-white);
+    padding: 0;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 0px 1px rgba(0, 0, 0, 0.06);
+}
+
+.user-container.user-step-new7 .testimonial-content-advanced {
+    padding: 16px;
+}
+
+.user-container.user-step-new7 .testimonial-header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.user-container.user-step-new7 .rating {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.user-container.user-step-new7 .rating img {
+    width: auto;
+    height: 16px;
+}
+
+@media (min-width: 441px) {
+    .user-container.user-step-new7 .testimonial-content-advanced {
+        height: unset;
+        justify-content: flex-start;
+    }
+    
+    .user-container.user-step-new7 .testimonial-header {
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    
+    .user-container.user-step-new7 .rating {
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 440px) {
+    .user-container.user-step-new7 .testimonial-content-advanced {
+        height: unset;
+        justify-content: flex-start;
+    }
+    
+    .user-container.user-step-new7 .testimonial-header {
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    
+    .user-container.user-step-new7 .rating {
+        margin-top: 8px;
+    }
 }
 
 
@@ -957,6 +1095,7 @@ body {
 
 .splash-image {
     width: 100%;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -970,14 +1109,6 @@ body {
     display: block;
 }
 
-
-.award-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 0 0 12px 0;
-}
 
 .award-icon {
     width: 28px;
@@ -1050,6 +1181,13 @@ body {
     overflow: hidden;
 }
 
+.quiz-container:has(.bottom-bar) .content-wrapper {
+    padding-bottom: 92px !important;
+}
+.quiz-container:has(.continue-button-wrapper) .content-wrapper {
+    padding-bottom: 92px !important;
+}
+
 .building-plan-container .progress-bar-container {
     height: 8px !important;
 }
@@ -1102,10 +1240,6 @@ body {
         margin: 0 auto;
     }
 
-    .award-section {
-        width: 146px;
-        margin: 0 auto;
-    }
 
     .progress-section {
         max-width: 400px;
@@ -1147,12 +1281,6 @@ body {
     }
 
     .splash-image {
-        margin: 0 auto;
-        flex-shrink: 0;
-    }
-
-    .award-section {
-        width: 146px;
         margin: 0 auto;
         flex-shrink: 0;
     }
@@ -1246,4 +1374,106 @@ body {
         transform: translate3d(0, 0, 0);
         -webkit-transform: translate3d(0, 0, 0);
     }
+}
+
+/* Steps Info Page Styles */
+.steps-info-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.steps-info-content .content-wrapper {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.steps-info-content .title-wrapper {
+  padding: 0;
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 10px;
+}
+
+.step-item {
+  display: flex;
+  gap: 16px;
+  /* height: 68px; */
+}
+
+.step-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48px;
+  flex-shrink: 0;
+}
+
+.step-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.step-icon img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.step-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
+  padding-top: 4px;
+}
+
+.connector-dot {
+  width: 1px;
+  height: 1px;
+  background: #7554CC;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 12px;
+}
+
+.step-title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-primary-text);
+  margin: 0;
+}
+
+.step-description {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-secondary-text);
+  margin: 0;
+  height: 100%;
+}
+
+@media (min-width: 769px) {
+  .steps-info-content .content-wrapper {
+    max-width: 440px;
+    margin: 0 auto;
+  }
 }

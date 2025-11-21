@@ -22,8 +22,8 @@ export interface QuizPageData {
 export const quizPages: QuizPageData[] = [
   {
     id: 1,
-    title: "Start your age rewind with just 15-minutes a day",
-    subtitle: "Feel 5 years younger through a science-based method that restores posture, energy, and confidence",
+    title: "Turn back time!<br />Rewind visible age with just 15<br />minutes a day",
+    subtitle: "Discover a science-based method to help you look and feel up to 10 years younger, naturally.",
     progress: 64,
     className: "splash-page",
     isSplashPage: true,
@@ -31,29 +31,30 @@ export const quizPages: QuizPageData[] = [
   },
   {
     id: 2,
-    title: "Your age helps us guide you. How old are you?",
-    subtitle: "Age Back will create your personalised program based on your age",
+    title: "How old do you feel right now?",
+    subtitle: "Sometimes your body tells the truth better than the calendar.",
     progress: 10,
     className: "page-2",
     options: [
-      { value: "18-25", text: "18-25" },
-      { value: "26-35", text: "26-35" },
-      { value: "36-45", text: "36-45" },
-      { value: "46-55", text: "46-55" },
-      { value: "56+", text: "56+" }
+      { value: "18-25", text: "Much younger (−10 yrs)" },
+      { value: "26-35", text: "Slightly younger (−5 yrs)" },
+      { value: "36-45", text: "About my age" },
+      { value: "46-55", text: "A bit older (+5 yrs)" },
+      { value: "56+", text: "Much older (+10 yrs)" }
     ]
   },
   {
     id: 3,
-    title: "What's your primary goal for feeling your best?",
+    title: "What’s your actual age today?",
+    subtitle: "Your age helps us create a rewind path that fits your body.",
     progress: 25,
     className: "page-2",
     options: [
-      { value: "Slow down aging", text: "Slow down aging" },
-      { value: "Look fresher and younger", text: "Look fresher and younger" },
-      { value: "Feel more energetic and active", text: "Feel more energetic and active" },
-      { value: "Regain daily energy", text: "Regain daily energy" },
-      { value: "Improve body & shape", text: "Improve body & shape" }
+      { value: "Slow down aging", text: "18–29" },
+      { value: "Look fresher and younger", text: "30–39" },
+      { value: "Feel more energetic and active", text: "40-49" },
+      { value: "Regain daily energy", text: "50-59" },
+      { value: "Improve body & shape", text: "60+" }
     ]
   },
   {

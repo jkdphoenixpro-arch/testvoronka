@@ -16,6 +16,8 @@ import LessonPage from './components/LessonPage';
 import UserProfilePage from './components/UserProfilePage';
 import AdminPage from './components/AdminPage';
 import TestMailPage from './components/TestMailPage';
+import CreatePlanPage from './components/CreatePlanPage';
+import ReadyPlanPage from './components/ReadyPlanPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AnimationProvider } from './contexts/AnimationContext';
 import './styles/main.css';
@@ -33,7 +35,9 @@ function App() {
             <Route path="/lifestyle/:stepId" element={<LifestylePage />} />
             <Route path="/statements/:stepId" element={<StatementsPage />} />
             <Route path="/buildingplan/:stepId" element={<BuildingPlanPage />} />
+            <Route path="/ready-plan" element={<ReadyPlanPage />} />
             <Route path="/results" element={<ResultsPage />} />
+            <Route path="/create-plan" element={<CreatePlanPage />} />
             <Route path="/enteremail" element={<EnterEmailPage />} />
             <Route path="/paywall" element={<PaywallPage />} />
             <Route path="/success" element={<SuccessPage />} />

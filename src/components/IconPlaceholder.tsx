@@ -7,30 +7,7 @@ interface IconPlaceholderProps {
 
 const IconPlaceholder: React.FC<IconPlaceholderProps> = ({ iconType, className = "" }) => {
   const getImageSrc = (type: string): string => {
-    switch (type) {
-      case 'face&neck':
-        return '/image/face&neck.webp';
-      case 'belly&waist':
-        return '/image/belly&waist.webp';
-      case 'back&posture':
-        return '/image/back&posture.webp';
-      case 'strength&bodytone':
-        return '/image/strength&bodytone.webp';
-      case 'joints&flexibility':
-        return '/image/joints&flexibility.webp';
-      case 'exercise':
-        return '/image/strength&bodytone.webp';
-      case 'nutrition':
-        return '/image/belly&waist.webp';
-      case 'back-posture':
-        return '/image/back&posture.webp';
-      case 'sleep':
-        return '/image/face&neck.webp';
-      case 'mindfulness':
-        return '/image/joints&flexibility.webp';
-      default:
-        return '/image/face&neck.webp';
-    }
+    return ("/image/" + type + ".webp")
   };
 
   const getAltText = (type: string): string => {
@@ -45,6 +22,26 @@ const IconPlaceholder: React.FC<IconPlaceholderProps> = ({ iconType, className =
         return 'Strength & body tone';
       case 'joints&flexibility':
         return 'Joints & flexibility';
+      case 'wrinkles&finelines':
+        return 'Wrinkles & fine lines';
+      case 'puffiness&darkcircles':
+        return 'Puffiness & dark circles';
+      case 'jawline&doublechin':
+        return 'Jawline & double chin';
+      case 'neck&venusrings':
+        return 'Neck & venus rings';
+      case 'skintone&firmness':
+        return 'Skin tone & firmness';
+      case 'slouching&neckhump':
+        return 'Slouching & neck hump';
+      case 'chestfirmness&shape':
+        return 'Chest firmness & shape';
+      case 'belly&bodyshape':
+        return 'Belly & body shape';
+      case 'flattenedglutes_softerhips':
+        return 'Flattened glutes / softer hips';
+      case 'muscletoneloss':
+        return 'Muscle tone loss';
       default:
         return 'Icon';
     }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from './Header';
-import { getPreviousStep } from '../utils/navigationUtils';
 import { saveGoalSelection, clearUserSelections } from '../utils/userSelections';
 import OptionButton from './OptionButton';
 import MultiOptionButton from './MultiOptionButton';
@@ -9,44 +8,41 @@ import ContinueButton from './ContinueButton';
 import TestimonialPage from './TestimonialPage';
 import ChartPage from './ChartPage';
 import SplashPage from './SplashPage';
-import { quizPages, QuizPageData } from '../data/quizData';
+import StepsInfoPage from './StepsInfoPage';
 import { useImagePreloader } from '../hooks/useImagePreloader';
-import { getImagesToPreload } from '../config/imagePreloadConfig';
+import { getStepByRoute, getNextStep, getPreviousStepByRoute, OnboardingStep } from '../config/onboardingConfig';
 
 const QuizPage: React.FC = () => {
   const { pageId, stepId } = useParams<{ pageId?: string; stepId?: string }>();
   const navigate = useNavigate();
   const location = useLocation();
   
-  const currentPageId = stepId ? parseInt(stepId) : pageId ? parseInt(pageId) : 1;
-  const pageData: QuizPageData | undefined = quizPages.find(page => page.id === currentPageId);
+  // Получаем конфигурацию текущей страницы из централизованного конфига
+  const currentPageId = stepId || pageId || '1';
+  const currentPath = `/goal/${currentPageId}`;
+  const stepConfig = getStepByRoute(currentPath);
   
-
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
-  // Предзагрузка изображений следующего шага
-  const currentPath = `/goal/${currentPageId}`;
-  const imagesToPreload = getImagesToPreload(currentPath);
-  useImagePreloader(imagesToPreload);
+  // Предзагрузка изображений следующего шага из конфига
+  useImagePreloader(stepConfig?.imagesToPreload || []);
 
   const getCurrentPath = () => {
     return stepId ? '/goal' : '';
   };
 
-
   useEffect(() => {
-    if (pageData && pageData.isSplashPage) {
+    if (stepConfig && stepConfig.pageType === 'splash') {
       const handleKeyPress = (event: KeyboardEvent) => {
         if (event.key === 'Enter') {
-          const basePath = stepId ? '/goal' : '';
-          navigate(`${basePath}/2`);
+          handleContinueClick();
         }
       };
 
       window.addEventListener('keydown', handleKeyPress);
       return () => window.removeEventListener('keydown', handleKeyPress);
     }
-  }, [pageData, navigate, stepId]);
+  }, [stepConfig, navigate]);
 
   // Очищаем все сохраненные выборы при загрузке
   useEffect(() => {
@@ -55,23 +51,28 @@ const QuizPage: React.FC = () => {
 
   // Сбрасываем selectedValues при смене страницы
   useEffect(() => {
-    if (!pageData) return;
+    if (!stepConfig) return;
     
     // Всегда сбрасываем выбор при переходе на новую страницу
     setSelectedValues([]);
-  }, [currentPageId, pageData]);
+  }, [currentPageId, stepConfig]);
 
-  if (!pageData) {
-    const basePath = getCurrentPath();
-    navigate(`${basePath}/1`);
+  // Редирект на первую страницу если конфиг не найден
+  useEffect(() => {
+    if (!stepConfig) {
+      const basePath = getCurrentPath();
+      navigate(`${basePath}/1`);
+    }
+  }, [stepConfig, navigate]);
+
+  if (!stepConfig) {
     return null;
   }
 
   const handleOptionClick = (value: string) => {
-    if (!pageData) return;
+    if (!stepConfig) return;
     
-    if (pageData.isMultiSelect) {
-
+    if (stepConfig.isMultiSelect) {
       setSelectedValues(prev => {
         if (prev.includes(value)) {
           return prev.filter(v => v !== value);
@@ -82,73 +83,67 @@ const QuizPage: React.FC = () => {
     } else {
       setSelectedValues([value]);
       
-      // Сохраняем выбор для goal страниц
-      const basePath = getCurrentPath();
-      if (basePath === '/goal') {
-        if (currentPageId === 3) {
-          saveGoalSelection('page3', value);
-        } else if (currentPageId === 5) {
-          saveGoalSelection('page5', value);
-        }
+      // Сохраняем выбор, если указан saveKey в конфиге
+      if (stepConfig.saveKey) {
+        saveGoalSelection(stepConfig.saveKey, value);
       }
       
-      if (!pageData.showContinueButton) {
+      // Автопереход если настроен в конфиге - сразу переходим, не проверяя selectedValues
+      if (stepConfig.autoNavigate && !stepConfig.showContinueButton) {
         setTimeout(() => {
-          const nextPageId = currentPageId + 1;
-          const nextPage = quizPages.find(page => page.id === nextPageId);
-          
-          if (nextPage) {
-            navigate(`${basePath}/${nextPageId}`);
-          } else {
-            navigate('/user/1');
+          const nextStep = getNextStep(stepConfig.id);
+          if (nextStep) {
+            navigate(nextStep.route);
           }
-        }, 500);
+        }, stepConfig.autoNavigateDelay || 500);
       }
     }
   };
   
   const handleContinueClick = () => {
+    if (!stepConfig) return;
+    
     // Проверяем, можно ли продолжить
-    if (!pageData.isTestimonialPage && !pageData.isChartPage && selectedValues.length === 0) {
+    const isSpecialPage = stepConfig.pageType === 'testimonial-grid' || 
+                          stepConfig.pageType === 'chart' || 
+                          stepConfig.pageType === 'splash' ||
+                          stepConfig.pageType === 'steps-info';
+    if (!isSpecialPage && selectedValues.length === 0) {
       return; // Не продолжаем, если ничего не выбрано
     }
     
-    const nextPageId = currentPageId + 1;
-    const nextPage = quizPages.find(page => page.id === nextPageId);
+    // Получаем следующий шаг из конфига
+    const nextStep = getNextStep(stepConfig.id);
     
-    if (nextPage) {
-      const basePath = getCurrentPath();
-      navigate(`${basePath}/${nextPageId}`);
-    } else {
-
-      navigate('/user/1');
+    if (nextStep) {
+      navigate(nextStep.route);
     }
   };
 
   const handleBackClick = () => {
-    const prevPageId = currentPageId - 1;
-    if (prevPageId >= 1) {
-      const basePath = getCurrentPath();
-      navigate(`${basePath}/${prevPageId}`);
-    } else if (currentPageId === 1 && stepId) {
-      // Для первой страницы goal предыдущего этапа нет (это самый первый этап)
-      // Можно перенаправить на главную страницу или другое действие
-      console.warn('Первая страница goal - предыдущего этапа нет');
+    if (!stepConfig) return;
+    
+    // Получаем предыдущий шаг из конфига
+    const prevStep = getPreviousStepByRoute(currentPath);
+    
+    if (prevStep) {
+      navigate(prevStep.route);
     }
   };
 
 
   const getContainerClassName = () => {
-    const basePath = getCurrentPath();
+    if (!stepConfig) return 'quiz-container';
+    
     let className = 'quiz-container';
     
-    if (pageData.showContinueButton) {
+    if (stepConfig.showContinueButton) {
       className += ' has-continue-button';
     }
     
-
-    if (basePath === '/goal' && (currentPageId >= 1 && currentPageId <= 7)) {
-      className += ` goal-page-${currentPageId}`;
+    // Сохраняем старый класс для совместимости стилей
+    if (stepConfig.legacyClassName) {
+      className += ` ${stepConfig.legacyClassName}`;
     }
     
     return className;
@@ -156,50 +151,69 @@ const QuizPage: React.FC = () => {
 
   return (
     <div className={getContainerClassName()}>
-      {!pageData.isSplashPage && (
+      {stepConfig.pageType !== 'splash' && (
         <Header 
           onBackClick={handleBackClick}
-          showBackButton={currentPageId > 1}
+          showBackButton={!!getPreviousStepByRoute(currentPath)}
         />
       )}
       
+      {stepConfig.pageType === 'splash' && (
+        <div className="top-bar">
+          <div className="navbar">
+            <div className="app-icon">
+              <img src="/image/rewind-icon-24px.svg" alt="" className="app-rewind-icon" />
+              <span className="app-name">Age Back</span>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <main className="content-wrapper">
-        {pageData.isSplashPage ? (
+        {stepConfig.pageType === 'splash' ? (
           <SplashPage 
-            title={pageData.title}
-            subtitle={pageData.subtitle}
+            title={stepConfig.title || ''}
+            subtitle={stepConfig.subtitle}
           />
-        ) : pageData.isTestimonialPage ? (
+        ) : stepConfig.pageType === 'testimonial-grid' ? (
           <TestimonialPage 
-            title={pageData.title}
-            subtitle={pageData.subtitle}
+            title={stepConfig.title || ''}
+            subtitle={stepConfig.subtitle}
           />
-        ) : pageData.isChartPage ? (
+        ) : stepConfig.pageType === 'chart' ? (
           <ChartPage 
-            title={pageData.title}
-            subtitle={pageData.subtitle}
+            title={stepConfig.title || ''}
+            subtitle={stepConfig.subtitle}
+            chartImage={stepConfig.chartImage}
+            infoText={stepConfig.infoText}
+            infoIcon={stepConfig.infoIcon}
+            testimonials={stepConfig.testimonials}
+          />
+        ) : stepConfig.pageType === 'steps-info' ? (
+          <StepsInfoPage 
+            title={stepConfig.title || ''}
+            steps={stepConfig.steps}
           />
         ) : (
           <>
-            <div className={`title-wrapper ${pageData.className === 'page-2' ? 'page-2-title' : ''}`}>
+            <div className={`title-wrapper ${stepConfig.legacyClassName === 'goal-page-2' || stepConfig.legacyClassName === 'goal-page-3' ? 'page-2-title' : ''}`}>
               <div className="heading-container">
-                <h2 className="question-title">{pageData.title}</h2>
+                <h2 className="question-title" dangerouslySetInnerHTML={{ __html: stepConfig.title || '' }} />
               </div>
-              {pageData.subtitle && (
-                <p className="question-subtitle">{pageData.subtitle}</p>
+              {stepConfig.subtitle && (
+                <p className="question-subtitle" dangerouslySetInnerHTML={{ __html: stepConfig.subtitle }} />
               )}
             </div>
 
             <div className={`options-wrapper ${
-              pageData.className === 'page-2' ? 'page-2-options' : 
-              pageData.className === 'page-4' ? 'page-4-options' : 
+              stepConfig.legacyClassName === 'goal-page-2' || stepConfig.legacyClassName === 'goal-page-3' ? 'page-2-options' : 
+              stepConfig.legacyClassName === 'goal-page-4' ? 'page-4-options' : 
               ''
             }`}>
-              {pageData.options.map((option, index) => {
+              {stepConfig.options?.map((option, index) => {
                 const animationClass = `animated-option delay-${Math.min(index + 1, 15)}`;
-                // Добавляем pageId к key чтобы заставить React перемонтировать элементы при смене страницы
                 const uniqueKey = `${currentPageId}-${index}`;
-                if (pageData.isMultiSelect) {
+                if (stepConfig.isMultiSelect) {
                   return (
                     <MultiOptionButton
                       key={uniqueKey}
@@ -226,19 +240,21 @@ const QuizPage: React.FC = () => {
         )}
       </main>
       
-      {pageData.showContinueButton && (
+      {stepConfig.showContinueButton && (
         <ContinueButton
           onClick={handleContinueClick}
+          text={stepConfig.pageType === 'steps-info' ? 'Start body scan' : 'Continue'}
           disabled={(() => {
-            // Для testimonial и chart страниц кнопка всегда активна
-            if (pageData.isTestimonialPage || pageData.isChartPage) {
+            const isSpecialPage = stepConfig.pageType === 'testimonial-grid' || 
+                                  stepConfig.pageType === 'chart' || 
+                                  stepConfig.pageType === 'splash' ||
+                                  stepConfig.pageType === 'steps-info';
+            if (isSpecialPage) {
               return false;
             }
-            // Для multi-select страниц (goal/4) кнопка неактивна, если ничего не выбрано
-            if (pageData.isMultiSelect) {
+            if (stepConfig.isMultiSelect) {
               return selectedValues.length === 0;
             }
-            // Для других страниц кнопка неактивна, если ничего не выбрано
             return selectedValues.length === 0;
           })()}
         />

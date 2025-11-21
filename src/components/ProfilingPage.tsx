@@ -201,9 +201,9 @@ export default function ProfilingPage() {
       <main className="content-wrapper">
         <div className="title-wrapper">
           <div className="heading-container">
-            <h2 className="question-title">{currentStep.title}</h2>
+            <h2 className="question-title" dangerouslySetInnerHTML={{ __html: currentStep.title }} />
           </div>
-          <p className="question-subtitle">{currentStep.subtitle}</p>
+          <p className="question-subtitle" dangerouslySetInnerHTML={{ __html: currentStep.subtitle }} />
         </div>
 
         {currentStep.isTestimonial ? (

@@ -168,7 +168,7 @@ const BuildingPlanPage: React.FC = () => {
             const loadFinalStep = async () => {
               await animateProgressBar(4, 100, 2500);
 
-              navigate('/results');
+              navigate('/ready-plan');
             };
             loadFinalStep();
           };
@@ -318,6 +318,7 @@ const BuildingPlanPage: React.FC = () => {
             />
           </button>
           <div className="app-icon">
+            <img src="/image/rewind-icon-24px.svg" alt="" className="app-rewind-icon" />
             <span className="app-name">Age Back</span>
           </div>
         </div>

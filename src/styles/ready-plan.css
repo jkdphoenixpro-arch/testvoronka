@@ -1,0 +1,68 @@
+/* Ready Plan Page Styles */
+
+.ready-plan-container {
+  width: 100%;
+  max-width: var(--desktop-max-width);
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.ready-plan-container .content-wrapper {
+  overflow: visible;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.ready-plan-container .title-wrapper {
+  text-align: center;
+  gap: 10px;
+}
+
+.ready-plan-container .question-title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 26px;
+  color: #28194B;
+}
+
+.ready-plan-container .question-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #504369;
+}
+
+/* Контейнер графіка */
+.ready-plan-container .chart-container {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ready-plan-container .chart-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 440px) {
+  .ready-plan-container .chart-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .ready-plan-container {
+    max-width: var(--mobile-max-width);
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+}

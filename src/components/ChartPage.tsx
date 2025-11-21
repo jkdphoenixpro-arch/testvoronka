@@ -2,12 +2,23 @@ import React, { useRef, useState } from 'react';
 import Lottie from 'lottie-react';
 import { usePreloadedAnimation } from '../hooks/usePreloadedAnimation';
 
+interface TestimonialItem {
+  description: string;
+  author?: string;
+  age?: string;
+  rating?: string;
+}
+
 interface ChartPageProps {
   title: string;
   subtitle?: string;
+  chartImage?: string;
+  infoText?: string;
+  infoIcon?: string;
+  testimonials?: TestimonialItem[];
 }
 
-const ChartPage: React.FC<ChartPageProps> = ({ title, subtitle }) => {
+const ChartPage: React.FC<ChartPageProps> = ({ title, subtitle, chartImage, infoText, infoIcon, testimonials }) => {
   const lottieRef = useRef<any>(null);
   const [isLottieReady, setIsLottieReady] = useState(false);
   const { animationData, isReady, shouldPlay } = usePreloadedAnimation('chart');
@@ -47,10 +58,10 @@ const ChartPage: React.FC<ChartPageProps> = ({ title, subtitle }) => {
     <div className="chart-content">
       <div className="title-wrapper">
         <div className="heading-container">
-          <h2 className="question-title">{title}</h2>
+          <h2 className="question-title" dangerouslySetInnerHTML={{ __html: title || '' }} />
         </div>
         {subtitle && (
-          <p className="question-subtitle">{subtitle}</p>
+          <p className="question-subtitle" dangerouslySetInnerHTML={{ __html: subtitle }} />
         )}
       </div>
 
@@ -58,9 +69,17 @@ const ChartPage: React.FC<ChartPageProps> = ({ title, subtitle }) => {
         <div className="chart-block">
           <div className="chart-image" style={{ position: 'relative' }}>
 
-            {/* Статичное изображение скрыто - показываем только анимацию */}
+            {/* Если есть chartImage - показываем статичное изображение */}
+            {chartImage && (
+              <img 
+                src={chartImage} 
+                alt="Chart" 
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
+            )}
 
-            {isReady && animationData && shouldPlay && (
+            {/* Иначе показываем Lottie анимацию */}
+            {!chartImage && isReady && animationData && shouldPlay && (
               <div
                 style={{
                   width: '100%',
@@ -90,12 +109,37 @@ const ChartPage: React.FC<ChartPageProps> = ({ title, subtitle }) => {
         </div>
 
         <div className="info-block">
-          <div className="info-icon">
-            <img src="/image/znak.svg" alt="Info icon" />
-          </div>
-          <div className="info-text">
-            <p>Data based on self-reported results from Age Back users, showing improvements in energy, posture, and skin tone</p>
-          </div>
+          {testimonials && testimonials.length > 0 ? (
+            <div className="testimonial-content-advanced">
+              <div className="testimonial-header">
+                <div className="user-info">
+                  <div className="user-avatar">
+                    <span>{testimonials[0]?.author?.charAt(0) || 'J'}</span>
+                  </div>
+                  <div className="user-details">
+                    <span>{testimonials[0]?.author}, {testimonials[0]?.age}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="testimonial-text">
+                <p>{testimonials[0]?.description}</p>
+              </div>
+              <div className="rating">
+                <img src={testimonials[0]?.rating || '/image/rating.svg'} alt="5 stars rating" />
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="info-icon">
+                <img src={infoIcon || "/image/znak.svg"} alt="Info icon" />
+              </div>
+              <div className="info-text">
+                <p dangerouslySetInnerHTML={{ 
+                  __html: infoText || "Data based on self-reported results from Age Back users, showing improvements in energy, posture, and skin tone" 
+                }} />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

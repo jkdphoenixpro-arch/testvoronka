@@ -233,18 +233,6 @@ body.results-page #root {
 }
 
 
-.results-container .bottom-bar {
-  position: static !important;
-  transform: none !important;
-  left: auto !important;
-  bottom: auto !important;
-  padding: 24px 20px 32px !important;
-  width: 100% !important;
-  max-width: var(--desktop-max-width) !important;
-  margin: 0 auto !important;
-  display: flex !important;
-  justify-content: center !important;
-}
 
 
 @media (max-width: 768px) {

@@ -47,10 +47,10 @@ const TestimonialPage: React.FC<TestimonialPageProps> = ({ title, subtitle }) =>
     <div className="testimonial-content">
       <div className="title-wrapper">
         <div className="heading-container">
-          <h2 className="question-title">{title}</h2>
+          <h2 className="question-title" dangerouslySetInnerHTML={{ __html: title || '' }} />
         </div>
         {subtitle && (
-          <p className="question-subtitle">{subtitle}</p>
+          <p className="question-subtitle" dangerouslySetInnerHTML={{ __html: subtitle }} />
         )}
       </div>
 

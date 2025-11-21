@@ -1,176 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Header from './Header';
-import { getPreviousStep } from '../utils/navigationUtils';
-import { saveIssueAreaSelections } from '../utils/userSelections';
+import { saveIssueAreaSelections, saveChallengeSelections } from '../utils/userSelections';
 import { useImagePreloader } from '../hooks/useImagePreloader';
-import { getImagesToPreload } from '../config/imagePreloadConfig';
+import { getStepByRoute, getNextStep, getPreviousStepByRoute } from '../config/onboardingConfig';
+import MultiOptionButton from './MultiOptionButton';
+import IconPlaceholder from './IconPlaceholder';
+import ChartPage from './ChartPage';
 import '../styles/user.css';
 import '../styles/testimonial.css';
 
 
-interface TestimonialItem {
-  percentage: string;
-  description: string;
-}
-
-
-interface UserStep {
-  title: string;
-  subtitle: string;
-  optionNames: string[];
-  initialSelected: number[];
-  progress: number;
-  stepClass: string;
-  isTestimonial?: boolean;
-  testimonials?: TestimonialItem[];
-}
-
-
-const userSteps: Record<number, UserStep> = {
-  1: {
-    title: "Your face shows your story. Which areas concern you most?",
-    subtitle: "Select 1 to 3 options",
-    optionNames: [
-      'Wrinkles', 'Jowls', 'Double chin',
-      'Puffiness', 'Drooping eyelids', 'Dark circles', 
-      'Skin elasticity', 'Nasolabial folds', 'Crow’s feet',
-      'Redness', 'Venus rings'
-    ],
-    initialSelected: [],
-    progress: 15,
-    stepClass: 'user-step-1'
-  },
-  2: {
-    title: "Your body deserves attention. Where do you feel changes or tension?",
-    subtitle: "Select 1 to 3 options",
-    optionNames: [
-      'Neck hump', 'Belly', 'Back',
-      'Posture', 'Slouching', 'Legs',
-      'Shoulders', 'Muscle weakness', 'Thighs / buttocks',
-      'Pelvis', 'Core strength'
-    ],
-    initialSelected: [],
-    progress: 25,
-    stepClass: 'user-step-2'
-  },
-  3: {
-    title: "Move freely. Where do you notice stiffness or limited flexibility?",
-    subtitle: "Select 1 to 3 options",
-    optionNames: [
-      'Neck stiffness', 'Shoulder mobility', 'Back flexibility',
-      'Hips', 'Knees', 'Ankles', 'Stiffness',
-      'Coordination', 'Weak flexibility', 'Joint pain',
-      'Core stability'
-    ],
-    initialSelected: [],
-    progress: 30,
-    stepClass: 'user-step-3'
-  },
-  4: {
-    title: "You're not alone! Most people notice the same areas first.",
-    subtitle: "The good news? With the right approach, these zones respond faster than you think.",
-    optionNames: [],
-    initialSelected: [],
-    progress: 35,
-    stepClass: 'user-step-4',
-    isTestimonial: true,
-    testimonials: [
-      { percentage: "78%", description: "reported visible posture improvement" },
-      { percentage: "65%", description: "noticed reduced puffiness" },
-      { percentage: "72%", description: "experienced higher energy levels" },
-      { percentage: "81%", description: "felt less stiffness and greater flexibility" }
-    ]
-  },
-  5: {
-    title: "Listen to your body. How often does it signal discomfort?",
-    subtitle: "",
-    optionNames: [
-      'Never, I feel comfortable',
-      'Rarely, minor discomfort',
-      'Sometimes, occasional aches',
-      'Often, noticeable pain',
-      'Constantly, frequent discomfort'
-    ],
-    initialSelected: [],
-    progress: 40,
-    stepClass: 'user-step-5'
-  },
-  6: {
-    title: "Which best describes your typical energy level?",
-    subtitle: "",
-    optionNames: [
-      'Barely have energy to get through the day',
-      'Often feel drained or fatigued',
-      'Energy varies during the day',
-      'Generally energetic and productive',
-      'Full of vitality and motivation'
-    ],
-    initialSelected: [],
-    progress: 45,
-    stepClass: 'user-step-6'
-  },
-  7: {
-    title: "Real User Stories and science-backed results: slower aging in 8 weeks",
-    subtitle: "",
-    optionNames: [],
-    initialSelected: [],
-    progress: 50,
-    stepClass: 'user-step-7',
-    isTestimonial: true,
-    testimonials: [
-      {
-        percentage: "",
-        description: "“Using Age Back, I've experienced a complete transformation! The app has helped improve my posture, refresh and tone my face. I feel more energetic and confident. Great solution for taking care of myself”"
-      }
-    ]
-  }
-};
+// Данные шагов user берутся из централизованного конфига (src/config/onboardingConfig.ts)
 
 
 export default function UserPage() {
   const { stepId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const currentStepId = parseInt(stepId || '1');
-  const currentStep = userSteps[currentStepId as keyof typeof userSteps] || userSteps[1];
+  const currentPath = `/user/${stepId || '1'}`;
   
-  const [selectedOptions, setSelectedOptions] = useState<number[]>(currentStep.initialSelected);
+  // Получаем конфигурацию текущей страницы из централизованного конфига
+  const stepConfig = getStepByRoute(currentPath);
+  
+  const [selectedOptions, setSelectedOptions] = useState<number[]>([]);
 
-  // Предзагрузка изображений следующего шага
-  const currentPath = `/user/${currentStepId}`;
-  const imagesToPreload = getImagesToPreload(currentPath);
-  useImagePreloader(imagesToPreload);
+  // Предзагрузка изображений следующего шага из конфига
+  useImagePreloader(stepConfig?.imagesToPreload || []);
 
 
 
 
   useEffect(() => {
-    setSelectedOptions(currentStep.initialSelected);
-  }, [currentStepId, currentStep.initialSelected]);
+    setSelectedOptions([]);
+  }, [stepId]);
 
   const handleOptionClick = (index: number) => {
-    if (currentStepId === 5 || currentStepId === 6) {
-
+    if (!stepConfig) return;
+    
+    // Автопереход для single-select страниц
+    if (stepConfig.autoNavigate) {
       setSelectedOptions([index]);
       setTimeout(() => {
         goNext();
-      }, 300);
+      }, stepConfig.autoNavigateDelay || 300);
       return;
     }
 
+    // Multi-select для pill-страниц и новых multi-select страниц
     setSelectedOptions(prev => {
       const newSelection = prev.includes(index)
         ? prev.filter(i => i !== index)
-        : prev.length < 3
+        : prev.length < (stepConfig.maxSelections || 3)
         ? [...prev, index]
         : prev;
       
-      // Сохраняем выборы для user/1, user/2, user/3
-      if (currentStepId >= 1 && currentStepId <= 3) {
-        const selectedNames = newSelection.map(i => currentStep.optionNames[i]);
-        const pageKey = `user${currentStepId}` as 'user1' | 'user2' | 'user3';
-        saveIssueAreaSelections(pageKey, selectedNames);
+      // Сохраняем выборы если указан saveKey в конфиге
+      if (stepConfig.saveKey && stepConfig.options) {
+        const selectedValues = newSelection.map(i => stepConfig.options![i].value);
+        
+        // Для новых страниц user/new1, user/new3, user/new5
+        if (stepConfig.id === 'user-new1' || stepConfig.id === 'user-new3' || stepConfig.id === 'user-new5') {
+          const pageKey = stepConfig.id === 'user-new1' ? 'userNew1' : 
+                         stepConfig.id === 'user-new3' ? 'userNew3' : 'userNew5';
+          saveChallengeSelections(pageKey, selectedValues);
+        } else {
+          // Для старых страниц user/1, user/2, user/3
+          const selectedNames = newSelection.map(i => stepConfig.options![i].text);
+          const pageKey = stepConfig.saveKey as 'user1' | 'user2' | 'user3';
+          saveIssueAreaSelections(pageKey, selectedNames);
+        }
       }
       
       return newSelection;
@@ -178,99 +77,134 @@ export default function UserPage() {
   };
 
   const handleBackClick = () => {
-    if (currentStepId === 1) {
-      // Для первой страницы user переходим на предыдущую секцию (goal/7)
-      const previousStep = getPreviousStep(location.pathname);
-      if (previousStep) {
-        navigate(previousStep);
-      }
-      return;
+    const prevStep = getPreviousStepByRoute(currentPath);
+    if (prevStep) {
+      navigate(prevStep.route);
     }
-    
-    // Для остальных страниц в секции - обычный переход на предыдущую страницу в секции
-    navigate(`/user/${currentStepId - 1}`);
   };
 
   const goNext = () => {
-    if (currentStepId === 1) {
-      navigate('/user/2');
-    } else if (currentStepId === 2) {
-      navigate('/user/3');
-    } else if (currentStepId === 3) {
-      navigate('/user/4');
-    } else if (currentStepId === 4) {
-      navigate('/user/5');
-    } else if (currentStepId === 5) {
-      navigate('/user/6');
-    } else if (currentStepId === 6) {
-      navigate('/user/7');
-    } else if (currentStepId === 7) {
-
-      navigate('/lifestyle/1');
-    } else {
-      navigate('/user/1');
+    if (!stepConfig) return;
+    const next = getNextStep(stepConfig.id);
+    if (next) {
+      navigate(next.route);
     }
   };
 
 
   const getContainerClassName = () => {
     let className = 'quiz-container user-container';
-    
-
-    if (currentStepId === 5 || currentStepId === 6) {
-      className += ` user-step-${currentStepId}`;
-    } else {
-      className += ` ${currentStep.stepClass}`;
+    if (stepConfig?.stepClass) {
+      className += ` ${stepConfig.stepClass}`;
+    } else if (stepId === '5' || stepId === '6') {
+      className += ` user-step-${stepId}`;
     }
-    
+    // Добавляем legacy класс для multi-select страниц
+    if (stepConfig?.legacyClassName) {
+      className += ` ${stepConfig.legacyClassName}`;
+    }
     return className;
   };
+
+  if (!stepConfig) {
+    navigate('/user/1');
+    return null;
+  }
 
   return (
     <div className={getContainerClassName()}>
       <Header 
         onBackClick={handleBackClick}
-        showBackButton={true}
+        showBackButton={!!getPreviousStepByRoute(currentPath)}
       />
       
       <main className="content-wrapper">
-        <div className="title-wrapper">
-          <div className="heading-container">
-            <h2 className="question-title">{currentStep.title}</h2>
-          </div>
-        </div>
+        {stepConfig.pageType === 'chart' ? (
+          <ChartPage 
+            title={stepConfig.title || ''}
+            subtitle={stepConfig.subtitle}
+            chartImage={stepConfig.chartImage}
+            infoText={stepConfig.infoText}
+            infoIcon={stepConfig.infoIcon}
+            testimonials={stepConfig.testimonials}
+          />
+        ) : (
+          <>
+            <div className="title-wrapper">
+              <div className="heading-container">
+                <h2 className="question-title" dangerouslySetInnerHTML={{ __html: stepConfig.title || '' }} />
+              </div>
+              {stepConfig.subtitle && (
+                <p className="question-subtitle" dangerouslySetInnerHTML={{ __html: stepConfig.subtitle }} />
+              )}
+            </div>
 
-        {currentStep.isTestimonial ? (
-          currentStepId === 7 ? (
-            <div className="user-step-7-testimonial">
-              <div className="testimonial-card-advanced">
-                <div className="testimonial-image">
-                  <img src="/image/before&after.webp" alt="Before and after results" />
+            {stepConfig.pageType === 'testimonial-with-logos' ? (
+          <>
+            <div className="doctor-card">
+              <img src={stepConfig.imageSrc} alt="Doctor" className="doctor-image" />
+              <div className="doctor-testimonial">
+                <div className="doctor-quote">
+                  {stepConfig.testimonials?.[0]?.description}
                 </div>
-                <div className="testimonial-content-advanced">
-                  <div className="testimonial-header">
-                    <div className="user-info">
-                      <div className="user-avatar">
-                        <span>J</span>
-                      </div>
-                      <div className="user-details">
-                        <span>Jessica, 32 y.o</span>
-                      </div>
-                    </div>
-                    <div className="rating">
-                      <img src="/image/rating.svg" alt="5 stars rating" />
-                    </div>
-                  </div>
-                  <div className="testimonial-text">
-                    <p>{currentStep.testimonials?.[0]?.description}</p>
-                  </div>
+                <div className="doctor-info">
+                  <div className="doctor-name">{stepConfig.testimonials?.[0]?.author}</div>
+                  <div className="doctor-title">{stepConfig.testimonials?.[0]?.age}</div>
                 </div>
               </div>
             </div>
-          ) : (
+            <div className="logos-block">
+              <div className="logos-title">{stepConfig.bottomText}</div>
+              <div className="logos-container">
+                <div className="logo-item">
+                  <img src="/image/GSR.svg" alt="GSR" />
+                </div>
+                <div className="logo-item">
+                  <img src="/image/GSR.svg" alt="GSR" />
+                </div>
+                <div className="logo-item">
+                  <img src="/image/GSR.svg" alt="GSR" />
+                </div>
+                <div className="logo-item">
+                  <img src="/image/GSR.svg" alt="GSR" />
+                </div>
+                <div className="logo-item">
+                  <img src="/image/GSR.svg" alt="GSR" />
+                </div>
+              </div>
+            </div>
+          </>
+        ) : stepConfig.pageType === 'testimonial-advanced' ? (
+          <div className="user-step-7-testimonial">
+            <div className="testimonial-card-advanced">
+              <div className="testimonial-image">
+                <img src={stepConfig.imageSrc} alt="Before and after results" />
+              </div>
+              <div className="testimonial-content-advanced">
+                <div className="testimonial-header">
+                  <div className="user-info">
+                    <div className="user-avatar">
+                      <span>{stepConfig.testimonials?.[0]?.author?.charAt(0) || 'J'}</span>
+                    </div>
+                    <div className="user-details">
+                      <span>{stepConfig.testimonials?.[0]?.author}, {stepConfig.testimonials?.[0]?.age}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="testimonial-text">
+                  <p>{stepConfig.testimonials?.[0]?.description}</p>
+                </div>
+                <div className="rating">
+                  <img src={stepConfig.testimonials?.[0]?.rating || '/image/rating.svg'} alt="5 stars rating" />
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : stepConfig.pageType === 'testimonial-grid' ? (
+          <>
             <div className="testimonials-wrapper">
               <div className="testimonials-grid">
-                {currentStep.testimonials?.map((item, index) => (
+                {stepConfig.testimonials?.map((item, index) => (
                   <div key={index} className="testimonial-card">
                     <div className="testimonial-percentage">{item.percentage}</div>
                     <div className="testimonial-description">{item.description}</div>
@@ -278,20 +212,52 @@ export default function UserPage() {
                 ))}
               </div>
             </div>
-          )
-        ) : currentStepId === 5 || currentStepId === 6 ? (
-          <div className="options-wrapper">
-            {currentStep.optionNames.map((name, index) => {
+            {stepConfig.bottomText && (
+              <div className="testimonials-bottom-text">{stepConfig.bottomText}</div>
+            )}
+          </>
+        ) : stepConfig.pageType === 'multi-select' ? (
+          <div className="options-wrapper page-4-options">
+            {stepConfig.options?.map((option, index) => {
               const isSelected = selectedOptions.includes(index);
               const animationClass = `animated-option delay-${Math.min(index + 1, 15)}`;
-              const uniqueKey = `${currentStepId}-${index}`;
+              const uniqueKey = `${stepId}-${index}`;
+              return (
+                <button 
+                  key={uniqueKey}
+                  className={`multi-select-option ${isSelected ? 'selected' : ''} ${animationClass}`}
+                  onClick={() => handleOptionClick(index)}
+                >
+                  <div className="image-area">
+                    {option.icon && <IconPlaceholder iconType={option.icon} />}
+                  </div>
+                  <span className="option-text">{option.text}</span>
+                  <div className="option-controls">
+                    <div className={`checkbox ${isSelected ? 'checked' : ''}`}>
+                      {isSelected && (
+                        <svg className="checkmark" width="9" height="6" viewBox="0 0 9 6" fill="none">
+                          <path d="M1 3L3.5 5L8 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        ) : stepConfig.pageType === 'single-select' ? (
+          <div className="options-wrapper">
+            {stepConfig.options?.map((option, index) => {
+              const isSelected = selectedOptions.includes(index);
+              const animationClass = `animated-option delay-${Math.min(index + 1, 15)}`;
+              const uniqueKey = `${stepId}-${index}`;
               return (
                 <button 
                   key={uniqueKey}
                   className={`single-select-option ${isSelected ? 'selected' : ''} ${animationClass}`}
                   onClick={() => handleOptionClick(index)}
                 >
-                  <span className="option-text">{name}</span>
+                  <span className="option-text">{option.text}</span>
                 </button>
               );
             })}
@@ -299,61 +265,39 @@ export default function UserPage() {
         ) : (
           <div className="options-wrapper user-options">
             <div className="options-grid">
-              {currentStep.optionNames.map((name, index) => {
+              {stepConfig.options?.map((option, index) => {
               const isSelected = selectedOptions.includes(index);
-              
-
-              const widthClasses = {
-                1: [
-                  'pill-w98', 'pill-w76', 'pill-w122',
-                  'pill-w103', 'pill-w158', 'pill-w120',
-                  'pill-w135', 'pill-w151', 'pill-w116',
-                  'pill-w98', 'pill-w120'
-                ],
-                2: [
-                  'pill-w119', 'pill-w69', 'pill-w70',
-                  'pill-w90', 'pill-w108', 'pill-w69',
-                  'pill-w109', 'pill-w166', 'pill-w162',
-                  'pill-w76', 'pill-w135'
-                ],
-                3: [
-                  'pill-w140', 'pill-w163', 'pill-w139',
-                  'pill-w67', 'pill-w80', 'pill-w83',
-                  'pill-w99', 'pill-w129', 'pill-w144',
-                  'pill-w105', 'pill-w130'
-                ]
-              };
-              
-              const widthClass = widthClasses[currentStepId as keyof typeof widthClasses]?.[index] || 'pill-w120';
+              const widthClass = option.width || 'pill-w120';
               const animationClass = `animated-option delay-${Math.min(index + 1, 15)}`;
-              const uniqueKey = `${currentStepId}-${index}`;
-              
+              const uniqueKey = `${stepId}-${index}`;
               return (
                 <button 
                   key={uniqueKey}
                   className={`pill ${widthClass} ${isSelected ? 'pill-primary' : ''} ${animationClass}`}
                   onClick={() => handleOptionClick(index)}
                 >
-                  {name}
+                  {option.text}
                 </button>
               );
               })}
             </div>
           </div>
         )}
+          </>
+        )}
       </main>
       
-      {(currentStepId === 4 || currentStepId === 7 || (currentStepId <= 3)) && (
+      {stepConfig.showContinueButton && (
         <div className="continue-button-wrapper">
           <button 
             className={`continue-button ${
-              currentStepId <= 3 && selectedOptions.length === 0 ? 'disabled' : ''
+              (stepConfig.pageType === 'multi-pill' || stepConfig.pageType === 'multi-select') && selectedOptions.length === 0 ? 'disabled' : ''
             }`} 
-            onClick={currentStepId <= 3 && selectedOptions.length === 0 ? undefined : goNext}
-            disabled={currentStepId <= 3 && selectedOptions.length === 0}
+            onClick={(stepConfig.pageType === 'multi-pill' || stepConfig.pageType === 'multi-select') && selectedOptions.length === 0 ? undefined : goNext}
+            disabled={(stepConfig.pageType === 'multi-pill' || stepConfig.pageType === 'multi-select') && selectedOptions.length === 0}
           >
             Continue
-            </button>
+          </button>
         </div>
       )}
     </div>

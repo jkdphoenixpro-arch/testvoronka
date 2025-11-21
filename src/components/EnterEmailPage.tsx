@@ -100,8 +100,9 @@ const EnterEmailPage: React.FC = () => {
 
       if (data.success) {
         localStorage.setItem('leadUserEmail', data.user.email);
+        localStorage.setItem('userName', formData.name);
         console.log('Lead created:', data.user);
-        navigate('/paywall');
+        navigate('/create-plan');
       } else {
         setError(data.message);
       }
@@ -150,6 +151,7 @@ const EnterEmailPage: React.FC = () => {
             />
           </button>
           <div className="app-icon">
+            <img src="/image/rewind-icon-24px.svg" alt="" className="app-rewind-icon" />
             <span className="app-name">Age Back</span>
           </div>
         </div>
@@ -159,7 +161,7 @@ const EnterEmailPage: React.FC = () => {
         <div className="enteremail-content">
           <div className="header-container">
             <div className="heading-container">
-              <h1 className="page-title">Enter your email to get your personal AgeBack plan</h1>
+              <h1 className="page-title">Enter your email to get Age-rewind Profile</h1>
             </div>
             <div className="description-container">
               <p className="page-description">We ensure that the results are saved in your account</p>

@@ -1,142 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { getPreviousStep } from '../utils/navigationUtils';
 import Lottie from 'lottie-react';
 import { usePreloadedAnimation } from '../hooks/usePreloadedAnimation';
 import { useImagePreloader } from '../hooks/useImagePreloader';
-import { getImagesToPreload } from '../config/imagePreloadConfig';
+import { getStepByRoute, getNextStep, getPreviousStepByRoute } from '../config/onboardingConfig';
 import Header from './Header';
 import ContinueButton from './ContinueButton';
+import ScaleButton from './ScaleButton';
 import '../styles/lifestyle.css';
+import '../styles/statements.css';
 
-interface LifestyleStep {
-  title: string;
-  subtitle?: string;
-  optionNames?: string[];
-  initialSelected: number[];
-  progress: number;
-  stepClass: string;
-  isInfoStep?: boolean;
-  description?: string;
-  imageSrc?: string;
-  infoText?: string;
-  isChartStep?: boolean;
-}
-
-const lifestyleSteps: Record<number, LifestyleStep> = {
-  1: {
-    title: "How much activity do you have in your life?",
-    subtitle: "",
-    optionNames: [
-      'Almost none',
-      'Mostly sitting, occasional walks',
-      'Light workouts or short walks',
-      'Regular sports',
-      'Very active lifestyle'
-    ],
-    initialSelected: [],
-    progress: 15,
-    stepClass: 'lifestyle-step-1'
-  },
-  2: {
-    title: "How does your nutrition usually look?",
-    subtitle: "",
-    optionNames: [
-      'Lots of fast food and sweets',
-      'More snacking than proper meals',
-      'Sometimes try to eat healthy',
-      'Generally balanced',
-      'Very careful about nutrition'
-    ],
-    initialSelected: [],
-    progress: 20,
-    stepClass: 'lifestyle-step-2'
-  },
-  3: {
-    title: "How about water? How much do you usually drink?",
-    subtitle: "",
-    optionNames: [
-      'Almost none',
-      'Less than 1 liter',
-      'About 1–1.5 liters',
-      'About 2 liters',
-      'More than 2 liters'
-    ],
-    initialSelected: [],
-    progress: 25,
-    stepClass: 'lifestyle-step-3'
-  },
-  4: {
-    title: "Aging isn't just about years — it's about habits",
-    subtitle: "",
-    description: "That's why Age Back takes a whole-body approach. By working on posture, flexibility, skin, sleep, and stress, we help you feel and look younger from every angle.",
-    imageSrc: "/image/approach.webp",
-    initialSelected: [],
-    progress: 30,
-    stepClass: 'lifestyle-step-4',
-    isInfoStep: true
-  },
-  5: {
-    title: "Sleep is the main source of youth. How's yours?",
-    subtitle: "",
-    optionNames: [
-      'Sleep very poorly',
-      'Often sleep badly',
-      'Varies',
-      'Generally sleep well',
-      'Sleep deeply and peacefully'
-    ],
-    initialSelected: [],
-    progress: 35,
-    stepClass: 'lifestyle-step-5'
-  },
-  6: {
-    title: "How often does stress affect your mood or health?",
-    subtitle: "",
-    optionNames: [
-      'Constantly',
-      'Often',
-      'Sometimes',
-      'Rarely',
-      'Almost never'
-    ],
-    initialSelected: [],
-    progress: 40,
-    stepClass: 'lifestyle-step-6'
-  },
-  7: {
-    title: "Your lifestyle shapes your aging speed",
-    subtitle: "With Age Back, even small shifts in daily habits add up to lasting youth.",
-    imageSrc: "/image/chart-withwithout.svg",
-    infoText: "Data shows that users who improved their daily routines with Age Back reported faster progress toward rejuvenation.",
-    initialSelected: [],
-    progress: 45,
-    stepClass: 'lifestyle-step-7',
-    isInfoStep: true,
-    isChartStep: true
-  }
-};
+// Данные шагов lifestyle берутся из централизованного конфига (src/config/onboardingConfig.ts)
 
 export default function LifestylePage() {
   const { stepId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const currentStepId = parseInt(stepId || '1');
-  const currentStep = lifestyleSteps[currentStepId as keyof typeof lifestyleSteps] || lifestyleSteps[1];
-  
-  const [selectedOptions, setSelectedOptions] = useState<number[]>(currentStep.initialSelected);
+  const currentStepId = stepId || '1';
+  const [selectedOptions, setSelectedOptions] = useState<number[]>([]);
   const lottieRef = useRef<any>(null);
   const [isLottieReady, setIsLottieReady] = useState(false);
+  const stepConfig = getStepByRoute(`/lifestyle/${currentStepId}`);
   const { animationData, isReady, shouldPlay } = usePreloadedAnimation('lifestyle');
 
-  // Предзагрузка изображений следующего шага
-  const currentPath = `/lifestyle/${currentStepId}`;
-  const imagesToPreload = getImagesToPreload(currentPath);
-  useImagePreloader(imagesToPreload);
+  // Предзагрузка изображений следующего шага из конфига
+  useImagePreloader(stepConfig?.imagesToPreload || []);
   
   useEffect(() => {
-    setSelectedOptions(currentStep.initialSelected);
-  }, [currentStep.initialSelected]);
+    setSelectedOptions([]);
+  }, [currentStepId]);
 
 
   const handleAnimationComplete = () => {
@@ -155,7 +47,7 @@ export default function LifestylePage() {
 
 
   React.useEffect(() => {
-    if (lottieRef.current && isLottieReady && shouldPlay && currentStepId === 7) {
+    if (lottieRef.current && isLottieReady && shouldPlay && currentStepId === '7') {
       lottieRef.current.goToAndStop(0, true);
       setTimeout(() => {
         if (lottieRef.current) {
@@ -167,50 +59,43 @@ export default function LifestylePage() {
 
   const handleOptionClick = (index: number) => {
     setSelectedOptions([index]);
-    
     setTimeout(() => {
       goNext();
     }, 300);
   };
 
+  const handleScaleClick = (value: number) => {
+    setSelectedOptions([value]);
+    setTimeout(() => {
+      goNext();
+    }, 500);
+  };
+
   const handleBackClick = () => {
-    if (currentStepId === 1) {
-      const previousStep = getPreviousStep(location.pathname);
-      if (previousStep) {
-        navigate(previousStep);
-      }
-      return;
+    const prev = getPreviousStepByRoute(`/lifestyle/${currentStepId}`);
+    if (prev) {
+      navigate(prev.route);
     }
-    
-    navigate(`/lifestyle/${currentStepId - 1}`);
   };
 
   const goNext = () => {
-    if (currentStepId === 1) {
-      navigate('/lifestyle/2');
-    } else if (currentStepId === 2) {
-      navigate('/lifestyle/3');
-    } else if (currentStepId === 3) {
-      navigate('/lifestyle/4');
-    } else if (currentStepId === 4) {
-      navigate('/lifestyle/5');
-    } else if (currentStepId === 5) {
-      navigate('/lifestyle/6');
-    } else if (currentStepId === 6) {
-      navigate('/lifestyle/7');
-    } else if (currentStepId === 7) {
-
-      navigate('/statements/1');
-    } else {
-      navigate('/lifestyle/1');
+    if (stepConfig?.id) {
+      const next = getNextStep(stepConfig.id);
+      if (next) {
+        navigate(next.route);
+      } else if (stepConfig.nextStepId) {
+        // Если следующий шаг не найден в конфиге, переходим напрямую по маршруту
+        navigate(`/${stepConfig.nextStepId}`);
+      }
     }
   };
 
   const getContainerClassName = () => {
     let className = 'quiz-container lifestyle-container';
-    
+    if (stepConfig?.pageType === 'scale') {
+      className = 'statements-container';
+    }
     className += ` lifestyle-step-${currentStepId}`;
-    
     return className;
   };
 
@@ -222,89 +107,144 @@ export default function LifestylePage() {
       />
       
       <main className="content-wrapper">
-        <div className="title-wrapper">
-          <div className="heading-container">
-            <h2 className="question-title">{currentStep.title}</h2>
-          </div>
-          {currentStep.subtitle && (
-            <p className="question-subtitle">{currentStep.subtitle}</p>
-          )}
-        </div>
-
-        {currentStep.isInfoStep ? (
+        {stepConfig?.pageType === 'scale' ? (
           <>
-            {currentStep.isChartStep ? (
-              <div className="chart-section">
-                <div className="chart-block">
-                  <div className="chart-image">
-                    {currentStepId === 7 && isReady && animationData ? (
-                      <Lottie 
-                        animationData={animationData}
-                        loop={false}
-                        autoplay={false}
-                        onComplete={handleAnimationComplete}
-                        onDOMLoaded={handleLottieReady}
-                        lottieRef={lottieRef}
-                        style={{ width: '100%', height: '100%' }}
-                        rendererSettings={{
-                          preserveAspectRatio: 'xMidYMid meet'
-                        }}
-                      />
-                    ) : (
-
-                      <img src={currentStep.imageSrc} alt="Age Back chart" />
-                    )}
-                  </div>
-                </div>
-                
-                <div className="info-block">
-                  <div className="info-icon">
-                    <img src="/image/znak.svg" alt="Info icon" />
-                  </div>
-                  <div className="info-text">
-                    <p>{currentStep.infoText}</p>
-                  </div>
-                </div>
+            <div className="title-wrapper">
+              <p className="statement-question">{stepConfig.question}</p>
+              <div className="heading-container">
+                <h2 className="statement-title">{stepConfig.statement}</h2>
               </div>
-            ) : (
-              <>
-                {currentStep.description && (
-                  <p className="info-description">{currentStep.description}</p>
-                )}
-                {currentStep.imageSrc && (
-                  <div className="info-image-wrapper">
-                    <img src={currentStep.imageSrc} alt="Age Back approach" className="info-image" />
-                  </div>
-                )}
-                {currentStep.infoText && (
-                  <p className="info-text">{currentStep.infoText}</p>
-                )}
-              </>
-            )}
+            </div>
+
+            <div className="scale-wrapper">
+              <div className="scale-options">
+                {[1, 2, 3, 4, 5].map((value, index) => {
+                  const animationClass = `animated-option delay-${Math.min(index + 1, 15)}`;
+                  const uniqueKey = `${currentStepId}-${value}`;
+                  return (
+                    <ScaleButton
+                      key={uniqueKey}
+                      value={value}
+                      selected={selectedOptions.includes(value)}
+                      onClick={handleScaleClick}
+                      className={animationClass}
+                    />
+                  );
+                })}
+              </div>
+              <div className="scale-labels">
+                <span className="scale-label-left">Strongly disagree</span>
+                <span className="scale-label-right">Strongly agree</span>
+              </div>
+            </div>
           </>
         ) : (
-          <div className="options-wrapper">
-            {currentStep.optionNames?.map((name, index) => {
-              const isSelected = selectedOptions.includes(index);
-              const uniqueKey = `${currentStepId}-${index}`;
-              
-              return (
-                <button 
-                  key={uniqueKey}
-                  className={`single-select-option ${isSelected ? 'selected' : ''} animated-option delay-${Math.min(index + 1, 15)}`}
-                  onClick={() => handleOptionClick(index)}
-                >
-                  <span className="option-text">{name}</span>
-                </button>
-              );
-            })}
-          </div>
+          <>
+            <div className="title-wrapper">
+              <div className="heading-container">
+                <h2 className="question-title" dangerouslySetInnerHTML={{ __html: stepConfig?.title || '' }} />
+              </div>
+              {stepConfig?.subtitle && (
+                <p className="question-subtitle" dangerouslySetInnerHTML={{ __html: stepConfig.subtitle }} />
+              )}
+            </div>
+
+            {stepConfig?.pageType === 'info' || stepConfig?.pageType === 'chart' ? (
+              <>
+                {stepConfig?.pageType === 'chart' ? (
+                  currentStepId === 'new4' ? (
+                    <>
+                      <div className="chart-container">
+                        <img src={stepConfig?.chartImage} alt="Progress rate chart" className="chart-image" />
+                      </div>
+                      
+                      <div className="expert-card">
+                        <div className="expert-quote">
+                          {stepConfig?.testimonials?.[0]?.description}
+                        </div>
+                        <div className="expert-footer">
+                          <div className="expert-info">
+                            <div className="expert-name">{stepConfig?.testimonials?.[0]?.author}</div>
+                            <div className="expert-title">{stepConfig?.testimonials?.[0]?.age}</div>
+                          </div>
+                        </div>
+                        <div className="expert-image-wrapper">
+                          <img src={stepConfig?.imageSrc} alt="Expert" className="expert-image" />
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="chart-section">
+                      <div className="chart-block">
+                        <div className="chart-image">
+                          {currentStepId === '7' && isReady && animationData ? (
+                            <Lottie 
+                              animationData={animationData}
+                              loop={false}
+                              autoplay={false}
+                              onComplete={handleAnimationComplete}
+                              onDOMLoaded={handleLottieReady}
+                              lottieRef={lottieRef}
+                              style={{ width: '100%', height: '100%' }}
+                              rendererSettings={{
+                                preserveAspectRatio: 'xMidYMid meet'
+                              }}
+                            />
+                          ) : (
+                            <img src={stepConfig?.imageSrc} alt="Age Back chart" />
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div className="info-block">
+                        <div className="info-icon">
+                          <img src="/image/znak.svg" alt="Info icon" />
+                        </div>
+                        <div className="info-text">
+                          <p>{stepConfig?.infoText}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                ) : (
+                  <>
+                    {stepConfig?.description && (
+                      <p className="info-description">{stepConfig?.description}</p>
+                    )}
+                    {stepConfig?.imageSrc && (
+                      <div className="info-image-wrapper">
+                        <img src={stepConfig?.imageSrc} alt="Age Back approach" className="info-image" />
+                      </div>
+                    )}
+                    {stepConfig?.infoText && (
+                      <p className="info-text">{stepConfig?.infoText}</p>
+                    )}
+                  </>
+                )}
+              </>
+            ) : (
+              <div className="options-wrapper">
+                {stepConfig?.options?.map((opt, index) => {
+                  const isSelected = selectedOptions.includes(index);
+                  const uniqueKey = `${currentStepId}-${index}`;
+                  
+                  return (
+                    <button 
+                      key={uniqueKey}
+                      className={`single-select-option ${isSelected ? 'selected' : ''} animated-option delay-${Math.min(index + 1, 15)}`}
+                      onClick={() => handleOptionClick(index)}
+                    >
+                      <span className="option-text">{opt.text}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </>
         )}
-
-
       </main>
       
-      {currentStep.isInfoStep && (
+      {(stepConfig?.pageType === 'info' || stepConfig?.pageType === 'chart') && (
         <ContinueButton onClick={goNext} />
       )}
     </div>

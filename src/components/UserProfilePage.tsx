@@ -84,6 +84,7 @@ const UserProfilePage: React.FC = () => {
               />
             </button>
             <div className="app-icon">
+              <img src="/image/rewind-icon-24px.svg" alt="" className="app-rewind-icon" />
               <span className="app-name">Profile</span>
             </div>
           </div>

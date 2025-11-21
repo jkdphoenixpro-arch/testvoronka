@@ -83,6 +83,7 @@
   gap: 8px;
   width: 400px;
   max-width: 400px;
+  margin-bottom: 0;
 }
 
 @media (max-width: 440px) {
@@ -121,7 +122,7 @@
   font-size: 40px;
   font-weight: 700;
   line-height: 40px;
-  color: #4D368A;
+  color: #7554CC;
   margin-bottom: 8px;
 }
 
@@ -130,6 +131,14 @@
   font-weight: 400;
   line-height: 20px;
   color: #28194B;
+}
+
+.user-step-4 .testimonials-bottom-text {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #50436D;
+  text-align: center;
 }
 
 
@@ -180,9 +189,9 @@
   flex: 1;
 }
 
-.testimonial-header {
+.user-step-7 .testimonial-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   margin-bottom: 12px;
 }
@@ -212,9 +221,20 @@
   color: #28194B;
 }
 
-.rating img {
+.user-step-7 .rating {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.user-step-7 .rating img {
   width: auto;
   height: 16px;
+}
+
+.testimonial-text {
+  margin-bottom: 0;
 }
 
 .testimonial-text p {
@@ -223,7 +243,7 @@
   line-height: 20px;
   color: #28194B;
   margin: 0;
-  text-align: left;
+  text-align: center;
 }
 
 
@@ -244,8 +264,8 @@
     justify-content: flex-start;
   }
   
-  .testimonial-header {
-    justify-content: space-between;
+  .user-step-7 .testimonial-header {
+    justify-content: center;
     align-items: center;
     margin-bottom: 8px;
   }
@@ -256,8 +276,12 @@
     font-size: 12px;
   }
   
+  .user-step-7 .rating {
+    margin-top: 8px;
+    width: 100%;
+  }
   
-  .rating img {
+  .user-step-7 .rating img {
     height: 16px;
   }
   
@@ -290,8 +314,8 @@
     justify-content: flex-start;
   }
   
-  .testimonial-header {
-    justify-content: space-between;
+  .user-step-7 .testimonial-header {
+    justify-content: center;
     align-items: center;
     margin-bottom: 8px;
   }
@@ -302,7 +326,12 @@
     font-size: 12px;
   }
   
-  .rating img {
+  .user-step-7 .rating {
+    margin-top: 8px;
+    width: 100%;
+  }
+  
+  .user-step-7 .rating img {
     height: 16px;
   }
   
