@@ -994,7 +994,6 @@ body {
 
     .chart-block {
         max-width: 400px;
-        min-height: 278.857px;
     }
 
     .chart-image {
@@ -1021,11 +1020,6 @@ body {
 
     .chart-block {
         max-width: 400px;
-        min-height: 245.317px;
-    }
-
-    .chart-image {
-        height: 213.317px;
     }
 
     .info-block {

@@ -55,7 +55,7 @@ const ReadyPlanPage: React.FC = () => {
                 <div className="title-wrapper">
                     <div className="heading-container">
                         <h2 className="question-title">
-                            {userName},<br />Your personal Age-Rewind plan is<br />ready!
+                            {userName},<br />Your personal Age-Rewind<br />plan is ready!
                         </h2>
                     </div>
                     <p className="question-subtitle">

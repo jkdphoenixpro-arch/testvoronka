@@ -234,10 +234,7 @@
 }
 
 @media (max-width: 440px) {
-  .user-container.user-step-new8 .content-wrapper {
-    padding: 0;
-  }
-  
+
   .user-container.user-step-new8 .doctor-card {
     width: 100%;
   }

@@ -142,11 +142,11 @@ export const onboardingSteps: OnboardingStep[] = [
     title: 'How far do you dream to rewind?',
     subtitle: 'Choose the result that feels both realistic and inspiring.',
     options: [
-      { value: 'face-neck', text: '2 – 3 years' },
-      { value: 'belly-waist', text: '5 years' },
-      { value: 'back-posture', text: '7 – 8 years' },
-      { value: 'strength-bodytone', text: '10 years' },
-      { value: 'joints-flexibility', text: 'Not sure yet' }
+      { value: '2-3 years', text: '2 – 3 years' },
+      { value: '5 years', text: '5 years' },
+      { value: '7 – 8 years', text: '7 – 8 years' },
+      { value: '10 years', text: '10 years' },
+      { value: 'Not sure yet', text: 'Not sure yet' }
     ],
     autoNavigate: true,
     autoNavigateDelay: 500,
@@ -909,6 +909,16 @@ export const onboardingSteps: OnboardingStep[] = [
     nextStepId: 'enteremail',
   },
 
+  // ==================== ENTEREMAIL СТРАНИЦА ====================
+  {
+    id: 'enteremail',
+    route: '/enteremail',
+    pageType: 'info',
+    title: 'Enter your email',
+    showContinueButton: false,
+    nextStepId: 'create-plan',
+  },
+
   // ==================== STATEMENTS СЕКЦИЯ ====================
   {
     id: 'statements-1',
@@ -993,12 +1003,12 @@ export const getNextStep = (currentId: string): OnboardingStep | null => {
 };
 
 /**
- * Получить предыдущий шаг
+ * Получить предыдущий шаг (по цепочке nextStepId, а не по индексу)
  */
 export const getPreviousStepById = (currentId: string): OnboardingStep | null => {
-  const currentIndex = onboardingSteps.findIndex(step => step.id === currentId);
-  if (currentIndex <= 0) return null;
-  return onboardingSteps[currentIndex - 1];
+  // Ищем шаг, у которого nextStepId указывает на текущий шаг
+  const previousStep = onboardingSteps.find(step => step.nextStepId === currentId);
+  return previousStep || null;
 };
 
 /**
