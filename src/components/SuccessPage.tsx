@@ -26,6 +26,7 @@ const SuccessPage: React.FC = () => {
           
           if (statusData.status === 'paid') {
             const leadEmail = localStorage.getItem('leadUserEmail');
+            const userName = localStorage.getItem('userName');
             
             if (leadEmail) {
               const upgradeResponse = await fetch(`${API_CONFIG.BASE_URL}/api/payment/success`, {
@@ -33,7 +34,10 @@ const SuccessPage: React.FC = () => {
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: leadEmail }),
+                body: JSON.stringify({ 
+                  email: leadEmail,
+                  name: userName 
+                }),
               });
               
               const upgradeData = await upgradeResponse.json();
@@ -41,6 +45,7 @@ const SuccessPage: React.FC = () => {
               if (upgradeData.success) {
                 setUserPassword(upgradeData.password);
                 localStorage.removeItem('leadUserEmail');
+                localStorage.removeItem('userName');
                 console.log('Пользователь обновлён до customer, пароль:', upgradeData.password);
               } else {
                 console.error('Ошибка обновления пользователя:', upgradeData.message);

@@ -1,4 +1,3 @@
-
 body.paywall-page {
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -44,6 +43,30 @@ body.paywall-page #root {
   max-width: 400px;
   margin: 0 auto;
   width: 100%;
+}
+
+/* Глобальное отключение эффектов выделения для всех интерактивных элементов */
+button,
+.plan-card,
+.grab-offer-btn,
+.get-plan-btn,
+input,
+select,
+textarea,
+a {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  outline: none !important;
+}
+
+button:focus,
+.plan-card:focus,
+.grab-offer-btn:focus,
+.get-plan-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 
@@ -99,10 +122,16 @@ body.paywall-page #root {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .grab-offer-btn:active {
   transform: scale(0.98);
+}
+
+.grab-offer-btn:focus {
+  outline: none;
 }
 
 
@@ -155,7 +184,6 @@ body.paywall-page #root {
 }
 
 .before-after-image {
-  height: 252px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,15 +204,16 @@ body.paywall-page #root {
   margin: 0 auto 24px auto;
   line-height: 1.25;
 }
-.final-cta-section .section-title{
+
+.final-cta-section .section-title {
   max-width: 200px;
 }
 
-.benefits-section .section-title{
+.benefits-section .section-title {
   max-width: 270px;
 }
 
-.testimonials-section .section-title{
+.testimonials-section .section-title {
   max-width: 250px;
 }
 
@@ -240,10 +269,12 @@ body.paywall-page #root {
   cursor: pointer;
   transition: all 0.2s ease;
   min-height: 84px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .plan-card.selected {
-  border-color: #FF5180;
+  border-color: #7554CC;
 }
 
 .plan-card:hover {
@@ -264,7 +295,7 @@ body.paywall-page #root {
 }
 
 .plan-badge.best-for-you {
-  background: #FF5180;
+  background: #7554CC;
   width: 83px;
   text-align: center;
 }
@@ -272,10 +303,11 @@ body.paywall-page #root {
 .plan-badge.popular {
   font-size: 12px;
   font-weight: 500;
-  background: #7554CC;
+  background: #F8F5FF;
   border: 2px solid white;
   width: 59px;
   text-align: center;
+  color: #28194B
 }
 
 .plan-content {
@@ -283,7 +315,7 @@ body.paywall-page #root {
   gap: 12px;
 }
 
-.paywall-container .plan-content .checkbox{
+.paywall-container .plan-content .checkbox {
   margin-top: 2px;
 }
 
@@ -301,8 +333,8 @@ body.paywall-page #root {
 }
 
 .plan-content .checkbox.checked {
-  background: #FF5180;
-  border-color: #FF5180;
+  background: #7554CC;
+  border-color: #7554CC
 }
 
 .plan-content .checkmark {
@@ -356,7 +388,7 @@ body.paywall-page #root {
 }
 
 .plan-pricing.highlighted {
-  background: rgba(255, 81, 128, 0.1);
+  background: rgba(117, 84, 204, 0.15);
 }
 
 .price-per-day {
@@ -398,17 +430,24 @@ body.paywall-page #root {
   cursor: pointer;
   width: 100%;
   transition: all 0.2s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .get-plan-btn:active {
   transform: scale(0.98);
 }
 
+.get-plan-btn:focus {
+  outline: none;
+}
+
 .guarantee-text {
   font-size: 16px;
   color: #504369;
 }
-.cta-section .guarantee-text{
+
+.cta-section .guarantee-text {
   max-width: 220px;
   margin: auto;
   color: #50436D;
@@ -499,6 +538,7 @@ body.paywall-page #root {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -546,44 +586,78 @@ body.paywall-page #root {
 }
 
 .fact-card {
-  background: rgba(77, 54, 138, 0.1);
+  background: linear-gradient(149deg, rgba(77, 54, 138, 0.1) 50%, #C4BAE4 75%);
   border-radius: 20px;
   padding: 16px;
+  position: relative;
+  overflow: hidden;
   display: flex;
-  gap: 16px;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 160px;
+  text-align: left;
 }
 
 .fact-content {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: calc(100% - 160px);
+  position: relative;
+  z-index: 1;
 }
 
 .fact-title {
   font-size: 16px;
   font-weight: 600;
+  line-height: 20px;
   color: #28194B;
-  margin: 0 0 10px 0;
+  margin: 0;
   text-align: left;
-  max-width: 150px;
+  max-width: 224px;
 }
 
 .fact-description {
   font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #504369;
+  margin: 0;
+  text-align: left;
+  max-width: 215px;
+}
+
+.fact-footer {
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+  max-width: calc(100% - 160px);
+}
+
+.fact-position {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
   color: #504369;
   margin: 0;
   text-align: left;
 }
 
-.fact-image {
-  width: 140px;
-  height: 120px;
-  border-radius: 0 20px 20px 0;
-  overflow: hidden;
+.fact-image-wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
 }
 
-.fact-image img {
-  width: 100%;
-  height: 100%;
+.fact-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
 }
 
@@ -662,9 +736,9 @@ body.paywall-page #root {
 .feature-icon {
   width: 24px;
   height: 24px;
-  background: #FF5180;
+  background: #7554CC;
   border-radius: 16px;
-  border: 1px solid #FF5180;
+  border: 1px solid #7554CC;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -889,18 +963,136 @@ body.paywall-page #root {
   .paywall-container .content-wrapper {
     padding: 0 16px 0 !important;
   }
-  
+
   .paywall-content {
     max-width: 400px;
   }
-  
+
   .hero-title,
   .section-title {
     padding: 0 0;
   }
-  
+
   .paywall-container .bottom-bar {
     padding: 16px 16px 24px !important;
     max-width: var(--mobile-max-width) !important;
   }
+}
+
+/* Summary Card в before-after-section */
+.paywall-summary {
+  background: #FFFFFF;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: -4px;
+}
+
+.paywall-summary .summary-row {
+  display: flex;
+  gap: 0;
+}
+
+.paywall-summary .summary-item {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  padding: 12px 8px;
+  border: 1px solid rgba(77, 54, 138, 0.1);
+  align-items: center;
+}
+
+.paywall-summary .summary-row:first-child .summary-item:first-child {
+  border-left: none;
+  border-top: none;
+}
+
+.paywall-summary .summary-row:first-child .summary-item:last-child {
+  border-top: none;
+  border-right: none;
+}
+
+.paywall-summary .summary-row:last-child .summary-item:first-child {
+  border-left: none;
+  border-bottom: none;
+}
+
+.paywall-summary .summary-row:last-child .summary-item:last-child {
+  border-right: none;
+  border-bottom: none;
+}
+
+.paywall-summary .summary-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.paywall-summary .summary-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.paywall-summary .summary-content {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.paywall-summary .summary-label {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #504369;
+  margin: 0;
+}
+
+.paywall-summary .summary-value {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #28194B;
+  margin: 0;
+}
+
+
+/* Before After Section */
+.before-after-section {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.comparison-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 12px;
+}
+
+.comparison-label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #28194B;
+  flex: 1;
+  text-align: center;
+}
+
+.before-after-image {
+  width: 100%;
+  border-radius: 0;
+}
+
+.before-after-image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }

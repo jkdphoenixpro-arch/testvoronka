@@ -62,8 +62,7 @@ const Header: React.FC<HeaderProps> = ({ progress: localProgress, onBackClick, s
         ) : null}
         
         <div className="app-icon">
-          <img src="/image/rewind-icon-24px.svg" alt="" className="app-rewind-icon" />
-          <span className="app-name">Age Back</span>
+          <img src="/image/app-logo.svg" alt="Age Back" className="app-name" />
         </div>
       </nav>
       

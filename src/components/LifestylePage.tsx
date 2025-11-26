@@ -92,9 +92,6 @@ export default function LifestylePage() {
 
   const getContainerClassName = () => {
     let className = 'quiz-container lifestyle-container';
-    if (stepConfig?.pageType === 'scale') {
-      className = 'statements-container';
-    }
     className += ` lifestyle-step-${currentStepId}`;
     return className;
   };

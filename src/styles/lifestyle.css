@@ -102,7 +102,7 @@
 
 /* Блок з експертом */
 .lifestyle-container.lifestyle-step-new4 .expert-card {
-  background: rgba(77, 54, 138, 0.1);
+  background: linear-gradient(149deg, rgba(77, 54, 138, 0.1) 50%, #C4BAE4 75%);
   border-radius: 20px;
   padding: 16px;
   max-width: 400px;

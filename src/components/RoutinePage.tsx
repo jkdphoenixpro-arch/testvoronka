@@ -43,7 +43,7 @@ const RoutinePage: React.FC = () => {
     return (
       <div className="routine-container">
         <div className="routine-background">
-          <div className="routine-loading">Загрузка уроков...</div>
+          <div className="routine-loading">loading...</div>
         </div>
       </div>
     );
@@ -53,7 +53,7 @@ const RoutinePage: React.FC = () => {
     return (
       <div className="routine-container">
         <div className="routine-background">
-          <div className="routine-error">Ошибка загрузки уроков</div>
+          <div className="routine-error">Loading error</div>
         </div>
       </div>
     );

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Header from './Header';
 import ContinueButton from './ContinueButton';
 import { getAllChallenges, getAgeGroup, getMotivation } from '../utils/userSelections';
+import { getPreviousStep } from '../utils/navigationUtils';
 import '../styles/create-plan.css';
 
 interface CreatePlanData {
@@ -19,6 +20,7 @@ interface CreatePlanData {
 
 const CreatePlanPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [challenges, setChallenges] = useState<string[]>([]);
   const [ageGroup, setAgeGroup] = useState<string>('30s');
   const [motivation, setMotivation] = useState<string>('Feel confident');
@@ -107,7 +109,12 @@ const CreatePlanPage: React.FC = () => {
   };
 
   const handleBackClick = () => {
-    navigate(-1);
+    const previousStep = getPreviousStep(location.pathname);
+    if (previousStep) {
+      navigate(previousStep);
+    } else {
+      navigate('/enteremail');
+    }
   };
 
   const handleContinueClick = () => {

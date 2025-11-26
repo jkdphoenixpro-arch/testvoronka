@@ -2,14 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/paywall.css';
 import API_CONFIG from '../config/api';
+import { getAllChallenges, getAgeGroup, getMotivation } from '../utils/userSelections';
 
 const PaywallPage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState('8-week');
   const [timeLeft, setTimeLeft] = useState({ minutes: 4, seconds: 58 });
+  const [challenges, setChallenges] = useState<string[]>([]);
+  const [ageGroup, setAgeGroup] = useState<string>('30s');
+  const [motivation, setMotivation] = useState<string>('Feel confident');
 
   useEffect(() => {
     document.body.classList.add('paywall-page');
+
+    // Загружаем данные пользователя
+    const savedChallenges = getAllChallenges();
+    const savedAgeGroup = getAgeGroup();
+    const savedMotivation = getMotivation();
+    setChallenges(savedChallenges);
+    setAgeGroup(savedAgeGroup);
+    setMotivation(savedMotivation);
 
     return () => {
       document.body.classList.remove('paywall-page');
@@ -32,6 +44,26 @@ const PaywallPage: React.FC = () => {
   }, []);
 
   const formatTime = (num: number) => num.toString().padStart(2, '0');
+
+  // Функция для получения данных в зависимости от возрастной группы
+  const getAgeGroupData = (age: string) => {
+    switch (age) {
+      case '20s':
+        return { profileType: 'Early Balancer', rejuvenationType: 'Early Balancer' };
+      case '30s':
+        return { profileType: 'Rhythm Restorer', rejuvenationType: 'Rhythm Restorer' };
+      case '40s':
+        return { profileType: 'Youth Recharger', rejuvenationType: 'Youth Recharger' };
+      case '50s':
+        return { profileType: 'Vitality Rebuilder', rejuvenationType: 'Vitality Rebuilder' };
+      case '60s':
+        return { profileType: 'Flow Reviver', rejuvenationType: 'Flow Reviver' };
+      default:
+        return { profileType: 'Rhythm Restorer', rejuvenationType: 'Rhythm Restorer' };
+    }
+  };
+
+  const ageGroupData = getAgeGroupData(ageGroup);
 
   const handleBackClick = () => {
     navigate('/results');
@@ -125,11 +157,55 @@ const PaywallPage: React.FC = () => {
               <div className="before-after-image">
                 <img src="/image/paywall-before&after.webp" alt="Before and After Results" />
               </div>
+              
+              {/* Summary Card */}
+              <div className="summary-card paywall-summary">
+                <div className="summary-row">
+                  <div className="summary-item">
+                    <div className="summary-icon">
+                      <img src="/image/user-icon-24px.svg" alt="User" />
+                    </div>
+                    <div className="summary-content">
+                      <p className="summary-label">Age</p>
+                      <p className="summary-value">{ageGroup}</p>
+                    </div>
+                  </div>
+                  <div className="summary-item">
+                    <div className="summary-icon">
+                      <img src="/image/rewind-icon-24px.svg" alt="Rewind" />
+                    </div>
+                    <div className="summary-content">
+                      <p className="summary-label">Rewind Goal</p>
+                      <p className="summary-value">2-3 years</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="summary-row">
+                  <div className="summary-item">
+                    <div className="summary-icon">
+                      <img src="/image/clock-icon-24px.svg" alt="Clock" />
+                    </div>
+                    <div className="summary-content">
+                      <p className="summary-label">Rejuvenation Type</p>
+                      <p className="summary-value">{ageGroupData.rejuvenationType}</p>
+                    </div>
+                  </div>
+                  <div className="summary-item">
+                    <div className="summary-icon">
+                      <img src="/image/flash-icon-24px.svg" alt="Flash" />
+                    </div>
+                    <div className="summary-content">
+                      <p className="summary-label">Motivation</p>
+                      <p className="summary-value">{motivation}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="results-section">
-            <h2 className="section-title">Get visible results in 8 weeks!</h2>
+            <h2 className="section-title">Get visible results in 12 weeks!</h2>
 
             <div className="offer-alert">
               <div className="alert-icon">
@@ -330,11 +406,14 @@ const PaywallPage: React.FC = () => {
             <h2 className="section-title">Science-backed approach</h2>
             <div className="fact-card">
               <div className="fact-content">
-                <h3 className="fact-title">Program Created by Dr. Paula Stein</h3>
-                <p className="fact-description">Expert in anti-aging and wellness with over 15 years of experience</p>
+                <h3 className="fact-title">Method developed by Nora Klein, PhD</h3>
+                <p className="fact-description">Leading Rejuvenation Scientist with 15+ Years of Research</p>
               </div>
-              <div className="fact-image">
-                <img src="/image/dr-stein.webp" alt="Dr. Paula Stein" />
+              <div className="fact-footer">
+                <p className="fact-position">Clinical Director at Age Back</p>
+              </div>
+              <div className="fact-image-wrapper">
+                <img src="/image/doctor.webp" alt="Nora Klein" className="fact-image" />
               </div>
             </div>
           </div>
@@ -382,7 +461,7 @@ const PaywallPage: React.FC = () => {
           </div>
 
           <div className="what-you-get-section">
-            <h2 className="section-title">What you get</h2>
+            <h2 className="section-title">What you get with Age Back</h2>
             <div className="features-card">
               <div className="feature-item">
                 <div className="feature-icon"></div>
@@ -458,7 +537,7 @@ const PaywallPage: React.FC = () => {
           </div>
 
           <div className="final-cta-section">
-            <h2 className="section-title">Get visible results in 8 weeks!</h2>
+            <h2 className="section-title">Get visible results in 12 weeks!</h2>
 
             <div className="offer-alert">
               <div className="alert-icon">

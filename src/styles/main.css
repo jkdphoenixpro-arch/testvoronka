@@ -1,43 +1,42 @@
-
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'SF Pro Display';
+    src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'SF Pro Display';
+    src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Semibold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'SF Pro Display';
+    src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Semibold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'SF Pro Display';
+    src: url('../../public/fonts/SFProDisplay/SF-Pro-Display-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }
 
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../../public/fonts/Inter/Inter/Inter-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Inter';
+    src: url('../../public/fonts/Inter/Inter/Inter-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
 }
 
 :root {
@@ -109,7 +108,7 @@ body {
 }
 
 
-.quiz-container.has-continue-button .content-wrapper{
+.quiz-container.has-continue-button .content-wrapper {
     padding-bottom: 92px;
 }
 
@@ -154,7 +153,7 @@ body {
     height: 12px;
 }
 
-.botton-section{
+.botton-section {
     height: 46px;
     padding: 20px 0;
 }
@@ -171,26 +170,17 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 160px;
     height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-}
-
-.app-rewind-icon {
-    width: 24px;
-    height: 24px;
-    display: block;
 }
 
 .app-name {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 20px;
-    color: var(--color-primary-text);
+    height: 100%;
+    width: auto;
+    display: block;
+    object-fit: contain;
 }
 
 
@@ -237,6 +227,7 @@ body {
         opacity: 0;
         transform: translateX(20px);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0);
@@ -251,29 +242,73 @@ body {
 }
 
 
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.5s; }
-.delay-6 { animation-delay: 0.30s; }
-.delay-7 { animation-delay: 0.35s; }
-.delay-8 { animation-delay: 0.40s; }
-.delay-9 { animation-delay: 0.45s; }
-.delay-10 { animation-delay: 0.50s; }
-.delay-11 { animation-delay: 0.55s; }
-.delay-12 { animation-delay: 0.60s; }
-.delay-13 { animation-delay: 0.65s; }
-.delay-14 { animation-delay: 0.70s; }
-.delay-15 { animation-delay: 0.75s; }
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+}
+
+.delay-4 {
+    animation-delay: 0.4s;
+}
+
+.delay-5 {
+    animation-delay: 0.5s;
+}
+
+.delay-6 {
+    animation-delay: 0.30s;
+}
+
+.delay-7 {
+    animation-delay: 0.35s;
+}
+
+.delay-8 {
+    animation-delay: 0.40s;
+}
+
+.delay-9 {
+    animation-delay: 0.45s;
+}
+
+.delay-10 {
+    animation-delay: 0.50s;
+}
+
+.delay-11 {
+    animation-delay: 0.55s;
+}
+
+.delay-12 {
+    animation-delay: 0.60s;
+}
+
+.delay-13 {
+    animation-delay: 0.65s;
+}
+
+.delay-14 {
+    animation-delay: 0.70s;
+}
+
+.delay-15 {
+    animation-delay: 0.75s;
+}
 
 
 .title-wrapper {
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-   padding: 0 20px;
+    gap: 12px;
+    padding: 0 20px;
 }
 
 
@@ -327,6 +362,8 @@ body {
 }
 
 .single-select-option {
+    max-width: 400px;
+    margin: auto;
     font-family: 'SF Pro Display', sans-serif;
     width: 100%;
     height: 52px;
@@ -557,13 +594,16 @@ body {
     .continue-button-wrapper {
         max-width: 100%;
     }
-    .content-wrapper{
+
+    .content-wrapper {
         padding: var(--content-top-margin) 20px 0;
     }
-    .title-wrapper{
+
+    .title-wrapper {
         padding: 0;
     }
-    .bottom-bar{
+
+    .bottom-bar {
         padding: 20px 20px !important;
     }
 }
@@ -658,17 +698,16 @@ body {
     flex: 1;
 }
 
-.quiz-container.building-plan-container .testimonial-section{
+.quiz-container.building-plan-container .testimonial-section {
     gap: 0;
 }
 
-/* Убираем gap для страницы goal/new8 */
 .quiz-container.goal-page-6 .testimonial-content {
-    gap: 0;
+    gap: 24px;
 }
 
 .quiz-container.goal-page-6 .testimonial-section {
-    gap: 0;
+    gap: 15px;
 }
 
 .image-container {
@@ -775,6 +814,9 @@ body {
     flex: 1;
 }
 
+.user-step-new2 .chart-section {
+    gap: 24px;
+}
 
 .chart-block {
     background: var(--color-white);
@@ -788,6 +830,7 @@ body {
 
 .chart-image {
     width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -854,6 +897,10 @@ body {
     box-shadow: none;
 }
 
+.goal-page-new5 .chart-section {
+    gap: 24px;
+}
+
 /* Стили info-block для goal/new5 */
 .quiz-container.goal-page-new5 .info-block {
     background: var(--color-white);
@@ -866,6 +913,8 @@ body {
     align-items: center;
     justify-content: flex-start;
     padding-top: 0;
+    width: 48px;
+    height: 48px;
 }
 
 .quiz-container.goal-page-new5 .info-text p {
@@ -891,6 +940,8 @@ body {
     align-items: center;
     justify-content: flex-start;
     padding-top: 0;
+    width: 48px;
+    height: 48px;
 }
 
 .user-container.user-step-new2 .info-text p {
@@ -940,13 +991,13 @@ body {
         height: unset;
         justify-content: flex-start;
     }
-    
+
     .user-container.user-step-new7 .testimonial-header {
         justify-content: center;
         align-items: center;
         margin-bottom: 8px;
     }
-    
+
     .user-container.user-step-new7 .rating {
         margin-top: 8px;
     }
@@ -957,13 +1008,13 @@ body {
         height: unset;
         justify-content: flex-start;
     }
-    
+
     .user-container.user-step-new7 .testimonial-header {
         justify-content: center;
         align-items: center;
         margin-bottom: 8px;
     }
-    
+
     .user-container.user-step-new7 .rating {
         margin-top: 8px;
     }
@@ -972,6 +1023,7 @@ body {
 
 .quiz-container.goal-page-6 .image-container {
     height: auto;
+    max-height: 310px;
     aspect-ratio: 1;
 }
 
@@ -1020,10 +1072,6 @@ body {
 
     .chart-block {
         max-width: 400px;
-    }
-
-    .chart-image {
-        height: 213.317px;
     }
 
     .info-block {
@@ -1182,6 +1230,7 @@ body {
 .quiz-container:has(.bottom-bar) .content-wrapper {
     padding-bottom: 92px !important;
 }
+
 .quiz-container:has(.continue-button-wrapper) .content-wrapper {
     padding-bottom: 92px !important;
 }
@@ -1274,7 +1323,7 @@ body {
         padding: 24px 20px 0;
     }
 
-    .quiz-container.goal-page-1 .heading-container{
+    .quiz-container.goal-page-1 .heading-container {
         padding-top: 0;
     }
 
@@ -1376,102 +1425,102 @@ body {
 
 /* Steps Info Page Styles */
 .steps-info-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .steps-info-content .content-wrapper {
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .steps-info-content .title-wrapper {
-  padding: 0;
+    padding: 0;
 }
 
 .steps-list {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 10px;
 }
 
 .step-item {
-  display: flex;
-  gap: 16px;
-  /* height: 68px; */
+    display: flex;
+    gap: 16px;
+    /* height: 68px; */
 }
 
 .step-icon-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 48px;
-  flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48px;
+    flex-shrink: 0;
 }
 
 .step-icon {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
 }
 
 .step-icon img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
 }
 
 .step-connector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  flex: 1;
-  padding-top: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    flex: 1;
 }
 
 .connector-dot {
-  width: 1px;
-  height: 1px;
-  background: #7554CC;
+    width: 1px;
+    height: 1px;
+    background: #7554CC;
 }
 
 .step-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 12px;
+    text-align: left;
 }
 
 .step-title {
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  color: var(--color-primary-text);
-  margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--color-primary-text);
+    margin: 0;
 }
 
 .step-description {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: var(--color-secondary-text);
-  margin: 0;
-  height: 100%;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--color-secondary-text);
+    margin: 0;
+    height: 100%;
 }
 
 @media (min-width: 769px) {
-  .steps-info-content .content-wrapper {
-    max-width: 440px;
-    margin: 0 auto;
-  }
+    .steps-info-content .content-wrapper {
+        max-width: 440px;
+        margin: 0 auto;
+    }
 }

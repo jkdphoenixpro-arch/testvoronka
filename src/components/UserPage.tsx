@@ -142,15 +142,17 @@ export default function UserPage() {
             {stepConfig.pageType === 'testimonial-with-logos' ? (
           <>
             <div className="doctor-card">
-              <img src={stepConfig.imageSrc} alt="Doctor" className="doctor-image" />
-              <div className="doctor-testimonial">
-                <div className="doctor-quote">
-                  {stepConfig.testimonials?.[0]?.description}
-                </div>
+              <div className="doctor-quote">
+                {stepConfig.testimonials?.[0]?.description}
+              </div>
+              <div className="doctor-footer">
                 <div className="doctor-info">
                   <div className="doctor-name">{stepConfig.testimonials?.[0]?.author}</div>
                   <div className="doctor-title">{stepConfig.testimonials?.[0]?.age}</div>
                 </div>
+              </div>
+              <div className="doctor-image-wrapper">
+                <img src={stepConfig.imageSrc} alt="Doctor" className="doctor-image" />
               </div>
             </div>
             <div className="logos-block">
@@ -296,7 +298,7 @@ export default function UserPage() {
             onClick={(stepConfig.pageType === 'multi-pill' || stepConfig.pageType === 'multi-select') && selectedOptions.length === 0 ? undefined : goNext}
             disabled={(stepConfig.pageType === 'multi-pill' || stepConfig.pageType === 'multi-select') && selectedOptions.length === 0}
           >
-            Continue
+            {stepConfig.id === 'user-new6' ? 'See how it works' : 'Continue'}
           </button>
         </div>
       )}

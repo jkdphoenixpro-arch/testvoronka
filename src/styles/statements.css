@@ -17,6 +17,11 @@
     justify-content: flex-start;
 }
 
+.statement-title{
+    font-size: 22px;
+    font-weight: 600;
+}
+
 .statements-container .statement-question {
     font-weight: 400;
     font-size: 16px;
