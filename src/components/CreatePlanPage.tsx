@@ -4,6 +4,7 @@ import Header from './Header';
 import ContinueButton from './ContinueButton';
 import { getAllChallenges, getAgeGroup, getMotivation } from '../utils/userSelections';
 import { getPreviousStep } from '../utils/navigationUtils';
+import { useImagePreloader } from '../hooks/useImagePreloader';
 import '../styles/create-plan.css';
 
 interface CreatePlanData {
@@ -24,6 +25,9 @@ const CreatePlanPage: React.FC = () => {
   const [challenges, setChallenges] = useState<string[]>([]);
   const [ageGroup, setAgeGroup] = useState<string>('30s');
   const [motivation, setMotivation] = useState<string>('Feel confident');
+
+  // Предзагрузка изображений для buildingplan (если есть)
+  useImagePreloader([]);
 
   useEffect(() => {
     // Загружаем выбранные challenges, возрастную группу и motivation из localStorage

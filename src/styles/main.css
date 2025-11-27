@@ -900,7 +900,8 @@ body {
 .goal-page-new5 .chart-section {
     gap: 24px;
 }
-.goal-page-new5 .chart-image{
+
+.goal-page-new5 .chart-image {
     height: 246px;
 }
 
@@ -957,6 +958,9 @@ body {
 .user-container.user-step-new7 .chart-block {
     background: none;
     box-shadow: none;
+}
+.user-step-new7 .testimonial-text p{
+    font-size: 16px;
 }
 
 .user-container.user-step-new7 .info-block {
