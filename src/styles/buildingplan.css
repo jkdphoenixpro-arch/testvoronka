@@ -258,7 +258,7 @@
 .buildingplan-testimonial-card .user-details span {
   font-family: 'SF Pro Display', sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   color: #281A4B;
 }
@@ -379,7 +379,7 @@
 .modal-option-button span {
   font-family: 'SF Pro Display', sans-serif;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 20px;
   color: #281A4B;
 }
@@ -402,9 +402,6 @@
     max-width: 400px;
   }
   
-  .building-plan-title {
-    max-width: 310px;
-  }
   
 
   .building-plan-container .progress-bar-container {
@@ -417,10 +414,6 @@
   
 
   .feedback-modal {
-    max-width: 400px;
-    width: 100%;
-    height: fit-content;
-    padding: 20px;
     margin-left: 10px;
     margin-right: 10px;
   }

@@ -140,6 +140,7 @@
   max-width: calc(100% - 168px);
   position: relative;
   z-index: 1;
+  text-align: left;
 }
 
 .user-container.user-step-new8 .doctor-footer {
@@ -262,6 +263,7 @@
     overflow: hidden;
   }
 }
+
 /*
  Стили для страницы user/new8 с доктором и логотипами */
 .doctor-card {
@@ -290,7 +292,7 @@
 }
 
 .doctor-info {
-  text-align: center;
+  text-align: left;
 }
 
 .doctor-name {

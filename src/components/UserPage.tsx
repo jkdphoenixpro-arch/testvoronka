@@ -168,7 +168,7 @@ export default function UserPage() {
                   <img src="/image/Bloom.svg" alt="Bloom" />
                 </div>
                 <div className="logo-item">
-                  <img src="/image/Wellness Journal.svg" alt="Wellness Journal" />
+                  <img src="/image/AgeWell.svg" alt="AgeWell" />
                 </div>
                 <div className="logo-item">
                   <img src="/image/GSR.svg" alt="GSR" />
