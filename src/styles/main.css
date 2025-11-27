@@ -900,6 +900,9 @@ body {
 .goal-page-new5 .chart-section {
     gap: 24px;
 }
+.goal-page-new5 .chart-image{
+    height: 246px;
+}
 
 /* Стили info-block для goal/new5 */
 .quiz-container.goal-page-new5 .info-block {

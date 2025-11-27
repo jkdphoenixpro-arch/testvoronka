@@ -159,16 +159,16 @@ export default function UserPage() {
               <div className="logos-title">{stepConfig.bottomText}</div>
               <div className="logos-container">
                 <div className="logo-item">
-                  <img src="/image/GSR.svg" alt="GSR" />
+                  <img src="/image/MindFlow.svg" alt="MindFlow" />
                 </div>
                 <div className="logo-item">
-                  <img src="/image/GSR.svg" alt="GSR" />
+                  <img src="/image/Wellness Journal.svg" alt="Wellness Journal" />
                 </div>
                 <div className="logo-item">
-                  <img src="/image/GSR.svg" alt="GSR" />
+                  <img src="/image/Bloom.svg" alt="Bloom" />
                 </div>
                 <div className="logo-item">
-                  <img src="/image/GSR.svg" alt="GSR" />
+                  <img src="/image/Wellness Journal.svg" alt="Wellness Journal" />
                 </div>
                 <div className="logo-item">
                   <img src="/image/GSR.svg" alt="GSR" />

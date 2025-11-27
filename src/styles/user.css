@@ -211,7 +211,7 @@
 .user-container.user-step-new8 .logos-container {
   background: rgba(77, 54, 138, 0.1);
   border-radius: 20px;
-  padding: 24px 16px;
+  padding: 24px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 24px;
@@ -242,7 +242,6 @@
 
 .user-container.user-step-new8 .logo-item img,
 .user-container.user-step-new8 .logo-item svg {
-  max-width: 110px;
   height: auto;
 }
 
@@ -251,7 +250,7 @@
   .user-container.user-step-new8 .doctor-card {
     width: 100%;
   }
-  
+
   .user-container.user-step-new8 .logos-block {
     width: 100%;
   }
@@ -263,5 +262,96 @@
     overflow: hidden;
   }
 }
+/*
+ Стили для страницы user/new8 с доктором и логотипами */
+.doctor-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+}
 
+.doctor-quote {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #28194B;
+  text-align: center;
+  margin-bottom: 12px;
+}
 
+.doctor-footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.doctor-info {
+  text-align: center;
+}
+
+.doctor-name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #28194B;
+}
+
+.doctor-title {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #504369;
+}
+
+.doctor-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.doctor-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.logos-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.logos-title {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #504369;
+  text-align: center;
+}
+
+.logos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-item img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
