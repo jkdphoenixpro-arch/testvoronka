@@ -102,7 +102,7 @@
 
 /* Блок з експертом */
 .lifestyle-container.lifestyle-step-new4 .expert-card {
-  background: linear-gradient(149deg, rgba(77, 54, 138, 0.1) 50%, #C4BAE4 75%);
+      background: radial-gradient(circle at 81% 90%, #C4BAE4 21%, rgba(196, 186, 228, 0) 43% 43%), #c4bae440;
   border-radius: 20px;
   padding: 16px;
   max-width: 400px;
@@ -113,7 +113,7 @@
   display: flex;
   flex-direction: column;
   gap: 34px;
-  min-height: 160px;
+  height: 160px;
   text-align: left;
 }
 
@@ -122,9 +122,11 @@
   font-weight: 600;
   line-height: 20px;
   color: #28194B;
+  min-width: 200px;
   max-width: calc(100% - 160px);
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
 
 .lifestyle-container.lifestyle-step-new4 .expert-footer {
@@ -133,7 +135,9 @@
   align-items: flex-end;
   position: relative;
   z-index: 1;
+  min-width: 200px;
   max-width: calc(100% - 160px);
+  flex-shrink: 0;
 }
 
 .lifestyle-container.lifestyle-step-new4 .expert-info {
@@ -158,10 +162,11 @@
 }
 
 .lifestyle-container.lifestyle-step-new4 .expert-image-wrapper {
+  min-width: 120px;
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 160px;
+  width: clamp(80px, calc(100% - 216px), 160px);
   height: 160px;
   pointer-events: none;
 }
@@ -180,9 +185,10 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 160px;
+  width: 100%;
   height: 160px;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: bottom right;
 }
 
 @media (max-width: 440px) {

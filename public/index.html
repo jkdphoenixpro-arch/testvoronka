@@ -10,8 +10,23 @@
       content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    
+    <!-- DNS prefetch for faster external resource loading -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Critical resources for goal/1 page - highest priority -->
+    <link rel="preload" href="%PUBLIC_URL%/fonts/SFProDisplay/SF-Pro-Display-Semibold.otf" as="font" type="font/otf" crossorigin="anonymous" />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/SFProDisplay/SF-Pro-Display-Regular.otf" as="font" type="font/otf" crossorigin="anonymous" />
+    <link rel="preload" href="%PUBLIC_URL%/image/app-logo.svg" as="image" />
+    <link rel="preload" href="%PUBLIC_URL%/image/start_image.webp" as="image" />
+    
+    <!-- Secondary fonts - lower priority -->
+    <link rel="preload" href="%PUBLIC_URL%/fonts/SFProDisplay/SF-Pro-Display-Medium.otf" as="font" type="font/otf" crossorigin="anonymous" />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/SFProDisplay/SF-Pro-Display-Bold.otf" as="font" type="font/otf" crossorigin="anonymous" />
+    <link rel="preload" href="%PUBLIC_URL%/fonts/Inter/Inter/Inter-ExtraBold.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
    
     <title>React App</title>
   </head>

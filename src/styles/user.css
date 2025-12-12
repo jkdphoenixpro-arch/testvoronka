@@ -116,7 +116,7 @@
 
 /* Картка с врачом */
 .user-container.user-step-new8 .doctor-card {
-  background: linear-gradient(149deg, #FFFFFF 50%, #C4BAE4 75%);
+  background: radial-gradient(circle at 81% 90%, #C4BAE4 21%, rgba(196, 186, 228, 0) 43%), #ffffff;
   border-radius: 20px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   padding: 16px;
@@ -128,7 +128,7 @@
   display: flex;
   flex-direction: column;
   gap: 34px;
-  min-height: 160px;
+  height: 160px;
   text-align: left;
 }
 
@@ -137,10 +137,11 @@
   font-weight: 600;
   line-height: 20px;
   color: #28194B;
-  max-width: calc(100% - 168px);
+  min-width: 200px;
+  max-width: calc(100% - 160px);
   position: relative;
   z-index: 1;
-  text-align: left;
+  flex-shrink: 0;
 }
 
 .user-container.user-step-new8 .doctor-footer {
@@ -149,7 +150,10 @@
   align-items: flex-end;
   position: relative;
   z-index: 1;
+  min-width: 200px;
   max-width: calc(100% - 160px);
+  flex-shrink: 0;
+  bottom: 16px;
 }
 
 .user-container.user-step-new8 .doctor-info {
@@ -174,10 +178,11 @@
 }
 
 .user-container.user-step-new8 .doctor-image-wrapper {
+  min-width: 120px;
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 160px;
+  width: clamp(80px, calc(100% - 176px), 160px);
   height: 160px;
   pointer-events: none;
 }
@@ -186,9 +191,10 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 160px;
+  width: 100%;
   height: 160px;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: bottom right;
 }
 
 /* Блок с логотипами */
@@ -212,10 +218,9 @@
 .user-container.user-step-new8 .logos-container {
   background: rgba(77, 54, 138, 0.1);
   border-radius: 20px;
-  padding: 24px;
+  padding: 16px 28px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 24px;
   align-items: center;
   justify-items: center;
 }
@@ -281,7 +286,6 @@
   font-weight: 400;
   line-height: 20px;
   color: #28194B;
-  text-align: center;
   margin-bottom: 12px;
 }
 
